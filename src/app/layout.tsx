@@ -1,0 +1,266 @@
+import type { Metadata, Viewport } from "next";
+import { JetBrains_Mono, Syne } from "next/font/google";
+import "./globals.css";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/context/AuthContext";
+import { FirebaseErrorListener } from "@/components/FirebaseErrorListener";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Fonts
+//
+// JetBrains Mono — all data, labels, inputs, code, monospace UI chrome.
+//   The "machine" voice of the app.
+// Syne — headings, navigation, display text.
+//   Geometric, authoritative, distinctly non-corporate.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const fontMono = JetBrains_Mono({
+  subsets:  ["latin"],
+  variable: "--font-mono",
+  weight:   ["300", "400", "500", "600", "700"],
+  display:  "swap",
+  preload:  true,
+  adjustFontFallback: false,
+});
+
+const fontDisplay = Syne({
+  subsets:  ["latin"],
+  variable: "--font-display",
+  weight:   ["500", "600", "700", "800"],
+  display:  "swap",
+  preload:  true,
+  adjustFontFallback: false,
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Viewport
+// Must be a separate named export in Next.js 14+ (cannot live inside metadata)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const viewport: Viewport = {
+  width:        "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)",  color: "#080A0C" },
+    { media: "(prefers-color-scheme: light)", color: "#080A0C" },
+  ],
+  colorScheme: "dark",
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Site constants — single source of truth for URLs and brand strings
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SITE_URL  = process.env.NEXT_PUBLIC_APP_URL ?? "https://ciphersuite.app";
+const SITE_NAME = "CipherSuite";
+const COMPANY   = "Alcyone Secure";
+const TAGLINE   = "Professional Cybersecurity Workspace by Alcyone Secure";
+const DESC      =
+  "A structured operational workspace for penetration testers, bug bounty " +
+  "hunters, and security researchers. Document findings, manage evidence, " +
+  "analyze logs, and generate professional client reports — all in one place.";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Metadata
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+
+  title: {
+    default:  `${SITE_NAME} · ${TAGLINE}`,
+    template: `%s · ${SITE_NAME}`,
+  },
+
+  description: DESC,
+
+  applicationName: SITE_NAME,
+
+  authors: [
+    { name: COMPANY,   url: SITE_URL          },
+    { name: SITE_NAME, url: SITE_URL          },
+  ],
+  creator:   COMPANY,
+  publisher: COMPANY,
+
+  keywords: [
+    "cybersecurity workspace",
+    "penetration testing tool",
+    "pentest report generator",
+    "bug bounty management",
+    "vulnerability tracking",
+    "security findings management",
+    "SOC analyst tool",
+    "security research workspace",
+    "alcyone secure",
+    "ciphersuite",
+  ],
+
+  /*
+   * Intentionally de-indexed. CipherSuite is an operational security tool —
+   * it should not appear in public search results.
+   */
+  robots: {
+    index:     false,
+    follow:    false,
+    googleBot: { index: false, follow: false },
+  },
+
+  icons: {
+    icon: [
+      { url: "/favicon.ico",      sizes: "any"           },
+      { url: "/icon.svg",         type:  "image/svg+xml" },
+      { url: "/favicon-32x32.png",sizes: "32x32"         },
+      { url: "/favicon-16x16.png",sizes: "16x16"         },
+    ],
+    apple:   "/apple-touch-icon.png",
+    shortcut:"/favicon-16x16.png",
+  },
+
+  manifest: "/manifest.json",
+
+  openGraph: {
+    type:        "website",
+    locale:      "en_US",
+    url:         SITE_URL,
+    siteName:    SITE_NAME,
+    title:       `${SITE_NAME} — ${TAGLINE}`,
+    description: DESC,
+    images: [
+      {
+        url:    "/og-image.png",
+        width:  1200,
+        height: 630,
+        alt:    `${SITE_NAME} — ${TAGLINE}`,
+      },
+    ],
+  },
+
+  twitter: {
+    card:        "summary_large_image",
+    title:       `${SITE_NAME} — ${TAGLINE}`,
+    description: DESC,
+    images:      ["/og-image.png"],
+  },
+
+  // Prevents MIME-type sniffing — belt-and-suspenders server hardening
+  other: {
+    "X-Content-Type-Options": "nosniff",
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Root layout
+// ─────────────────────────────────────────────────────────────────────────────
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      dir="ltr"
+      className={cn(
+        // Always dark — this is a dark-only product
+        "dark",
+        // CSS variable injection for fonts
+        fontMono.variable,
+        fontDisplay.variable,
+      )}
+      // Required to suppress the React hydration warning caused by
+      // browser extensions (e.g. 1Password, Grammarly) that modify the DOM
+      suppressHydrationWarning
+    >
+      <head>
+        {/*
+         * Preconnect to Google Fonts CDN so font files load without
+         * a round-trip penalty. next/font handles the actual @font-face
+         * injection — these just warm the connection.
+         */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+
+      <body
+        className={cn(
+          // Layout
+          "min-h-screen overflow-x-hidden",
+          // Background — matches --background CSS var in globals.css
+          "bg-[#080A0C]",
+          // Typography
+          "font-mono antialiased text-slate-100",
+          // iOS font size inflation prevention
+          "[-webkit-text-size-adjust:100%] [text-size-adjust:100%]",
+          // Global text selection colour
+          "selection:bg-cyan-500/20 selection:text-cyan-100",
+        )}
+      >
+        <AuthProvider>
+          <FirebaseErrorListener />
+          {/*
+           * Root visual shell — three fixed background layers below all content.
+           *
+           * z-index budget (negative = behind content):
+           *   -30  Ambient radial glow       (atmosphere)
+           *   -20  Noise / grain texture     (tactile depth)
+           *   -10  Scanline overlay          (terminal character)
+           *     0+ App content
+           *
+           * All layers are `fixed` so they tile the full viewport on long pages
+           * without creating a scroll-height artefact.
+           */}
+          <div className="relative isolate flex min-h-screen flex-col">
+
+            {/* Layer 1 — Ambient cyan bloom at the top of the viewport */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none fixed inset-0 -z-30"
+              style={{
+                background:
+                  "radial-gradient(ellipse 80% 45% at 50% -5%, rgba(6,182,212,0.065) 0%, transparent 70%)",
+              }}
+            />
+
+            {/* Layer 2 — Noise grain texture for tactile screen depth */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none fixed inset-0 -z-20 bg-repeat bg-[url('/noise.png')] opacity-[0.028]"
+            />
+
+            {/*
+             * Layer 3 — Subtle horizontal scanline pattern.
+             * Fallback for environments where noise.png is unavailable.
+             * Low enough opacity that it never interferes with readability.
+             */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none fixed inset-0 -z-10"
+              style={{
+                backgroundImage: `repeating-linear-gradient(
+                  0deg,
+                  transparent,
+                  transparent 2px,
+                  rgba(0,0,0,0.018) 2px,
+                  rgba(0,0,0,0.018) 4px
+                )`,
+              }}
+            />
+
+            {/* App content */}
+            {children}
+          </div>
+
+          {/*
+           * Global toast notifications.
+           * Rendered outside the layout shell so toasts are never clipped
+           * by overflow:hidden containers deeper in the tree.
+           */}
+          <Toaster />
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}

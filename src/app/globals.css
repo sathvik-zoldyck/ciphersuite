@@ -1,0 +1,461 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CipherSuite Design System — Alcyone Secure
+   Dark-only theme. All CSS variables are HSL without the hsl() wrapper
+   so they can be composed with opacity modifiers: hsl(var(--primary) / 0.5)
+───────────────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    /* ── Core backgrounds ─────────────────────────────────────────────────── */
+    --background:  222 22%  5%;   /* #080A0C  — page bg                      */
+    --surface-1:   225 14%  7%;   /* #0A0B0D  — sidebar, topbar, popovers    */
+    --surface-2:   224 15%  8%;   /* #0D0F12  — cards, inputs                */
+    --surface-3:   222 14% 11%;   /* #161820  — elevated cards, dropdowns    */
+    --surface-4:   220 12% 15%;   /* #1E2028  — hover states, selected rows  */
+
+    /* ── shadcn/ui semantic tokens ────────────────────────────────────────── */
+    --card:                 224 15%  8%;
+    --card-foreground:      220  9% 88%;
+    --popover:              225 14%  7%;
+    --popover-foreground:   220  9% 88%;
+    --primary:              190 81% 56%;   /* cyan-400  — interactive/active  */
+    --primary-foreground:   220 100%  5%;  /* near-black text on cyan buttons */
+    --secondary:            220 12% 16%;
+    --secondary-foreground: 220  9% 88%;
+    --muted:                220 12% 16%;
+    --muted-foreground:     220  7% 46%;   /* slate-500 equivalent            */
+    --accent:               190 81% 56%;
+    --accent-foreground:    220 100%  5%;
+    --destructive:            0 72% 51%;   /* red-500                         */
+    --destructive-foreground: 0  0% 98%;
+    --border:               220 10% 20%;   /* slate-700/60                    */
+    --input:                222 13% 10%;   /* slightly lighter than card      */
+    --ring:                 190 81% 56%;
+    --radius:               0.5rem;
+
+    /* ── Foreground / text ────────────────────────────────────────────────── */
+    --foreground:           220  9% 88%;   /* slate-200 — primary text        */
+    --foreground-muted:     220  7% 60%;   /* slate-400 — secondary text      */
+    --foreground-subtle:    220  6% 40%;   /* slate-600 — labels, captions    */
+    --foreground-faint:     220  5% 25%;   /* slate-800 — placeholders        */
+
+    /* ── Severity scale ───────────────────────────────────────────────────── */
+    --severity-critical:    0   75% 55%;   /* red-400                         */
+    --severity-high:        25  95% 58%;   /* orange-400                      */
+    --severity-medium:      45  93% 52%;   /* yellow-400                      */
+    --severity-low:         190 81% 56%;   /* cyan-400                        */
+    --severity-info:        220  7% 46%;   /* slate-500                       */
+
+    /* ── Status scale ─────────────────────────────────────────────────────── */
+    --status-open:          0   75% 55%;   /* red-400                         */
+    --status-fixed:         142 71% 52%;   /* emerald-400                     */
+    --status-verified:      190 81% 56%;   /* cyan-400                        */
+    --status-accepted:      38  92% 58%;   /* amber-400                       */
+
+    /* ── Sidebar tokens ───────────────────────────────────────────────────── */
+    --sidebar-background:       225 14%  7%;
+    --sidebar-foreground:       220  8% 68%;
+    --sidebar-accent:           224 15%  9%;
+    --sidebar-accent-foreground:220  9% 94%;
+    --sidebar-border:           222 13% 10%;
+    --sidebar-ring:             190 81% 56%;
+
+    /* ── Brand glow ───────────────────────────────────────────────────────── */
+    --glow-cyan:    rgba(6, 182, 212, 0.25);
+    --glow-cyan-sm: rgba(6, 182, 212, 0.12);
+  }
+
+  /* Dark class — identical to :root (dark-only product, no light mode) */
+  .dark {
+    --background:            222 22%  5%;
+    --surface-1:             225 14%  7%;
+    --surface-2:             224 15%  8%;
+    --surface-3:             222 14% 11%;
+    --surface-4:             220 12% 15%;
+    --card:                  224 15%  8%;
+    --card-foreground:       220  9% 88%;
+    --popover:               225 14%  7%;
+    --popover-foreground:    220  9% 88%;
+    --primary:               190 81% 56%;
+    --primary-foreground:    220 100%  5%;
+    --secondary:             220 12% 16%;
+    --secondary-foreground:  220  9% 88%;
+    --muted:                 220 12% 16%;
+    --muted-foreground:      220  7% 46%;
+    --accent:                190 81% 56%;
+    --accent-foreground:     220 100%  5%;
+    --destructive:             0 72% 51%;
+    --destructive-foreground:  0  0% 98%;
+    --border:                220 10% 20%;
+    --input:                 222 13% 10%;
+    --ring:                  190 81% 56%;
+    --foreground:            220  9% 88%;
+    --foreground-muted:      220  7% 60%;
+    --foreground-subtle:     220  6% 40%;
+    --foreground-faint:      220  5% 25%;
+    --sidebar-background:    225 14%  7%;
+    --sidebar-foreground:    220  8% 68%;
+    --sidebar-accent:        224 15%  9%;
+    --sidebar-accent-foreground: 220 9% 94%;
+    --sidebar-border:        222 13% 10%;
+    --sidebar-ring:          190 81% 56%;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Base layer — resets, typography, global element styles
+───────────────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply border-border box-border;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    /* Force dark colour scheme at the OS/browser level */
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    /* Subtle scanline texture — visible only at very low opacity */
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.012) 2px,
+      rgba(0, 0, 0, 0.012) 4px
+    );
+  }
+
+  /* Selection colour — brand cyan tint */
+  ::selection {
+    background-color: hsl(var(--primary) / 0.18);
+    color: inherit;
+  }
+
+  /* Headings use the display font (Syne) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', 'Space Grotesk', ui-sans-serif, sans-serif;
+    @apply tracking-tight;
+  }
+
+  /* Smooth focus ring using brand color */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring) / 0.7);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Remove default focus ring for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Scrollbar — thin, brand-tinted */
+  ::-webkit-scrollbar        { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  {
+    background: hsl(220 10% 20%);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(220 10% 28%);
+  }
+  * { scrollbar-width: thin; scrollbar-color: hsl(220 10% 20%) transparent; }
+
+  /* Input autofill override — prevents browser yellow/blue tint */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: hsl(var(--foreground));
+    -webkit-box-shadow: 0 0 0px 1000px hsl(var(--input)) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* Prevent layout shift from scrollbar appearing */
+  html { overflow-y: scroll; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Component layer — reusable class-based primitives
+───────────────────────────────────────────────────────────────────────────── */
+
+@layer components {
+
+  /* ── Typography helpers ──────────────────────────────────────────────────── */
+
+  .page-title {
+    font-family: 'Syne', ui-sans-serif, sans-serif;
+    @apply text-lg font-bold text-slate-100 tracking-tight;
+  }
+
+  .section-label {
+    @apply text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-slate-600;
+  }
+
+  .mono-body {
+    @apply text-sm font-mono text-slate-300 leading-relaxed;
+  }
+
+  /* ── Card ────────────────────────────────────────────────────────────────── */
+
+  .card-base {
+    @apply rounded-xl border bg-[#0D0F12];
+    border-color: hsl(var(--border) / 0.6);
+  }
+
+  .card-base:hover {
+    border-color: hsl(var(--border) / 0.9);
+  }
+
+  .card-elevated {
+    @apply card-base;
+    box-shadow:
+      0 0 0 1px hsl(var(--border) / 0.3),
+      0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ── Inputs ──────────────────────────────────────────────────────────────── */
+
+  .input-base {
+    @apply w-full px-3 py-2.5 rounded-lg text-sm font-mono text-slate-200;
+    @apply bg-[#0D0F12] border border-slate-700/60;
+    @apply placeholder-slate-700;
+    @apply focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20;
+    @apply transition-colors duration-150;
+    caret-color: hsl(var(--primary));
+  }
+
+  .input-base.error {
+    @apply border-red-500/40 focus:border-red-500/60 focus:ring-red-500/20;
+  }
+
+  .select-base {
+    @apply input-base appearance-none cursor-pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 2.5rem;
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────────────────────── */
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-4 py-2 rounded-lg text-sm font-mono font-semibold;
+    @apply transition-all duration-150;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-cyan-500 hover:bg-cyan-400 text-black;
+    @apply shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30;
+    @apply hover:scale-[1.01] active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-slate-800 hover:bg-slate-700 text-slate-200;
+    @apply border border-slate-700 hover:border-slate-600;
+  }
+
+  .btn-ghost {
+    @apply btn text-slate-400 hover:text-slate-200 hover:bg-slate-800/60;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-500/10 hover:bg-red-500/20 text-red-400;
+    @apply border border-red-500/25 hover:border-red-500/40;
+  }
+
+  .btn-icon {
+    @apply p-2 rounded-lg text-slate-500 hover:text-slate-200;
+    @apply hover:bg-slate-800 transition-colors duration-150;
+    @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1;
+    @apply disabled:opacity-30 disabled:cursor-not-allowed;
+  }
+
+  /* ── Severity badges ─────────────────────────────────────────────────────── */
+
+  .severity-badge {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider border;
+  }
+
+  .severity-critical { @apply severity-badge bg-red-500/10     text-red-400     border-red-500/25;     }
+  .severity-high     { @apply severity-badge bg-orange-500/10  text-orange-400  border-orange-500/25;  }
+  .severity-medium   { @apply severity-badge bg-yellow-500/10  text-yellow-400  border-yellow-500/25;  }
+  .severity-low      { @apply severity-badge bg-cyan-500/10    text-cyan-400    border-cyan-500/25;    }
+  .severity-info     { @apply severity-badge bg-slate-500/10   text-slate-400   border-slate-500/25;   }
+
+  /* ── Status badges ───────────────────────────────────────────────────────── */
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider border;
+  }
+
+  .status-open     { @apply status-badge bg-red-500/10     text-red-400     border-red-500/25;     }
+  .status-fixed    { @apply status-badge bg-emerald-500/10 text-emerald-400 border-emerald-500/25; }
+  .status-verified { @apply status-badge bg-cyan-500/10    text-cyan-400    border-cyan-500/25;    }
+  .status-accepted { @apply status-badge bg-amber-500/10   text-amber-400   border-amber-500/25;   }
+
+  /* ── Loading skeletons ───────────────────────────────────────────────────── */
+
+  .skeleton {
+    @apply rounded bg-slate-800/80 animate-pulse;
+  }
+
+  .skeleton-text {
+    @apply skeleton h-3 rounded;
+  }
+
+  .skeleton-card {
+    @apply skeleton rounded-xl h-32;
+  }
+
+  /* ── Drawer / panel ──────────────────────────────────────────────────────── */
+
+  .drawer-backdrop {
+    @apply fixed inset-0 bg-black/70 backdrop-blur-sm z-40;
+  }
+
+  .drawer-panel {
+    @apply fixed right-0 top-0 bottom-0 z-50;
+    @apply bg-[#0A0B0D] border-l border-slate-800;
+    @apply flex flex-col;
+  }
+
+  /* ── Field label ─────────────────────────────────────────────────────────── */
+
+  .field-label {
+    @apply text-[10px] font-mono font-bold text-slate-500 uppercase tracking-[0.12em];
+  }
+
+  /* ── Code / terminal block ───────────────────────────────────────────────── */
+
+  .code-block {
+    @apply rounded-xl border border-slate-800 bg-black/60;
+    @apply p-4 text-xs font-mono text-slate-300 leading-relaxed;
+    @apply overflow-x-auto scrollbar-thin;
+  }
+
+  /* ── Divider ─────────────────────────────────────────────────────────────── */
+
+  .divider {
+    @apply h-px bg-slate-800/80 w-full;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Utility layer — one-off helpers that Tailwind doesn't cover
+───────────────────────────────────────────────────────────────────────────── */
+
+@layer utilities {
+
+  /* ── Font families ───────────────────────────────────────────────────────── */
+  .font-display {
+    font-family: 'Syne', 'Space Grotesk', ui-sans-serif, sans-serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  }
+
+  /* ── Severity glow utilities (box-shadow on severity-coloured elements) ──── */
+  .glow-critical { box-shadow: 0 0 12px rgba(248, 113, 113, 0.30); }
+  .glow-high     { box-shadow: 0 0 12px rgba(251, 146,  60, 0.30); }
+  .glow-medium   { box-shadow: 0 0 12px rgba(250, 204,  21, 0.25); }
+  .glow-low      { box-shadow: 0 0 12px rgba(  6, 182, 212, 0.25); }
+  .glow-cyan     { box-shadow: 0 0 20px rgba(  6, 182, 212, 0.20); }
+
+  /* ── Ambient card glow (top radial bloom inside card) ────────────────────── */
+  .card-glow-cyan {
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(6, 182, 212, 0.05) 0%, transparent 65%);
+  }
+
+  /* ── Text gradient ───────────────────────────────────────────────────────── */
+  .text-gradient-cyan {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #22d3ee 0%, #06b6d4 50%, #0e7490 100%);
+  }
+
+  /* ── Noise texture overlay (use as ::after or a child div) ──────────────── */
+  .noise-overlay {
+    background-image: url('/noise.png');
+    background-repeat: repeat;
+    opacity: 0.025;
+    pointer-events: none;
+  }
+
+  /* ── Scrollbar thin (explicit, for elements that don't inherit body style) ─ */
+  .scrollbar-thin          { scrollbar-width: thin; }
+  .scrollbar-track-transparent { scrollbar-color: transparent transparent; }
+
+  /* ── Truncate at specific line counts ────────────────────────────────────── */
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* ── Animated states ─────────────────────────────────────────────────────── */
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.25s ease-out forwards;
+  }
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* ── Full-height layout helper ───────────────────────────────────────────── */
+  .h-screen-safe {
+    height: 100dvh;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Keyframes
+───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* Scanline animation — subtle horizontal sweep (opt-in with class) */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-scanline::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(6, 182, 212, 0.04),
+    transparent
+  );
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+}

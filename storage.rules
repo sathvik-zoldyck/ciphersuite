@@ -1,0 +1,12 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow users to read and write to the evidence folder of projects they own.
+    // This rule checks the `ownerId` on the corresponding project document in Firestore.
+    match /evidence/{projectId}/{allPaths=**} {
+      allow read, write: if request.auth != null && 
+        get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid;
+    }
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CipherSuite — Alcyone Secure",
+  "description": "Canonical data model and Firebase configuration for CipherSuite. All entity schemas are the source of truth for Firestore document shapes, Security Rules validation, and TypeScript type generation.",
+  "version": "1.0.0",
+  "entities": {
+    "FirestoreDoc": {
+      "description": "Base fields present on every Firestore document. All entities extend this.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Firestore document ID (populated client-side after read)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set on creation. Never mutable after create."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated on every write."
+        }
+      },
+      "required": ["id", "createdAt", "updatedAt"]
+    },
+    "UserProfile": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "User Profile",
+      "description": "Stored at /users/{userId}. Created on first sign-in.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID. Must equal the document ID."
+        },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "settings": {
+          "type": "object",
+          "description": "User-specific app settings (theme, notification prefs, etc.).",
+          "additionalProperties": true
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "PersonalNote": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "Personal Note",
+      "description": "A standalone, project-agnostic personal note stored in a user's subcollection.",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string", "description": "Firebase Auth UID of the note owner." },
+        "title": { "type": "string", "maxLength": 200 },
+        "content": { "type": "string", "maxLength": 50000, "description": "Markdown content." },
+        "color": {
+          "type": "string",
+          "description": "Background color theme for the note.",
+          "enum": ["default", "white", "red", "yellow", "green", "blue", "purple"]
+        },
+        "isPinned": { "type": "boolean", "description": "Whether the note is pinned to the top." },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 50 },
+          "description": "User-defined tags for organization.",
+          "maxItems": 20
+        },
+        "backgroundImage": {
+          "type": "string",
+          "description": "Base64 encoded background image data URI."
+        },
+        "storage": {
+          "type": "string",
+          "description": "Where the note is stored.",
+          "enum": ["local", "cloud"]
+        },
+        "destroyAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp for when the note should self-destruct."
+        }
+      },
+      "required": ["ownerId", "content"]
+    },
+    "Project": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "Project",
+      "description": "Stored at /projects/{projectId}. Top-level engagement container.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 200 },
+        "target": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Primary target — domain, IP range, or asset name."
+        },
+        "scope": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Full scope definition and engagement boundaries."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Web Pentest",
+            "Mobile Pentest",
+            "Network Pentest",
+            "API Pentest",
+            "Infrastructure",
+            "Bug Bounty",
+            "Cloud Review",
+            "Log Analysis",
+            "Incident Response",
+            "Research"
+          ]
+        },
+        "status": { "type": "string", "enum": ["Active", "Completed", "On Hold"] },
+        "ownerId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the project owner."
+        },
+        "riskScore": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Computed 0–100 risk score derived from open findings. Default 0."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional engagement start date."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional engagement end date."
+        }
+      },
+      "required": ["name", "target", "scope", "type", "status", "ownerId", "riskScore"]
+    },
+    "Finding": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "Finding",
+      "description": "Stored at /projects/{projectId}/findings/{findingId}.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "ownerId": { "type": "string", "description": "Firebase Auth UID of the project owner." },
+        "title": { "type": "string", "maxLength": 200 },
+        "severity": {
+          "type": "string",
+          "enum": ["Critical", "High", "Medium", "Low", "Informational"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Open", "Fixed", "Verified", "Accepted"]
+        },
+        "description": { "type": "string", "maxLength": 10000 },
+        "stepsToReproduce": { "type": "string", "maxLength": 10000 },
+        "impact": { "type": "string", "maxLength": 5000 },
+        "remediation": { "type": "string", "maxLength": 5000 },
+        "target": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Affected endpoint, host, or component."
+        },
+        "cvss": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "CVSS v3.1 base score."
+        },
+        "cweId": {
+          "type": "string",
+          "pattern": "^CWE-[0-9]+$",
+          "description": "e.g. CWE-89"
+        },
+        "owaspId": {
+          "type": "string",
+          "pattern": "^A[0-9]{2}:2021$",
+          "description": "e.g. A03:2021"
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs of linked evidence documents."
+        }
+      },
+      "required": [
+        "projectId",
+        "ownerId",
+        "title",
+        "severity",
+        "status",
+        "description",
+        "stepsToReproduce",
+        "impact",
+        "remediation"
+      ]
+    },
+    "Evidence": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "Evidence",
+      "description": "Stored at /projects/{projectId}/evidence/{evidenceId}. Metadata record — actual file lives in Firebase Storage.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "name": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Original filename."
+        },
+        "storagePath": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Full Firebase Storage path, e.g. projects/abc/evidence/file.png"
+        },
+        "storageUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Public download URL. Populated after upload completes."
+        },
+        "uploadedAt": { "type": "string", "format": "date-time" },
+        "fileType": {
+          "type": "string",
+          "description": "MIME type, e.g. image/png, application/json."
+        },
+        "fileSize": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes."
+        },
+        "description": { "type": "string", "maxLength": 1000 },
+        "findingIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs of findings this evidence supports."
+        }
+      },
+      "required": ["projectId", "name", "storagePath", "uploadedAt"]
+    },
+    "Note": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "Note",
+      "description": "Stored at /projects/{projectId}/notes/{noteId}. Markdown-formatted free-form note.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "title": { "type": "string", "maxLength": 200 },
+        "content": {
+          "type": "string",
+          "maxLength": 500000,
+          "description": "Markdown content. Up to ~500KB."
+        },
+        "color": {
+          "type": "string",
+          "description": "Background color theme for the note.",
+          "enum": ["default", "white", "red", "yellow", "green", "blue", "purple"]
+        }
+      },
+      "required": ["projectId", "title", "content"]
+    },
+    "LogEntry": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "Log Entry",
+      "description": "Stored at /projects/{projectId}/logs/{logId}. Raw tool output or log data.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "name": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Descriptive name, e.g. 'Nmap scan — 10.0.0.0/24'."
+        },
+        "content": {
+          "type": "string",
+          "maxLength": 1000000,
+          "description": "Raw log content. Up to ~1MB."
+        }
+      },
+      "required": ["projectId", "name", "content"]
+    },
+    "Report": {
+      "allOf": [{ "$ref": "#/entities/FirestoreDoc" }],
+      "title": "Report",
+      "description": "Stored at /projects/{projectId}/reports/{reportId}. AI-generated engagement report.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "title": { "type": "string", "maxLength": 300 },
+        "template": {
+          "type": "string",
+          "enum": ["executive", "technical", "full", "bugbounty"]
+        },
+        "format": { "type": "string", "enum": ["markdown", "pdf", "docx"] },
+        "status": {
+          "type": "string",
+          "enum": ["generating", "ready", "failed"]
+        },
+        "sections": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Enabled section IDs included in this report."
+        },
+        "findingCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of findings included at generation time."
+        },
+        "wordCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Approximate word count of generated content."
+        },
+        "content": {
+          "type": "string",
+          "description": "Full generated report content, usually in Markdown format."
+        }
+      },
+      "required": [
+        "projectId",
+        "title",
+        "template",
+        "format",
+        "status",
+        "sections",
+        "findingCount"
+      ]
+    }
+  },
+  "auth": {
+    "providers": ["password", "anonymous"]
+  },
+  "firestore": {
+    "structure": {
+      "/users/{userId}": {
+        "schema": { "$ref": "#/entities/UserProfile" },
+        "description": "Collection of user profiles."
+      },
+       "/users/{userId}/personal_notes/{noteId}": {
+        "schema": { "$ref": "#/entities/PersonalNote" },
+        "description": "Subcollection storing a user's personal, non-project notes."
+      },
+      "/projects/{projectId}": {
+        "schema": { "$ref": "#/entities/Project" },
+        "description": "Top-level collection for cybersecurity projects."
+      },
+      "/projects/{projectId}/findings/{findingId}": {
+        "schema": { "$ref": "#/entities/Finding" },
+        "description": "Subcollection storing security findings specific to a project."
+      },
+      "/projects/{projectId}/evidence/{evidenceId}": {
+        "schema": { "$ref": "#/entities/Evidence" },
+        "description": "Subcollection storing evidence items for a project."
+      },
+      "/projects/{projectId}/notes/{noteId}": {
+        "schema": { "$ref": "#/entities/Note" },
+        "description": "Subcollection storing free-form notes for a project."
+      },
+      "/projects/{projectId}/logs/{logId}": {
+        "schema": { "$ref": "#/entities/LogEntry" },
+        "description": "Subcollection storing raw log data for a project."
+      },
+      "/projects/{projectId}/reports/{reportId}": {
+        "schema": { "$ref": "#/entities/Report" },
+        "description": "Subcollection storing generated reports for a project."
+      }
+    }
+  }
+}

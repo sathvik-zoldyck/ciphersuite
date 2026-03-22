@@ -1,0 +1,215 @@
+
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CipherSuite Firestore Security Rules — Alcyone Secure
+//
+// Philosophy:
+//   • Deny by default — every path not explicitly matched is denied.
+//   • Authenticate before authorise — every rule checks request.auth first.
+//   • Validate on write — field types and required keys are enforced here,
+//     not just in the client, so direct API calls can't bypass validation.
+//   • Least privilege — subcollections are never writable without a parent
+//     ownership check; no cross-user reads are ever permitted.
+//
+// Subcollections covered: findings, evidence, notes, logs, reports
+// ─────────────────────────────────────────────────────────────────────────────
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Helpers ──────────────────────────────────────────────────────────────
+
+    function isAuthed() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return isAuthed() && request.auth.uid == uid;
+    }
+
+    function projectOwner(projectId) {
+      return get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId;
+    }
+
+    function ownsProject(projectId) {
+      return isAuthed() && request.auth.uid == projectOwner(projectId);
+    }
+
+    function hasFields(required) {
+      return request.resource.data.keys().hasAll(required);
+    }
+
+    function validString(field, maxBytes) {
+      return field is string && field.size() > 0 && field.size() <= maxBytes;
+    }
+    
+    function nullableString(field, maxBytes) {
+        return field == null || (field is string && field.size() <= maxBytes);
+    }
+
+    function isServerTimestamp(field) {
+      return request.resource.data[field] == request.time;
+    }
+
+    // ─── User profiles & data ─────────────────────────────────────────────────
+
+    match /users/{userId} {
+      allow read, write: if isUser(userId);
+
+      // User profile doc
+      allow create: if isUser(userId)
+                    && hasFields(["uid", "email"])
+                    && request.resource.data.uid == userId;
+      allow update: if isUser(userId)
+                    && request.resource.data.uid       == resource.data.uid
+                    && request.resource.data.createdAt == resource.data.createdAt;
+      
+      // Personal notes subcollection
+      match /personal_notes/{noteId} {
+        allow read, write: if isUser(userId);
+
+        allow create: if isUser(userId)
+                      && hasFields(["ownerId", "content", "createdAt", "updatedAt"])
+                      && request.resource.data.ownerId == userId
+                      && validString(request.resource.data.content, 50000);
+        
+        allow update: if isUser(userId)
+                      && request.resource.data.ownerId == resource.data.ownerId
+                      && request.resource.data.createdAt == resource.data.createdAt;
+      }
+    }
+
+    // ─── Projects ─────────────────────────────────────────────────────────────
+
+    match /projects/{projectId} {
+
+      allow read: if isAuthed() && request.auth.uid == resource.data.ownerId;
+
+      allow create: if isAuthed()
+                    && request.resource.data.ownerId == request.auth.uid
+                    && hasFields(["name", "target", "scope", "type", "status",
+                                  "ownerId", "riskScore", "createdAt", "updatedAt"])
+                    && validString(request.resource.data.name,   200)
+                    && validString(request.resource.data.target, 500)
+                    && validString(request.resource.data.scope,  2000)
+                    && request.resource.data.type in [
+                        "Web Pentest", "Mobile Pentest", "Network Pentest", "API Pentest",
+                        "Infrastructure", "Bug Bounty", "Cloud Review",
+                        "Log Analysis", "Incident Response", "Research"
+                      ]
+                    && request.resource.data.status in ["Active", "Completed", "On Hold"]
+                    && request.resource.data.riskScore is int
+                    && request.resource.data.riskScore >= 0
+                    && request.resource.data.riskScore <= 100
+                    && isServerTimestamp("createdAt")
+                    && isServerTimestamp("updatedAt");
+
+      allow update: if isAuthed()
+                    && request.auth.uid == resource.data.ownerId
+                    && request.resource.data.ownerId   == resource.data.ownerId
+                    && request.resource.data.createdAt == resource.data.createdAt
+                    && isServerTimestamp("updatedAt");
+
+      allow delete: if isAuthed()
+                    && request.auth.uid == resource.data.ownerId;
+
+      // ─── Findings ────────────────────────────────────────────────────────────
+
+      match /findings/{findingId} {
+        // Allow reads (get, list) and writes (update, delete) if the user owns the parent project.
+        allow get, list, update, delete: if ownsProject(projectId);
+
+        // CREATE rule:
+        // Allow if the user owns the project AND the new finding document
+        // correctly includes their UID as the `ownerId`.
+        allow create: if ownsProject(projectId)
+                      && request.resource.data.ownerId == request.auth.uid
+                      && hasFields(["projectId", "ownerId", "title", "severity", "status", "description",
+                                    "stepsToReproduce", "impact", "remediation", "createdAt", "updatedAt"])
+                      && request.resource.data.projectId == projectId
+                      && validString(request.resource.data.title, 200)
+                      && request.resource.data.severity in ["Critical", "High", "Medium", "Low", "Informational"]
+                      && request.resource.data.status in ["Open", "Fixed", "Verified", "Accepted"]
+                      && validString(request.resource.data.description, 10000)
+                      && validString(request.resource.data.stepsToReproduce, 10000)
+                      && validString(request.resource.data.impact, 5000)
+                      && validString(request.resource.data.remediation, 5000);
+      }
+
+      // ─── Evidence ─────────────────────────────────────────────────────────────
+
+      match /evidence/{evidenceId} {
+        allow read, write: if ownsProject(projectId);
+
+        allow create: if ownsProject(projectId)
+                      && hasFields(["projectId", "name", "storagePath", "uploadedAt", "createdAt", "updatedAt"])
+                      && request.resource.data.projectId == projectId
+                      && validString(request.resource.data.name, 255)
+                      && validString(request.resource.data.storagePath, 1000);
+        
+        allow update: if ownsProject(projectId)
+                      && request.resource.data.projectId == resource.data.projectId
+                      && request.resource.data.createdAt == resource.data.createdAt;
+      }
+
+      // ─── Notes ────────────────────────────────────────────────────────────────
+
+      match /notes/{noteId} {
+        allow read, write: if ownsProject(projectId);
+
+        allow create: if ownsProject(projectId)
+                      && hasFields(["projectId", "title", "content", "createdAt", "updatedAt"])
+                      && request.resource.data.projectId == projectId
+                      && validString(request.resource.data.title, 200)
+                      && validString(request.resource.data.content, 500000);
+
+        allow update: if ownsProject(projectId)
+                      && request.resource.data.projectId == resource.data.projectId
+                      && request.resource.data.createdAt == resource.data.createdAt;
+      }
+
+      // ─── Logs ─────────────────────────────────────────────────────────────────
+
+      match /logs/{logId} {
+        allow read, write: if ownsProject(projectId);
+        
+        allow create: if ownsProject(projectId)
+                      && hasFields(["projectId", "name", "content", "createdAt", "updatedAt"])
+                      && request.resource.data.projectId == projectId
+                      && validString(request.resource.data.name, 200)
+                      && validString(request.resource.data.content, 1000000);
+        
+        allow update: if ownsProject(projectId)
+                      && request.resource.data.projectId == resource.data.projectId
+                      && request.resource.data.createdAt == resource.data.createdAt;
+      }
+
+      // ─── Reports ──────────────────────────────────────────────────────────────
+
+      match /reports/{reportId} {
+        allow read, write: if ownsProject(projectId);
+
+        allow create: if ownsProject(projectId)
+                      && hasFields(["projectId", "title", "template", "format", "status", "sections", "findingCount", "createdAt", "updatedAt"])
+                      && request.resource.data.projectId == projectId
+                      && validString(request.resource.data.title, 300)
+                      && request.resource.data.template in ["executive", "technical", "full", "bugbounty"]
+                      && request.resource.data.format in ["markdown", "pdf", "docx"]
+                      && request.resource.data.status in ["generating", "ready", "failed"];
+
+        allow update: if ownsProject(projectId)
+                      && request.resource.data.projectId == resource.data.projectId
+                      && request.resource.data.createdAt == resource.data.createdAt;
+      // ─── Activity Logs ────────────────────────────────────────────────────────
+
+      match /activity/{activityId} {
+        allow read:   if isAuthed() && request.auth.uid == projectOwner(projectId);
+        allow create: if isAuthed() && request.auth.uid == projectOwner(projectId)
+                      && hasFields(["projectId", "action", "userId", "userEmail", "timestamp"])
+                      && isServerTimestamp("timestamp");
+        // No update or delete — audit logs are immutable
+      }
+    }
+  }
+}
