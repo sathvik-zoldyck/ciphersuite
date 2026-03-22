@@ -1,19 +1,16 @@
 # CipherSuite
-
 > Your entire pentest workflow. One workspace.
 
-CipherSuite is a full-stack cybersecurity workspace designed for penetration testers, bug bounty hunters, SOC analysts, and security students.
-
-It replaces fragmented workflows (notes, evidence, reporting) with a unified, structured, and professional environment.
+CipherSuite is a full-stack cybersecurity workspace for penetration testers, bug bounty hunters, SOC analysts, and security students. It replaces fragmented workflows — notes in Notion, evidence in Drive, reports in Word — with one unified, dark-themed professional environment.
 
 ---
 
 ## ⚡ Overview
 
-CipherSuite centralizes the entire offensive security workflow:
+From first recon to final report, everything lives in one place:
 
-- Manage projects and engagements
-- Document findings with structured data
+- Manage projects and security engagements
+- Document and track findings with structured data
 - Store and organize evidence
 - Write technical notes alongside testing
 - Generate professional reports with AI assistance
@@ -27,58 +24,52 @@ CipherSuite centralizes the entire offensive security workflow:
 - Track scope, targets, and timelines
 - Risk scoring and status tracking
 
----
-
 ### 🔍 Findings Management
 - Structured vulnerability documentation
 - Severity classification (Critical → Informational)
 - Status tracking (Open, Fixed, Verified, Accepted)
 - CVSS, CWE, OWASP mapping support
+- Full finding detail pages with history
 - Clean technical + business impact separation
-
----
 
 ### 🧾 Evidence Vault
 - Upload and manage files (images, logs, dumps)
-- Organized per project
+- Bidirectional Evidence ↔ Finding linking
 - Quick preview and structured storage
 
----
-
-### 📝 Notes System (Advanced)
+### 📝 Notes System
+- Multi-note manager with sidebar navigation
 - Markdown editor with split preview
-- Tagging and filtering system
-- Pin important notes
-- Color-coded categorization
+- Tagging, pinning, and color-coded categorization
+- Autosave with 1.5s debounce
 - **Local-only notes mode (never synced)**
-- **Self-destruct notes (auto-delete timers)**
+- **Self-destruct notes with auto-delete timers**
 - Custom background support (stored locally)
 
----
+### 🔧 Tool Import
+- Parse output directly from Nmap, Nessus, and Burp Suite
+- AI-powered analysis converts tool output into structured findings automatically
 
 ### 📊 Dashboard & Analytics
 - Findings distribution by severity
 - Risk score calculation (0–100)
-- Status breakdown
-- Engagement overview panel
-
----
+- Live activity feed with audit logging
+- Status and engagement overview
 
 ### 🤖 AI-Assisted Reporting
 - Generate full reports from findings
-- Multiple templates:
+- Four professional templates:
   - Executive Summary
   - Technical Report
   - Full Pentest Report
   - Bug Bounty Report
-- Optimized for real-world deliverables
-
----
+- PDF export for final deliverables
+- Optimized for real-world client deliverables
 
 ### 🔐 Authentication & Security
-- Firebase Authentication (Email + Google)
+- Firebase Authentication (Email + Google OAuth + Guest Mode)
 - Project-level access isolation
-- Firestore security rules enforced
+- Production-grade Firestore and Storage security rules
 
 ---
 
@@ -103,32 +94,30 @@ CipherSuite centralizes the entire offensive security workflow:
 
 ## 🏗️ Tech Stack
 
-- **Frontend:** Next.js 14, TypeScript
-- **Styling:** Tailwind CSS + shadcn/ui
-- **Animations:** Framer Motion
-- **Backend:** Firebase (Firestore, Auth, Storage)
-- **AI:** Anthropic Claude API
-- **Charts:** Recharts
-- **Markdown:** react-markdown + remark-gfm
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| **Frontend** | Next.js 14, TypeScript | React App Router, SSR |
+| **Styling** | Tailwind CSS + shadcn/ui | Dark war-room aesthetic |
+| **Database** | Firebase Firestore | Real-time sync, offline support |
+| **Auth** | Firebase Auth | Email, Google OAuth, Guest mode |
+| **Storage** | Firebase Storage | Evidence files |
+| **AI** | Anthropic Claude API | Report generation, tool analysis |
+| **Charts** | Recharts | Analytics and dashboards |
+| **Markdown** | react-markdown + remark-gfm | Notes and reports |
 
 ---
 
-## 🚧 Current Status
+## 🚀 Current Status
 
-Version: **v1.0**
+**Version: v1.0** — Fully functional and deployed.
 
-CipherSuite is fully functional with core workflow features implemented.
+All core workflow features are live including findings management, evidence vault, AI reporting, tool import, activity logging, PDF export, and the advanced notes system.
 
 ---
 
-## 🔮 Upcoming Improvements
+## 🔮 What's Next
 
-- Tool import system (Nmap, Burp, Nessus)
-- Evidence ↔ Findings linking
-- Dedicated finding detail pages
-- PDF/DOCX report export
-- Activity tracking and audit logs
-- UI/UX refinements and bug fixes
+CipherSuite is actively evolving. The next phase focuses on expanding into new workspace types — **CTF Mode** for students and challenge tracking, and **Bug Bounty Mode** for hunters managing multiple programs. Collaborative team projects and deeper AI integration are also on the roadmap.
 
 ---
 
@@ -140,8 +129,7 @@ CipherSuite is fully functional with core workflow features implemented.
 
 ## 📌 Note
 
-This project is actively evolving.  
-Future updates will focus on deeper automation, integrations, and professional-grade reporting workflows.
+This project is actively evolving. Future updates will focus on deeper automation, new workspace types, and professional-grade collaboration workflows.
 
 ---
 
