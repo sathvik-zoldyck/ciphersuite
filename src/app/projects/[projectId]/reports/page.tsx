@@ -23,6 +23,7 @@ import {
 import { generateReport as aiGenerateReport } from "@/ai/flows";
 import { logActivity } from "@/lib/activity-service";
 import { exportReportToPDF } from "@/lib/export-pdf";
+import { exportReportToDOCX } from "@/lib/export-docx";
 import type {
   Report, ReportFormat, ReportTemplate, ReportSection, ReportSectionId,
   FindingSeverity, Finding,
@@ -168,25 +169,41 @@ function ReportCard({ report, onView, onDelete }: {
   };
 
   const handleDownload = async () => {
-    if (report.format === "pdf" && report.content) {
+    if (!report.content) {
+      if (report.downloadUrl) {
+        window.open(report.downloadUrl, '_blank');
+      }
+      return;
+    }
+
+    if (report.format === "pdf") {
       setDownloading(true);
       try {
         await exportReportToPDF(report.title, report.content);
-        toast.success("PDF downloaded.");
+        toast({ title: "PDF downloaded." });
       } catch (e: any) {
         console.error(e);
-        toast.error("PDF export failed.");
+        toast({ variant: "destructive", title: "PDF export failed.", description: e?.message });
       } finally {
         setDownloading(false);
       }
       return;
     }
 
-    if(report.downloadUrl) {
-        window.open(report.downloadUrl, '_blank');
-        return;
+    if (report.format === "docx") {
+      setDownloading(true);
+      try {
+        await exportReportToDOCX(report.title, report.content);
+        toast({ title: "Word document downloaded." });
+      } catch (e: any) {
+        console.error(e);
+        toast({ variant: "destructive", title: "DOCX export failed.", description: e?.message });
+      } finally {
+        setDownloading(false);
+      }
+      return;
     }
-    if (!report.content) return;
+
     const name = `${report.title.replace(/\s+/g, "-").toLowerCase()}.md`;
     downloadText(report.content, name, "text/markdown");
   };

@@ -1,17 +1,17 @@
-
 'use server';
 /**
  * @fileOverview Genkit flow for generating professional security reports.
+ *
+ * Returns Markdown only. PDF/DOCX conversion happens client-side
+ * (see src/lib/export-pdf.ts and src/lib/export-docx.ts) because
+ * serverless runtimes (Vercel) cannot run PhantomJS/Chromium reliably
+ * and the client already has the rendering libraries.
  */
+
+export const maxDuration = 60;
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
-import { storage } from '@/lib/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { marked } from 'marked';
-// @ts-expect-error missing typings
-import HTMLtoDOCX from 'html-to-docx';
-import pdf from 'html-pdf';
 
 // A simplified schema for findings passed to the AI
 const FindingSchema = z.object({
@@ -56,7 +56,7 @@ export type ReportGenerationOutput = z.infer<typeof ReportGenerationOutputSchema
 const reportGenerationPrompt = ai.definePrompt({
   name: 'reportGenerationPrompt',
   input: { schema: ReportGenerationInputSchema },
-  output: { schema: z.string() }, // The AI still just outputs a markdown string
+  output: { schema: z.string() },
   prompt: `You are a senior penetration tester and technical writer at {{{companyName}}} producing a professional security assessment report.
 Write in formal, authoritative language suitable for delivery to a client.
 The report should be formatted in clean Markdown with proper headers, tables, and lists.
@@ -112,7 +112,7 @@ const generateReportFlow = ai.defineFlow(
     outputSchema: ReportGenerationOutputSchema,
   },
   async (input) => {
-    const { findings, format, projectId, reportId } = input;
+    const { findings } = input;
 
     const findingSummary = findings.map((f, i) =>
       `${i + 1}. [${f.severity}] ${f.title} — Target: ${f.target ?? "N/A"}, Status: ${f.status}`
@@ -149,61 +149,10 @@ ${f.owaspId ? `- **OWASP**: ${f.owaspId}` : ""}
     if (!markdownContent) {
       throw new Error('AI returned an empty response.');
     }
-    
+
     const wordCount = markdownContent.split(/\s+/).filter(Boolean).length;
 
-    if (format === 'markdown') {
-        return { content: markdownContent, wordCount };
-    }
-
-    const htmlContent = marked(markdownContent);
-    const styledHtml = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; }
-            h1, h2, h3 { color: #111; }
-            pre, code { font-family: "Courier New", Courier, monospace; }
-            pre { background-color: #f5f5f5; padding: 1rem; border-radius: 0.5rem; }
-            table { border-collapse: collapse; width: 100%; margin-bottom: 1rem; }
-            th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
-            th { background-color: #f2f2f2; }
-          </style>
-        </head>
-        <body>${htmlContent}</body>
-      </html>
-    `;
-
-    let fileBuffer: Buffer | ArrayBuffer;
-    let storageRefPath = `reports/${projectId}/${reportId}.${format}`;
-    
-    if (format === 'docx') {
-        fileBuffer = await HTMLtoDOCX(styledHtml, null, {
-            table: { row: { cantSplit: true } },
-            footer: true,
-            pageNumber: true,
-        });
-    } else if (format === 'pdf') {
-        fileBuffer = await new Promise<Buffer>((resolve, reject) => {
-            pdf.create(styledHtml, { format: 'A4' }).toBuffer((err, buffer) => {
-                if (err) {
-                    return reject(err);
-                }
-                resolve(buffer);
-            });
-        });
-    } else {
-        // Should not happen due to Zod schema validation
-        throw new Error(`Unsupported format: ${format}`);
-    }
-
-    const storageRef = ref(storage, storageRefPath);
-    await uploadBytes(storageRef, fileBuffer);
-    const downloadUrl = await getDownloadURL(storageRef);
-    
-    return { content: markdownContent, downloadUrl, wordCount };
+    return { content: markdownContent, wordCount };
   }
 );
 
