@@ -44,8 +44,6 @@
     "firebase": "^11.9.1",
     "framer-motion": "^11.2.12",
     "genkit": "^1.28.0",
-    "html-pdf": "^3.0.1",
-    "html-to-docx": "^1.8.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
     "lucide-react": "^0.475.0",
@@ -64,7 +62,6 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@types/html-pdf": "^3.0.3",
     "@types/marked": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^19.2.1",
