@@ -6,9 +6,10 @@
  * (see src/lib/export-pdf.ts and src/lib/export-docx.ts) because
  * serverless runtimes (Vercel) cannot run PhantomJS/Chromium reliably
  * and the client already has the rendering libraries.
+ *
+ * Route-segment maxDuration is set in
+ * src/app/projects/[projectId]/reports/layout.tsx.
  */
-
-export const maxDuration = 60;
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
