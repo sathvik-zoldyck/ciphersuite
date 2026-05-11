@@ -457,7 +457,16 @@ function NewReportDrawer({
           sections: enabledSections, findings, classification, authorName, companyName,
       });
 
-      const updates   = { status: "ready" as const, content: result.content, wordCount: result.wordCount, downloadUrl: result.downloadUrl };
+      if (!result.ok) {
+        throw new Error(result.error);
+      }
+
+      const updates = {
+        status: "ready" as const,
+        content: result.data.content,
+        wordCount: result.data.wordCount,
+        downloadUrl: result.data.downloadUrl,
+      };
 
       if (!isGuest) {
         await updateDoc(doc(db, "projects", projectId, "reports", reportId), {
@@ -465,7 +474,7 @@ function NewReportDrawer({
         });
       }
       onReportUpdated(reportId, updates);
-      toast({ title: "Report ready.", description: `~${result.wordCount.toLocaleString()} words generated.` });
+      toast({ title: "Report ready.", description: `~${result.data.wordCount.toLocaleString()} words generated.` });
 
     } catch (err: any) {
       console.error("Report generation failed:", err);

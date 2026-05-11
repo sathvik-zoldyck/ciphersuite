@@ -53,6 +53,12 @@ const ReportGenerationOutputSchema = z.object({
 
 export type ReportGenerationOutput = z.infer<typeof ReportGenerationOutputSchema>;
 
+// Wrapped result type so the client always receives the real error
+// message. Next.js masks thrown server-action errors in production.
+export type GenerateReportResult =
+  | { ok: true; data: ReportGenerationOutput }
+  | { ok: false; error: string };
+
 
 const reportGenerationPrompt = ai.definePrompt({
   name: 'reportGenerationPrompt',
@@ -157,9 +163,22 @@ ${f.owaspId ? `- **OWASP**: ${f.owaspId}` : ""}
   }
 );
 
-// Public server action
+// Public server action.
+// Returns a discriminated result instead of throwing — Next.js masks
+// thrown server-action errors in production, so we surface the real
+// message via `result.error` so the UI/toast can display it.
 export async function generateReport(
     input: Parameters<typeof generateReportFlow>[0]
-): Promise<ReportGenerationOutput> {
-    return generateReportFlow(input);
+): Promise<GenerateReportResult> {
+    try {
+        const data = await generateReportFlow(input);
+        return { ok: true, data };
+    } catch (err: any) {
+        console.error('[generateReport] flow failed:', err);
+        const message =
+            err?.message ||
+            err?.cause?.message ||
+            (typeof err === 'string' ? err : 'Unknown error in report generation.');
+        return { ok: false, error: message };
+    }
 }
