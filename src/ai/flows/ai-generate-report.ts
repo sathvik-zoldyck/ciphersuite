@@ -60,10 +60,12 @@ export type GenerateReportResult =
   | { ok: false; error: string };
 
 
+// NOTE: no output schema — we want raw markdown text. Declaring
+// `output.schema: z.string()` makes Genkit force JSON-mode on Gemini,
+// which then returns null and fails schema validation.
 const reportGenerationPrompt = ai.definePrompt({
   name: 'reportGenerationPrompt',
   input: { schema: ReportGenerationInputSchema },
-  output: { schema: z.string() },
   prompt: `You are a senior penetration tester and technical writer at {{{companyName}}} producing a professional security assessment report.
 Write in formal, authoritative language suitable for delivery to a client.
 The report should be formatted in clean Markdown with proper headers, tables, and lists.
@@ -144,7 +146,7 @@ ${f.owaspId ? `- **OWASP**: ${f.owaspId}` : ""}
 
     const currentDate = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
-    const { output: markdownContent } = await reportGenerationPrompt({
+    const response = await reportGenerationPrompt({
         ...input,
         findings,
         findingSummary,
@@ -152,6 +154,8 @@ ${f.owaspId ? `- **OWASP**: ${f.owaspId}` : ""}
         currentDate,
         sections: input.sections.join(', '),
     });
+
+    const markdownContent = response.text?.trim();
 
     if (!markdownContent) {
       throw new Error('AI returned an empty response.');
