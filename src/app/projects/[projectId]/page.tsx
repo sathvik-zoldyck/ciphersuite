@@ -294,7 +294,7 @@ function SeverityBars({ findings, isLoading }: { findings: Finding[]; isLoading:
             {/* Bar track */}
             <div className="flex-1 h-5 bg-slate-800/60 rounded-md overflow-hidden relative">
               <div
-                className={cn("h-full rounded-md transition-all duration-700 ease-out", cfg.border.replace('border-','bg-'))}
+                className={cn("h-full rounded-md transition-all duration-700 ease-out", cfg.dot)}
                 style={{
                   width: animated ? `${Math.max(pct, count > 0 ? 3 : 0)}%` : "0%",
                   transitionDelay: `${i * 80}ms`,
@@ -740,7 +740,7 @@ export default function DashboardPage() {
                           <div className={cn("w-1 h-1 rounded-full flex-shrink-0", cfg.dot)} />
                           <span className="text-[10px] font-mono text-slate-600 w-16">{sev}</span>
                           <div className="flex-1 h-1 bg-slate-800 rounded-full overflow-hidden">
-                            <div className={cn("h-full rounded-full", cfg.border.replace('border-','bg-'))} style={{ width: `${pct}%` }} />
+                            <div className={cn("h-full rounded-full", cfg.dot)} style={{ width: `${pct}%` }} />
                           </div>
                           <span className={cn("text-[10px] font-mono font-bold w-4 text-right", cfg.color)}>{count}</span>
                         </div>
