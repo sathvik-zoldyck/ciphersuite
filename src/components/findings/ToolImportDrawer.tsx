@@ -6,7 +6,7 @@ import {
   X, Upload, FileTerminal, Loader2, CheckSquare,
   Square, Search, CheckCircle2, ShieldAlert,
   ChevronLeft, Zap, AlertTriangle,
-} from "lucide-react";
+} from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { SUPPORTED_TOOLS, type ToolType } from "@/lib/types";
 import { summarizeXMLOutput } from "@/lib/parsers/parse-tool-output";

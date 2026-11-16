@@ -8,7 +8,7 @@ import {
   Copy, Search, Upload, X, ChevronDown, ChevronUp,
   Terminal, Filter, Hash, Zap, CheckCheck,
   AlertTriangle, Info, Activity, FileCode,
-} from "lucide-react";
+} from "@/components/icons";
 import { useDoc } from '@/hooks/use-doc';
 import { setDocument } from '@/lib/firestore';
 import { db } from '@/lib/firebase';

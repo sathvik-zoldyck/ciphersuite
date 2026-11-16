@@ -17,7 +17,7 @@ import { useAuth } from "@/context/AuthContext";
 import { toast } from "@/hooks/use-toast";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "@/components/icons";
 import { Calendar } from "@/components/ui/calendar";
 import type { PersonalNote, NoteColor as PersonalNoteColor } from "@/lib/types";
 

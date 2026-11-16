@@ -11,7 +11,7 @@ import {
   Filter, FolderOpen, HardDriveUpload, Plus,
   CheckCheck, SortAsc, Image as ImageIcon,
   FileText, Terminal, Archive, AlertCircle,
-} from "lucide-react";
+} from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { collection, serverTimestamp, doc } from "firebase/firestore";
 import { db, storage } from "@/lib/firebase";

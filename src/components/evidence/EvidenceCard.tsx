@@ -6,7 +6,7 @@ import {
   FileText, FileJson, FileCode, Terminal,
   Image as ImageIcon, FileArchive, FileSearch,
   Trash2, Download, Copy, Check, ExternalLink, Bug, Loader2
-} from "lucide-react";
+} from "@/components/icons";
 import { cn, formatBytes } from "@/lib/utils";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { collection, query, where, documentId } from "firebase/firestore";

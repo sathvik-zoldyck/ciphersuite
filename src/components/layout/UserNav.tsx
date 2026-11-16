@@ -3,7 +3,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
-import { LogOut, Shield } from "lucide-react";
+import { LogOut, Shield } from "@/components/icons";
 import {
   DropdownMenu,
   DropdownMenuContent,

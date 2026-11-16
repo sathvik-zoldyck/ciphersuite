@@ -12,7 +12,7 @@ import { toast } from "@/hooks/use-toast";
 import {
   Settings, Save, Trash2, AlertTriangle, Shield,
   Globe, CheckCircle2, Loader2, Lock, Building2, Info,
-} from "lucide-react";
+} from "@/components/icons";
 import {
   PROJECT_TYPES, PROJECT_STATUSES,
   type ProjectType, type ProjectStatus, type Project

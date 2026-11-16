@@ -11,7 +11,7 @@ import {
   Paperclip,
   Calendar,
   Hash,
-} from 'lucide-react';
+} from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { SeverityBadge, StatusBadge } from './SeverityBadge';
 import { SEVERITY_CONFIG } from '@/lib/types';

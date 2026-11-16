@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { StickyNote, Plus } from "lucide-react";
+import { StickyNote, Plus } from "@/components/icons";
 import { UserNav } from "@/components/layout/UserNav";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/lib/types";

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Loader2, FileImage } from "lucide-react";
+import { X, Check, Loader2, FileImage } from "@/components/icons";
 import { writeBatch, doc, arrayUnion, arrayRemove, serverTimestamp, collection, query, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";

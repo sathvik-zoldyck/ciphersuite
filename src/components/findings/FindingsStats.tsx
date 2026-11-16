@@ -1,7 +1,7 @@
 
 'use client';
 
-import { ShieldAlert, BarChart, CheckCircle, Clock } from 'lucide-react';
+import { ShieldAlert, BarChart, CheckCircle, Clock } from '@/components/icons';
 import type { Finding, FindingSeverity, FindingStatus } from '@/lib/types';
 import { motion } from 'framer-motion';
 import { Progress } from '../ui/progress';

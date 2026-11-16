@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, ChevronDown, Sparkles, LayoutTemplate,
   AlertTriangle, CheckCircle2, ChevronRight, Loader2,
-} from 'lucide-react';
+} from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { SeverityBadge } from './SeverityBadge';
 import {

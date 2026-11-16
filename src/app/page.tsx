@@ -21,7 +21,7 @@ import {
   StickyNote, Sparkles, Globe,
   X, AlertTriangle, Building2,
   Search, Grid3x3, List,
-} from "lucide-react";
+} from "@/components/icons";
 import {
   PROJECT_TYPES, PROJECT_STATUSES,
   type Project, type ProjectType, type ProjectStatus,

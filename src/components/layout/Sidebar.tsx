@@ -10,7 +10,7 @@ import {
   LayoutDashboard, Bug, Paperclip, BookText,
   FileText, FileBarChart2, Settings, ArrowLeft,
   ChevronRight, Zap, Shield,
-} from "lucide-react";
+} from "@/components/icons";
 import {
   Sidebar, SidebarHeader, SidebarContent,
   SidebarMenu, SidebarMenuItem, SidebarMenuButton,

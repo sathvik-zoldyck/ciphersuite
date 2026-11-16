@@ -9,7 +9,7 @@ import {
   ArrowRight, ChevronRight, Bug, Layers,
   Lock, Zap, BarChart2, Plus, Circle,
   CheckCircle2, XCircle, AlertCircle, FileBarChart2,
-} from "lucide-react";
+} from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { format, formatDistanceToNow } from "date-fns";
 import { useProject } from "@/hooks/use-project";
