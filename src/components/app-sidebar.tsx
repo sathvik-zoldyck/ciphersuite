@@ -74,9 +74,9 @@ function NavItem({
         className={cn(
           "relative flex items-center gap-3 px-3 h-9 rounded-lg w-full",
           "text-[13px] font-sans font-medium transition-all duration-150",
-          "focus-visible:ring-2 focus-visible:ring-cyan-500/40 focus-visible:outline-none",
+          "focus-visible:ring-2 focus-visible:ring-violet-500/40 focus-visible:outline-none",
           isActive
-            ? "bg-cyan-500/10 text-cyan-300"
+            ? "bg-violet-500/10 text-violet-300"
             : "text-slate-500 hover:text-slate-200 hover:bg-white/[0.04]",
         )}
       >
@@ -90,8 +90,8 @@ function NavItem({
                 animate={{ opacity: 1, scaleY: 1 }}
                 exit={{ opacity: 0, scaleY: 0 }}
                 transition={{ duration: 0.18, ease: "easeOut" }}
-                className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-cyan-400"
-                style={{ boxShadow: "0 0 8px rgba(6,182,212,0.6)" }}
+                className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-violet-400"
+               
               />
             )}
           </AnimatePresence>
@@ -101,7 +101,7 @@ function NavItem({
             className={cn(
               "flex-shrink-0 transition-colors duration-150",
               collapsed ? "w-4.5 h-4.5" : "w-4 h-4",
-              isActive ? "text-cyan-400" : "text-slate-600 group-hover:text-slate-400"
+              isActive ? "text-violet-400" : "text-slate-600 group-hover:text-slate-400"
             )}
           />
 
@@ -119,7 +119,7 @@ function NavItem({
 
           {/* Active arrow — only in expanded state */}
           {!collapsed && isActive && (
-            <ChevronRight className="w-3 h-3 text-cyan-500/50 flex-shrink-0" />
+            <ChevronRight className="w-3 h-3 text-violet-500/50 flex-shrink-0" />
           )}
         </Link>
       </SidebarMenuButton>
@@ -163,7 +163,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
             {/* Glow */}
             <div
               className="absolute inset-0 rounded-lg -z-10 blur-md opacity-60"
-              style={{ background: "rgba(6,182,212,0.4)" }}
+              style={{ background: "rgba(139, 92, 246,0.4)" }}
             />
           </div>
 
@@ -232,10 +232,10 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
 
         {/* AI hint chip — only when expanded */}
         {!collapsed && (
-          <div className="mx-1 mt-3 px-3 py-2.5 rounded-xl border border-cyan-500/15 bg-cyan-500/[0.04]">
+          <div className="mx-1 mt-3 px-3 py-2.5 rounded-xl border border-violet-500/15 bg-violet-500/[0.04]">
             <div className="flex items-center gap-2 mb-1">
-              <Zap className="w-3 h-3 text-cyan-500/60" />
-              <span className="text-[9px] font-sans font-bold text-cyan-600 uppercase tracking-wider">AI Assist</span>
+              <Zap className="w-3 h-3 text-violet-500/60" />
+              <span className="text-[9px] font-sans font-bold text-violet-600 uppercase tracking-wider">AI Assist</span>
             </div>
             <p className="text-[10px] font-sans text-slate-700 leading-relaxed">
               Draft findings and remediation with one click from any finding.

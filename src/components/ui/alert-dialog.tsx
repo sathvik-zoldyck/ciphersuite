@@ -129,7 +129,7 @@ const AlertDialogCancel = React.forwardRef<
       "border border-slate-700/60 bg-transparent text-slate-400",
       "hover:bg-slate-800/60 hover:text-slate-200 hover:border-slate-600",
       "transition-all duration-150",
-      "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50",
+      "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500/50",
       "sm:mt-0",
       className
     )}

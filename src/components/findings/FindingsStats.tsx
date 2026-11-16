@@ -34,14 +34,14 @@ export function FindingsStats({ riskScore, severityCounts, statusCounts }: Findi
     if (score > 75) return 'text-red-400';
     if (score > 50) return 'text-orange-400';
     if (score > 25) return 'text-yellow-400';
-    return 'text-cyan-400';
+    return 'text-violet-400';
   };
   
   const getRiskIndicatorColor = (score: number) => {
     if (score > 75) return 'bg-red-400';
     if (score > 50) return 'bg-orange-400';
     if (score > 25) return 'bg-yellow-400';
-    return 'bg-cyan-400';
+    return 'bg-violet-400';
   }
 
   const totalFindings = Object.values(severityCounts).reduce((a, b) => a + b, 0) + statusCounts.Accepted + statusCounts.Fixed + statusCounts.Verified;
@@ -65,7 +65,7 @@ export function FindingsStats({ riskScore, severityCounts, statusCounts }: Findi
       </StatCard>
 
       <StatCard
-        icon={<BarChart className="text-cyan-400" />}
+        icon={<BarChart className="text-violet-400" />}
         title="Open Findings"
         value={openFindings}
         index={1}

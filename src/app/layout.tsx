@@ -196,60 +196,12 @@ export default function RootLayout({
           // iOS font size inflation prevention
           "[-webkit-text-size-adjust:100%] [text-size-adjust:100%]",
           // Global text selection colour
-          "selection:bg-cyan-500/20 selection:text-cyan-100",
+          "selection:bg-violet-500/20 selection:text-violet-100",
         )}
       >
         <AuthProvider>
           <FirebaseErrorListener />
-          {/*
-           * Root visual shell — three fixed background layers below all content.
-           *
-           * z-index budget (negative = behind content):
-           *   -30  Ambient radial glow       (atmosphere)
-           *   -20  Noise / grain texture     (tactile depth)
-           *   -10  Scanline overlay          (terminal character)
-           *     0+ App content
-           *
-           * All layers are `fixed` so they tile the full viewport on long pages
-           * without creating a scroll-height artefact.
-           */}
           <div className="relative isolate flex min-h-screen flex-col">
-
-            {/* Layer 1 — Ambient cyan bloom at the top of the viewport */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none fixed inset-0 -z-30"
-              style={{
-                background:
-                  "radial-gradient(ellipse 80% 45% at 50% -5%, rgba(6,182,212,0.065) 0%, transparent 70%)",
-              }}
-            />
-
-            {/* Layer 2 — Noise grain texture for tactile screen depth */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none fixed inset-0 -z-20 bg-repeat bg-[url('/noise.png')] opacity-[0.028]"
-            />
-
-            {/*
-             * Layer 3 — Subtle horizontal scanline pattern.
-             * Fallback for environments where noise.png is unavailable.
-             * Low enough opacity that it never interferes with readability.
-             */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none fixed inset-0 -z-10"
-              style={{
-                backgroundImage: `repeating-linear-gradient(
-                  0deg,
-                  transparent,
-                  transparent 2px,
-                  rgba(0,0,0,0.018) 2px,
-                  rgba(0,0,0,0.018) 4px
-                )`,
-              }}
-            />
-
             {/* App content */}
             {children}
           </div>

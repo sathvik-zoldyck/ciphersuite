@@ -42,8 +42,8 @@ function Calendar({
         cell: cn(
           "h-8 w-8 text-center p-0 relative text-[11px] font-sans",
           "focus-within:relative focus-within:z-20",
-          "[&:has([aria-selected])]:bg-cyan-500/10 [&:has([aria-selected])]:rounded-md",
-          "[&:has([aria-selected].day-outside)]:bg-cyan-500/[0.05]",
+          "[&:has([aria-selected])]:bg-violet-500/10 [&:has([aria-selected])]:rounded-md",
+          "[&:has([aria-selected].day-outside)]:bg-violet-500/[0.05]",
           "first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md",
         ),
         day: cn(
@@ -53,18 +53,18 @@ function Calendar({
           "h-full w-full rounded-lg flex items-center justify-center outline-none",
           "hover:bg-slate-800 hover:text-slate-200 transition-colors duration-100",
           "aria-selected:opacity-100 focus-visible:outline-none",
-          "focus-visible:ring-1 focus-visible:ring-cyan-500/50",
+          "focus-visible:ring-1 focus-visible:ring-violet-500/50",
         ),
         day_range_end:    "day-range-end",
         day_selected:
-          "bg-cyan-500 text-black hover:bg-cyan-400 hover:text-black focus:bg-cyan-500 focus:text-black font-bold",
+          "bg-violet-500 text-white hover:bg-violet-400 hover:text-white focus:bg-violet-500 focus:text-white font-bold",
         day_today:
           "bg-slate-800 text-slate-100 font-bold",
         day_outside:
-          "day-outside text-slate-800 aria-selected:bg-cyan-500/[0.07] aria-selected:text-slate-600",
+          "day-outside text-slate-800 aria-selected:bg-violet-500/[0.07] aria-selected:text-slate-600",
         day_disabled:  "text-slate-800 opacity-40 cursor-not-allowed pointer-events-none",
         day_range_middle:
-          "aria-selected:bg-cyan-500/10 aria-selected:text-cyan-300 rounded-none",
+          "aria-selected:bg-violet-500/10 aria-selected:text-violet-300 rounded-none",
         day_hidden:    "invisible",
         ...classNames,
       }}

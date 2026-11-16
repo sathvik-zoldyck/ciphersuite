@@ -59,9 +59,9 @@ function getFileConfig(name: string, mimeType?: string): FileTypeConfig {
   if (CODE_EXTS.includes(ext)) return {
     icon:   <FileCode className="w-5 h-5" />,
     label:  ext.toUpperCase(),
-    color:  "text-cyan-400",
-    bg:     "bg-cyan-500/10",
-    stripe: "bg-cyan-500",
+    color:  "text-violet-400",
+    bg:     "bg-violet-500/10",
+    stripe: "bg-violet-500",
   };
   if (LOG_EXTS.includes(ext)) return {
     icon:   <Terminal className="w-5 h-5" />,
@@ -108,7 +108,7 @@ function EvidenceFindingsPopover({ evidence }: { evidence: Evidence }) {
       <Popover>
         <PopoverTrigger asChild>
           <button className="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-500/10 border border-slate-500/20 text-[10px] font-sans font-bold text-slate-300 hover:bg-slate-500/20 hover:text-white transition-colors">
-            <Bug className="w-3 h-3 text-cyan-400" />
+            <Bug className="w-3 h-3 text-violet-400" />
             {count} {count === 1 ? "finding" : "findings"}
           </button>
         </PopoverTrigger>

@@ -61,7 +61,7 @@ function NoResults({ onClear }: { onClear: () => void }) {
       <Filter className="w-8 h-8 text-slate-700 mb-4" />
       <p className="text-sm font-sans text-slate-500 mb-1">No findings match your filters.</p>
       <p className="text-[11px] font-sans text-slate-700 mb-4">Try adjusting the severity or status filter.</p>
-      <button onClick={onClear} className="text-xs font-sans text-cyan-400 hover:text-cyan-300 transition-colors">
+      <button onClick={onClear} className="text-xs font-sans text-violet-400 hover:text-violet-300 transition-colors">
         Clear all filters →
       </button>
     </div>
@@ -118,7 +118,7 @@ function SortButton({
       onClick={onClick}
       className={cn(
         "flex items-center gap-1 text-[11px] font-sans transition-colors",
-        active ? "text-cyan-400" : "text-slate-600 hover:text-slate-400"
+        active ? "text-violet-400" : "text-slate-600 hover:text-slate-400"
       )}
     >
       {label}
@@ -192,8 +192,8 @@ export default function FindingsPage() {
         {/* ── Page header ──────────────────────────────────────────── */}
         <div className="flex items-start justify-between gap-4 flex-shrink-0">
           <div className="flex items-center gap-3.5">
-            <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-              <Bug className="w-4 h-4 text-cyan-400" />
+            <div className="w-9 h-9 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+              <Bug className="w-4 h-4 text-violet-400" />
             </div>
             <div>
               <h1 className="page-title">Findings</h1>

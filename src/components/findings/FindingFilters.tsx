@@ -35,7 +35,7 @@ export function FindingFilters({
           placeholder="Search by title or target..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full h-9 bg-[#0A0B0C]/50 pl-9 pr-3 text-sm font-sans placeholder:text-slate-600 focus:outline-none border border-slate-700/60 focus:border-cyan-500/50 rounded-md"
+          className="w-full h-9 bg-[#0A0B0C]/50 pl-9 pr-3 text-sm font-sans placeholder:text-slate-600 focus:outline-none border border-slate-700/60 focus:border-violet-500/50 rounded-md"
         />
       </div>
 

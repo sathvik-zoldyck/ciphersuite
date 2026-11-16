@@ -105,7 +105,7 @@ export default function ProjectLayout({ children }: ProjectLayoutProps) {
             className="pointer-events-none fixed inset-0 -z-30"
             style={{
               background:
-                "radial-gradient(ellipse 90% 45% at 55% -5%, rgba(6,182,212,0.06) 0%, transparent 65%)",
+                "radial-gradient(ellipse 90% 45% at 55% -5%, rgba(139, 92, 246,0.06) 0%, transparent 65%)",
             }}
           />
 

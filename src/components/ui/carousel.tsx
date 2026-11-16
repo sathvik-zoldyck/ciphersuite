@@ -152,7 +152,7 @@ const navButtonBase = cn(
   "shadow-lg shadow-black/40",
   "transition-all duration-150",
   "disabled:opacity-25 disabled:cursor-not-allowed",
-  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50",
+  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500/50",
 );
 
 const CarouselPrevious = React.forwardRef<

@@ -46,7 +46,7 @@ const TEMPLATES: {
     sections: ["executive_summary", "risk_overview", "key_findings"],
   },
   {
-    id: "technical", label: "Technical Report", color: "text-cyan-400",
+    id: "technical", label: "Technical Report", color: "text-violet-400",
     desc: "Full technical detail for developers and security teams.",
     icon: <FileText className="w-4 h-4" />,
     sections: ["executive_summary", "methodology", "findings", "remediation"],
@@ -280,7 +280,7 @@ function ReportCard({ report, onView, onDelete }: {
                 disabled={downloading}
               >
                 {downloading ? (
-                  <Loader2 className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+                  <Loader2 className="w-3.5 h-3.5 text-violet-400 animate-spin" />
                 ) : (
                   <FileDown className="w-3.5 h-3.5" />
                 )}
@@ -508,8 +508,8 @@ function NewReportDrawer({
       >
         {/* Header */}
         <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-800 flex-shrink-0">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-            <FileBarChart2 className="w-4 h-4 text-cyan-400" />
+          <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <FileBarChart2 className="w-4 h-4 text-violet-400" />
           </div>
           <div className="flex-1">
             <p className="text-sm font-sans font-bold text-slate-100">New Report</p>
@@ -523,7 +523,7 @@ function NewReportDrawer({
         {/* Progress bar */}
         <div className="h-px bg-slate-800 flex-shrink-0">
           <motion.div
-            className="h-full bg-cyan-500/60"
+            className="h-full bg-violet-500/60"
             animate={{ width: step === 1 ? "50%" : "100%" }}
             transition={{ duration: 0.3 }}
           />
@@ -545,7 +545,7 @@ function NewReportDrawer({
                         className={cn(
                           "w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border text-left transition-all",
                           template === t.id
-                            ? "bg-cyan-500/[0.06] border-cyan-500/25"
+                            ? "bg-violet-500/[0.06] border-violet-500/25"
                             : "bg-[#0D0F12] border-slate-800/60 hover:border-slate-700"
                         )}
                       >
@@ -557,7 +557,7 @@ function NewReportDrawer({
                           <p className={cn("text-xs font-sans font-semibold", template === t.id ? "text-slate-100" : "text-slate-400")}>{t.label}</p>
                           <p className="text-[10px] font-sans text-slate-600 mt-0.5">{t.desc}</p>
                         </div>
-                        <div className={cn("w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0", template === t.id ? "bg-cyan-500 border-cyan-500" : "border-slate-700")}>
+                        <div className={cn("w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0", template === t.id ? "bg-violet-500 border-violet-500" : "border-slate-700")}>
                           {template === t.id && <Check className="w-2.5 h-2.5 text-black" />}
                         </div>
                       </button>
@@ -576,10 +576,10 @@ function NewReportDrawer({
                           onClick={() => setFormat(f)}
                           className={cn(
                             "flex flex-col items-center gap-1.5 px-3 py-3 rounded-xl border",
-                            format === f ? "bg-cyan-500/[0.06] border-cyan-500/25" : "bg-[#0D0F12] border-slate-800 text-slate-600 hover:border-slate-700"
+                            format === f ? "bg-violet-500/[0.06] border-violet-500/25" : "bg-[#0D0F12] border-slate-800 text-slate-600 hover:border-slate-700"
                           )}
                         >
-                          <FileText className={cn("w-4 h-4", format === f ? "text-cyan-400" : "text-slate-700")} />
+                          <FileText className={cn("w-4 h-4", format === f ? "text-violet-400" : "text-slate-700")} />
                           <span className="text-[10px] font-sans font-semibold text-slate-400 uppercase">{f}</span>
                         </button>
                       );
@@ -641,11 +641,11 @@ function NewReportDrawer({
                         onClick={() => toggleSection(s.id)}
                         className={cn(
                           "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border transition-all text-left",
-                          s.enabled ? "bg-cyan-500/[0.04] border-cyan-500/15" : "bg-transparent border-slate-800/40 hover:border-slate-700/60"
+                          s.enabled ? "bg-violet-500/[0.04] border-violet-500/15" : "bg-transparent border-slate-800/40 hover:border-slate-700/60"
                         )}
                       >
-                        <div className={cn("w-4 h-4 rounded flex items-center justify-center flex-shrink-0 border", s.enabled ? "bg-cyan-500/15 border-cyan-500/30" : "border-slate-700")}>
-                          {s.enabled && <Check className="w-2.5 h-2.5 text-cyan-400" />}
+                        <div className={cn("w-4 h-4 rounded flex items-center justify-center flex-shrink-0 border", s.enabled ? "bg-violet-500/15 border-violet-500/30" : "border-slate-700")}>
+                          {s.enabled && <Check className="w-2.5 h-2.5 text-violet-400" />}
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className={cn("text-xs font-sans", s.enabled ? "text-slate-200" : "text-slate-600")}>{s.label}</p>
@@ -804,7 +804,7 @@ export default function ReportsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-shrink-0">
         <StatCard index={0} color="text-slate-400"   icon={<FileBarChart2 className="w-3.5 h-3.5" />} title="Total Reports" value={displayReports.length} />
         <StatCard index={1} color="text-emerald-400" icon={<CheckCircle2  className="w-3.5 h-3.5" />} title="Ready"         value={readyCount} />
-        <StatCard index={2} color="text-cyan-400"    icon={<RefreshCw className={cn("w-3.5 h-3.5", generatingCount > 0 && "animate-spin")} />} title="Generating" value={generatingCount} />
+        <StatCard index={2} color="text-violet-400"    icon={<RefreshCw className={cn("w-3.5 h-3.5", generatingCount > 0 && "animate-spin")} />} title="Generating" value={generatingCount} />
         <StatCard index={3} color="text-slate-400"   icon={<Shield        className="w-3.5 h-3.5" />} title="Findings"      value={findings.length} />
       </div>
 

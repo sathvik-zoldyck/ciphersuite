@@ -9,16 +9,16 @@ const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "font-sans font-semibold transition-all duration-150",
-    "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50",
+    "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500/50",
     "disabled:pointer-events-none disabled:opacity-40",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",
   ],
   {
     variants: {
       variant: {
-        // Primary — cyan, used for main CTA
+        // Primary — violet, used for the main action
         default:
-          "bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:scale-[1.01] active:scale-[0.98]",
+          "bg-violet-500 hover:bg-violet-400 text-white  hover:scale-[1.01] active:scale-[0.98]",
 
         // Danger — red, used for destructive actions
         destructive:
@@ -38,7 +38,7 @@ const buttonVariants = cva(
 
         // Link — text only
         link:
-          "bg-transparent text-cyan-400 underline-offset-4 hover:underline hover:text-cyan-300 p-0 h-auto",
+          "bg-transparent text-violet-400 underline-offset-4 hover:underline hover:text-violet-300 p-0 h-auto",
       },
       size: {
         default: "h-9 px-4 rounded-lg text-sm",

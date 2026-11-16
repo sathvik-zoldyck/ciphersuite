@@ -63,7 +63,7 @@ export function DataTableViewOptions<TData>({
         <SlidersHorizontal className="w-3 h-3" />
         <span>Columns</span>
         {!allVisible && (
-          <span className="flex items-center justify-center w-4 h-4 rounded-full bg-cyan-500/15 text-cyan-400 text-[9px] font-bold">
+          <span className="flex items-center justify-center w-4 h-4 rounded-full bg-violet-500/15 text-violet-400 text-[9px] font-bold">
             {visibleCount}
           </span>
         )}
@@ -94,7 +94,7 @@ export function DataTableViewOptions<TData>({
                   <button
                     onClick={() => table.toggleAllColumnsVisible(true)}
                     disabled={allVisible}
-                    className="text-[9px] font-sans text-slate-700 hover:text-cyan-400 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+                    className="text-[9px] font-sans text-slate-700 hover:text-violet-400 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                   >
                     All
                   </button>
@@ -134,10 +134,10 @@ export function DataTableViewOptions<TData>({
                         <div className={cn(
                           "w-4 h-4 rounded flex items-center justify-center flex-shrink-0 border transition-all",
                           visible
-                            ? "bg-cyan-500/15 border-cyan-500/30"
+                            ? "bg-violet-500/15 border-violet-500/30"
                             : "bg-transparent border-slate-700",
                         )}>
-                          {visible && <Check className="w-2.5 h-2.5 text-cyan-400" />}
+                          {visible && <Check className="w-2.5 h-2.5 text-violet-400" />}
                         </div>
 
                         <span className="flex-1 truncate">{label}</span>

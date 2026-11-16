@@ -274,8 +274,8 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                       className={cn(
                         'flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-sans rounded-lg border transition-all',
                         showTemplates
-                          ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400'
-                          : 'bg-slate-800/60 border-slate-700/60 text-slate-500 hover:border-cyan-500/30 hover:text-cyan-400'
+                          ? 'bg-violet-500/10 border-violet-500/30 text-violet-400'
+                          : 'bg-slate-800/60 border-slate-700/60 text-slate-500 hover:border-violet-500/30 hover:text-violet-400'
                       )}
                     >
                       <LayoutTemplate className="w-3.5 h-3.5" />
@@ -304,7 +304,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                               className="w-full flex items-center justify-between gap-3 px-3 py-3 hover:bg-slate-800/60 transition-colors group"
                             >
                               <div className="flex items-center gap-2 min-w-0">
-                                <ChevronRight className="w-3 h-3 text-slate-700 group-hover:text-cyan-400 flex-shrink-0 transition-colors" />
+                                <ChevronRight className="w-3 h-3 text-slate-700 group-hover:text-violet-400 flex-shrink-0 transition-colors" />
                                 <span className="text-xs font-sans text-slate-300 truncate">{t.title}</span>
                               </div>
                               {t.severity && <SeverityBadge severity={t.severity} size="sm" />}
@@ -341,7 +341,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                       'relative flex items-center gap-2 px-4 py-3 text-[11px] font-sans font-semibold',
                       'uppercase tracking-wider border-b-2 transition-all',
                       activeTab === tab
-                        ? 'border-cyan-400 text-cyan-400'
+                        ? 'border-violet-400 text-violet-400'
                         : 'border-transparent text-slate-600 hover:text-slate-300'
                     )}
                   >
@@ -512,7 +512,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                         form.cvss >= 9   ? 'text-red-400 bg-red-500/10'     :
                         form.cvss >= 7   ? 'text-orange-400 bg-orange-500/10' :
                         form.cvss >= 4   ? 'text-yellow-400 bg-yellow-500/10' :
-                        'text-cyan-400 bg-cyan-500/10'
+                        'text-violet-400 bg-violet-500/10'
                       )}>
                         {form.cvss.toFixed(1)} — {
                           form.cvss >= 9 ? 'Critical' : form.cvss >= 7 ? 'High' : form.cvss >= 4 ? 'Medium' : 'Low'
@@ -523,15 +523,15 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
 
                   {/* Gradient band */}
                   <div className="relative h-3 rounded-full overflow-hidden"
-                    style={{ background: 'linear-gradient(to right, #06b6d4 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
+                    style={{ background: 'linear-gradient(to right, #8b5cf6 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
                   >
                     <div
                       className="absolute inset-0 opacity-30"
-                      style={{ background: 'linear-gradient(to right, #06b6d4 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
+                      style={{ background: 'linear-gradient(to right, #8b5cf6 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
                     />
                     {form.cvss !== undefined && (
                       <motion.div
-                        className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg border-2 border-slate-900"
+                        className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full  border-2 border-slate-900"
                         initial={{ left: '0%' }}
                         animate={{ left: `calc(${(form.cvss / 10) * 100}% - 6px)` }}
                         transition={{ type: 'spring', damping: 18, stiffness: 220 }}
@@ -570,10 +570,10 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                   <motion.div
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-cyan-500/[0.06] border border-cyan-500/20"
+                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-violet-500/[0.06] border border-violet-500/20"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
-                    <span className="text-xs font-sans text-cyan-300/80">
+                    <div className="w-1.5 h-1.5 rounded-full bg-violet-400 flex-shrink-0" />
+                    <span className="text-xs font-sans text-violet-300/80">
                       {OWASP_CATEGORIES.find((c) => c.id === form.owaspId)?.label ?? form.owaspId}
                     </span>
                   </motion.div>
@@ -621,8 +621,8 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                   disabled={loading}
                   className={cn(
                     'flex items-center gap-2 px-5 py-2 text-xs font-sans font-bold rounded-lg transition-all',
-                    'bg-cyan-500 hover:bg-cyan-400 text-black',
-                    'shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30',
+                    'bg-violet-500 hover:bg-violet-400 text-white',
+                    'shadow-lg',
                     'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
                     'hover:scale-[1.02] active:scale-[0.98]'
                   )}
@@ -666,7 +666,7 @@ function Field({
       <div className="flex items-center justify-between">
         <label className="text-[10px] font-sans font-bold text-slate-500 uppercase tracking-[0.12em]">
           {label}
-          {required && <span className="text-cyan-400 ml-1">*</span>}
+          {required && <span className="text-violet-400 ml-1">*</span>}
         </label>
         {error ? (
           <span className="text-[10px] font-sans text-red-400 flex items-center gap-1">
@@ -712,12 +712,12 @@ function AITextarea({
           disabled={aiLoading}
           className={cn(
             'absolute top-2 right-2 p-1.5 rounded-lg transition-all',
-            'text-slate-700 hover:text-cyan-400 hover:bg-cyan-500/10',
+            'text-slate-700 hover:text-violet-400 hover:bg-violet-500/10',
             'opacity-0 group-hover:opacity-100',
             'disabled:opacity-50 disabled:cursor-not-allowed'
           )}
         >
-          {aiLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin text-cyan-400" /> : <Sparkles className="w-3.5 h-3.5" />}
+          {aiLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin text-violet-400" /> : <Sparkles className="w-3.5 h-3.5" />}
         </button>
       )}
 
@@ -742,7 +742,7 @@ const InputCls = [
   'w-full px-3 py-2.5',
   'bg-[#0D0F12] border border-slate-700/60 rounded-lg',
   'text-sm text-slate-200 font-sans placeholder-slate-700',
-  'focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20',
+  'focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20',
   'transition-colors',
 ].join(' ');
 
@@ -752,6 +752,6 @@ const SelectCls = [
   'w-full px-3 py-2.5',
   'bg-[#0D0F12] border border-slate-700/60 rounded-lg',
   'text-sm text-slate-300 font-sans',
-  'focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20',
+  'focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20',
   'transition-colors appearance-none cursor-pointer',
 ].join(' ');

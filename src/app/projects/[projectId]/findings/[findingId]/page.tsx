@@ -160,7 +160,7 @@ export default function FindingDetailPage() {
     ul: ({node, ...props}: any) => <ul className="list-disc pl-5 mb-4 text-slate-300 space-y-1" {...props} />,
     ol: ({node, ...props}: any) => <ol className="list-decimal pl-5 mb-4 text-slate-300 space-y-1" {...props} />,
     li: ({node, ...props}: any) => <li {...props} />,
-    a:  ({node, ...props}: any) => <a className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2" target="_blank" rel="noopener noreferrer" {...props} />,
+    a:  ({node, ...props}: any) => <a className="text-violet-400 hover:text-violet-300 underline underline-offset-2" target="_blank" rel="noopener noreferrer" {...props} />,
     code: ({node, inline, className, children, ...props}: any) => {
       const match = /language-(\w+)/.exec(className || "");
       return !inline ? (
@@ -316,7 +316,7 @@ export default function FindingDetailPage() {
                   <span className="text-[10px] font-sans text-slate-600">CWE ID</span>
                   <p className="text-xs font-sans text-slate-300 mt-1">
                     {finding.cweId ? (
-                      <a href={`https://cwe.mitre.org/data/definitions/${finding.cweId.replace(/\D/g, '')}.html`} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-cyan-400 transition-colors">
+                      <a href={`https://cwe.mitre.org/data/definitions/${finding.cweId.replace(/\D/g, '')}.html`} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-violet-400 transition-colors">
                         <Hash className="w-3 h-3" /> {finding.cweId}
                       </a>
                     ) : "—"}
@@ -373,12 +373,12 @@ export default function FindingDetailPage() {
          ) : evidenceItems.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                {evidenceItems.map(item => (
-                 <a key={item.id} href={item.storageUrl} target="_blank" rel="noreferrer" className="group rounded-lg border border-slate-800 bg-[#0A0B0D] p-3 flex items-start gap-3 hover:border-cyan-500/30 transition-colors">
-                   <div className="w-8 h-8 rounded bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                     <FileImage className="w-4 h-4 text-cyan-400" />
+                 <a key={item.id} href={item.storageUrl} target="_blank" rel="noreferrer" className="group rounded-lg border border-slate-800 bg-[#0A0B0D] p-3 flex items-start gap-3 hover:border-violet-500/30 transition-colors">
+                   <div className="w-8 h-8 rounded bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+                     <FileImage className="w-4 h-4 text-violet-400" />
                    </div>
                    <div className="flex-1 min-w-0">
-                     <p className="text-xs font-sans font-semibold text-slate-300 truncate group-hover:text-cyan-400 transition-colors">{item.name}</p>
+                     <p className="text-xs font-sans font-semibold text-slate-300 truncate group-hover:text-violet-400 transition-colors">{item.name}</p>
                      <p className="text-[9px] font-sans text-slate-600 mt-1">{format(new Date(item.uploadedAt as any), "MMM d, yyyy")}</p>
                    </div>
                  </a>

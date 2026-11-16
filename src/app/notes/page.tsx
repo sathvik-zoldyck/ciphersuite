@@ -1188,7 +1188,7 @@ export default function PersonalNotesPage() {
         .np-prose code{font-family:var(--font-mono), monospace!important;font-size:11px;padding:1px 5px;background:${T.tagBg};border-radius:2px}
         .np-prose ul,.np-prose ol{padding-left:18px;margin-bottom:10px}
         .np-prose li{margin-bottom:4px;font-size:13px;line-height:1.6}
-        .np-prose a{color:#22d3ee;text-decoration:underline}
+        .np-prose a{color:#a78bfa;text-decoration:underline}
         @media(max-width:1200px){.np-m4{column-count:3!important}}
         @media(max-width:900px){.np-m4{column-count:2!important}}
         @media(max-width:600px){.np-m4{column-count:1!important}}

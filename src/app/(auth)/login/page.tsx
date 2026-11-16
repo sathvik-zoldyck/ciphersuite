@@ -22,7 +22,7 @@ const TERMINAL_LINES = [
   { text: "> initializing findings engine [OK]",    delay: 1000, color: "#10b981" },
   { text: "> mounting encrypted vault    [OK]",     delay: 1500, color: "#10b981" },
   { text: "> connecting AI assistant     [OK]",     delay: 2000, color: "#10b981" },
-  { text: "> CipherSuite v1.0 ready",               delay: 2600, color: "#22d3ee" },
+  { text: "> CipherSuite v1.0 ready",               delay: 2600, color: "#a78bfa" },
   { text: "$ awaiting authentication...",           delay: 3200, color: "#475569" },
 ];
 
@@ -30,7 +30,7 @@ const FEATURES = [
   { icon: "⬡", label: "Findings Manager",  desc: "CVSS-scored vulnerability tracking",   color: "#f87171" },
   { icon: "◈", label: "Evidence Vault",    desc: "Screenshots, logs & PoC per finding",  color: "#a78bfa" },
   { icon: "⌬", label: "Log Analyzer",      desc: "Smart syntax-highlighted log viewer",  color: "#34d399" },
-  { icon: "◎", label: "AI Assistant",      desc: "Draft professional findings instantly", color: "#22d3ee" },
+  { icon: "◎", label: "AI Assistant",      desc: "Draft professional findings instantly", color: "#a78bfa" },
 ];
 
 // ─── Magnetic Button ─────────────────────────────────────────────────────────
@@ -70,14 +70,14 @@ function MagneticButton({ children, className, onClick, disabled }: { children: 
 function FloatingOrbs() {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Large cyan orb */}
+      {/* Large violet orb */}
       <motion.div
         animate={{ x: [0, 30, -20, 0], y: [0, -40, 20, 0], scale: [1, 1.1, 0.95, 1] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute", top: "10%", left: "8%",
           width: 500, height: 500,
-          background: "radial-gradient(circle, rgba(6,182,212,0.13) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(139, 92, 246,0.13) 0%, transparent 70%)",
           borderRadius: "50%", filter: "blur(1px)",
         }}
       />
@@ -99,7 +99,7 @@ function FloatingOrbs() {
         style={{
           position: "absolute", bottom: "15%", left: "30%",
           width: 260, height: 260,
-          background: "radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(139, 92, 246,0.07) 0%, transparent 70%)",
           borderRadius: "50%",
         }}
       />
@@ -189,7 +189,7 @@ function TerminalWindow() {
             {i === TERMINAL_LINES.length - 1 && visible.includes(i) && (
               <span style={{
                 display: "inline-block", width: 7, height: 13,
-                background: "#22d3ee", marginLeft: 2, verticalAlign: "middle",
+                background: "#a78bfa", marginLeft: 2, verticalAlign: "middle",
                 borderRadius: 1, opacity: cursor ? 1 : 0, transition: "opacity 0.08s",
               }} />
             )}
@@ -219,7 +219,7 @@ function GlassInput({ label, type, value, onChange, placeholder, icon, error }: 
       <motion.div
         animate={{
           boxShadow: focused
-            ? "0 0 0 1px rgba(6,182,212,0.5), 0 0 20px rgba(6,182,212,0.1)"
+            ? "0 0 0 1px rgba(139, 92, 246,0.5), 0 0 20px rgba(139, 92, 246,0.1)"
             : error
             ? "0 0 0 1px rgba(248,113,113,0.4)"
             : "0 0 0 1px rgba(255,255,255,0.07)",
@@ -244,7 +244,7 @@ function GlassInput({ label, type, value, onChange, placeholder, icon, error }: 
             style={{
               flex: 1, background: "transparent", border: "none", outline: "none",
               height: 44, fontFamily: "monospace", fontSize: 13, color: "#e2e8f0",
-              caretColor: "#22d3ee",
+              caretColor: "#a78bfa",
             }}
           />
           {type === "password" && (
@@ -323,12 +323,12 @@ function LeftPanel({ mounted }: { mounted: boolean }) {
 
       {/* Hero */}
       <div>
-        <p style={{ fontFamily: "monospace", fontSize: 10, color: "rgba(6,182,212,0.5)", textTransform: "uppercase", letterSpacing: "0.22em", marginBottom: 16 }}>
+        <p style={{ fontFamily: "monospace", fontSize: 10, color: "rgba(139, 92, 246,0.5)", textTransform: "uppercase", letterSpacing: "0.22em", marginBottom: 16 }}>
           Professional Cybersecurity Workspace
         </p>
         <h1 style={{ fontSize: "2.5rem", fontWeight: 700, color: "#f1f5f9", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: 16 }}>
           Your entire<br />
-          <span style={{ backgroundImage: "linear-gradient(135deg, #22d3ee, #06b6d4, #0e7490)", WebkitBackgroundClip: "text", color: "transparent", backgroundClip: "text" }}>
+          <span style={{ backgroundImage: "linear-gradient(135deg, #a78bfa, #8b5cf6, #6d28d9)", WebkitBackgroundClip: "text", color: "transparent", backgroundClip: "text" }}>
             pentest workflow.
           </span><br />
           One workspace.
@@ -530,7 +530,7 @@ function AuthPanel({ mounted }: { mounted: boolean }) {
 
         {/* Mobile logo */}
         <div className="mobile-logo" style={{ textAlign: "center", marginBottom: 32 }}>
-           <Image src="/logo.png" alt="CipherSuite Logo" width={68} height={68} priority style={{borderRadius: 16, margin: "0 auto 12px", boxShadow: "0 8px 32px rgba(6,182,212,0.35)"}}/>
+           <Image src="/logo.png" alt="CipherSuite Logo" width={68} height={68} priority style={{borderRadius: 16, margin: "0 auto 12px", boxShadow: "0 8px 32px rgba(139, 92, 246,0.35)"}}/>
           <p style={{ fontSize: 18, fontWeight: 700, color: "#f1f5f9" }}>CipherSuite</p>
           <p style={{ fontSize: 11, fontFamily: "monospace", color: "#475569" }}>by Alcyone Secure</p>
         </div>
@@ -552,10 +552,10 @@ function AuthPanel({ mounted }: { mounted: boolean }) {
                 textTransform: "uppercase", letterSpacing: "0.12em",
                 transition: "all 0.25s ease",
                 background: mode === m
-                  ? "linear-gradient(135deg, rgba(6,182,212,0.2), rgba(6,182,212,0.1))"
+                  ? "linear-gradient(135deg, rgba(139, 92, 246,0.2), rgba(139, 92, 246,0.1))"
                   : "transparent",
-                color: mode === m ? "#22d3ee" : "#475569",
-                boxShadow: mode === m ? "0 0 16px rgba(6,182,212,0.12), inset 0 1px 0 rgba(6,182,212,0.15)" : "none",
+                color: mode === m ? "#a78bfa" : "#475569",
+                boxShadow: mode === m ? "0 0 16px rgba(139, 92, 246,0.12), inset 0 1px 0 rgba(139, 92, 246,0.15)" : "none",
               }}
             >
               {m === "login" ? "Sign In" : "Sign Up"}
@@ -583,13 +583,13 @@ function AuthPanel({ mounted }: { mounted: boolean }) {
             {/* Mouse-follow shimmer */}
             <div style={{
               position: "absolute", inset: 0, pointerEvents: "none", borderRadius: 24, zIndex: 1,
-              background: `radial-gradient(300px circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(6,182,212,0.06) 0%, transparent 70%)`,
+              background: `radial-gradient(300px circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(139, 92, 246,0.06) 0%, transparent 70%)`,
             }} />
 
             {/* Top glow line */}
             <div style={{
               position: "absolute", top: 0, left: 0, right: 0, height: 1, zIndex: 2,
-              background: "linear-gradient(90deg, transparent 5%, rgba(6,182,212,0.8) 50%, transparent 95%)",
+              background: "linear-gradient(90deg, transparent 5%, rgba(139, 92, 246,0.8) 50%, transparent 95%)",
             }} />
 
             <AnimatePresence mode="wait">
@@ -603,7 +603,7 @@ function AuthPanel({ mounted }: { mounted: boolean }) {
                 >
                   {/* Header */}
                   <div style={{ marginBottom: 28 }}>
-                    <p style={{ fontFamily: "monospace", fontSize: 10, color: "rgba(6,182,212,0.5)", textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 8 }}>
+                    <p style={{ fontFamily: "monospace", fontSize: 10, color: "rgba(139, 92, 246,0.5)", textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 8 }}>
                       {mode === "login" ? "— Authentication" : "— Create Account"}
                     </p>
                     <h2 style={{ fontSize: 22, fontWeight: 700, color: "#f1f5f9", letterSpacing: "-0.02em", marginBottom: 6 }}>
@@ -662,13 +662,13 @@ function AuthPanel({ mounted }: { mounted: boolean }) {
                       display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                       width: "100%", height: 48, marginTop: 24, borderRadius: 14,
                       background: loading
-                        ? "rgba(6,182,212,0.3)"
-                        : "linear-gradient(135deg, #06b6d4 0%, #0e7490 100%)",
-                      border: "1px solid rgba(6,182,212,0.3)",
+                        ? "rgba(139, 92, 246,0.3)"
+                        : "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
+                      border: "1px solid rgba(139, 92, 246,0.3)",
                       color: loading ? "rgba(255,255,255,0.5)" : "#000",
                       fontFamily: "monospace", fontSize: 13, fontWeight: 700,
                       cursor: loading ? "not-allowed" : "pointer",
-                      boxShadow: loading ? "none" : "0 8px 32px rgba(6,182,212,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
+                      boxShadow: loading ? "none" : "0 8px 32px rgba(139, 92, 246,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
                       transition: "all 0.2s",
                       position: "relative", overflow: "hidden",
                     })}

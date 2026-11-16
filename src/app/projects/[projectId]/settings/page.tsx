@@ -235,7 +235,7 @@ export default function SettingsPage() {
             "flex items-center gap-2 h-9 px-4 rounded-lg text-sm font-sans font-bold",
             "transition-all duration-150 flex-shrink-0",
             isDirty && !saving
-              ? "bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg shadow-cyan-500/20"
+              ? "bg-violet-500 hover:bg-violet-400 text-white "
               : "bg-slate-800 text-slate-600 cursor-not-allowed",
           )}
         >
@@ -325,7 +325,7 @@ export default function SettingsPage() {
                       "px-3 py-2 rounded-lg border text-left transition-all duration-100",
                       "text-[11px] font-sans font-medium",
                       form.type === t
-                        ? "bg-cyan-500/[0.08] border-cyan-500/30 text-cyan-300"
+                        ? "bg-violet-500/[0.08] border-violet-500/30 text-violet-300"
                         : "bg-transparent border-slate-800 text-slate-600 hover:border-slate-700 hover:text-slate-400"
                     )}
                   >
@@ -408,7 +408,7 @@ export default function SettingsPage() {
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  className="text-[10px] font-sans text-cyan-400 hover:text-cyan-300 transition-colors"
+                  className="text-[10px] font-sans text-violet-400 hover:text-violet-300 transition-colors"
                 >
                   Save now →
                 </button>
