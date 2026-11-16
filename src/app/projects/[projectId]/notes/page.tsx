@@ -220,7 +220,7 @@ function MarkdownPreview({ content }: { content: string }) {
       "prose-h3:text-base prose-h3:text-slate-300",
       "prose-p:text-slate-300 prose-p:leading-relaxed prose-p:my-3 prose-p:font-sans prose-p:text-sm",
       "prose-code:text-violet-300 prose-code:bg-black/50 prose-code:border prose-code:border-slate-800",
-      "prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[11px] prose-code:font-sans",
+      "prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[11px] prose-code:font-mono",
       "prose-code:before:content-none prose-code:after:content-none",
       "prose-pre:bg-[#0A0B0D] prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-xl prose-pre:text-xs prose-pre:p-4",
       "prose-li:text-slate-300 prose-li:my-0.5 prose-li:font-sans prose-li:text-sm",

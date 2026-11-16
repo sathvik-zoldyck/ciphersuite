@@ -168,16 +168,19 @@ export default function FindingDetailPage() {
     ol: ({node, ...props}: any) => <ol className="list-decimal pl-5 mb-4 text-slate-300 space-y-1" {...props} />,
     li: ({node, ...props}: any) => <li {...props} />,
     a:  ({node, ...props}: any) => <a className="text-violet-400 hover:text-violet-300 underline underline-offset-2" target="_blank" rel="noopener noreferrer" {...props} />,
-    code: ({node, inline, className, children, ...props}: any) => {
-      const match = /language-(\w+)/.exec(className || "");
-      return !inline ? (
-        <pre className="p-4 bg-[#0A0B0D] border border-slate-800 rounded-lg overflow-x-auto mb-4 font-sans text-xs text-slate-300">
-          <code className={className} {...props}>{children}</code>
-        </pre>
-      ) : (
-        <code className="px-1.5 py-0.5 bg-slate-800/60 rounded text-amber-300 font-sans text-xs" {...props}>{children}</code>
-      );
-    },
+    // react-markdown v9 no longer passes `inline`, so style blocks on <pre>
+    // and treat <code> as inline unless it sits inside a <pre>.
+    pre: ({node, children, ...props}: any) => (
+      <pre
+        className="p-4 bg-[#0A0B0D] border border-slate-800 rounded-lg overflow-x-auto mb-4 font-mono text-xs text-slate-300 [&>code]:bg-transparent [&>code]:p-0 [&>code]:text-slate-300"
+        {...props}
+      >
+        {children}
+      </pre>
+    ),
+    code: ({node, className, children, ...props}: any) => (
+      <code className={cn("px-1.5 py-0.5 bg-slate-800/60 rounded text-amber-300 font-mono text-[0.85em]", className)} {...props}>{children}</code>
+    ),
     blockquote: ({node, ...props}: any) => <blockquote className="border-l-4 border-slate-700 pl-4 italic text-slate-400 mb-4 bg-slate-800/20 py-2 pr-4 rounded-r-lg" {...props} />
   };
 
