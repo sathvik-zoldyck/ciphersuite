@@ -201,6 +201,8 @@ service cloud.firestore {
         allow update: if ownsProject(projectId)
                       && request.resource.data.projectId == resource.data.projectId
                       && request.resource.data.createdAt == resource.data.createdAt;
+      }
+
       // ─── Activity Logs ────────────────────────────────────────────────────────
 
       match /activity/{activityId} {

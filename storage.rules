@@ -1,12 +1,19 @@
 rules_version = '2';
 
+// Evidence files live at evidence/{projectId}/{file}. Only the owner of the
+// project (the `ownerId` on the Firestore project document) can read or write
+// them. Uploads are capped at 50 MB per file.
 service firebase.storage {
   match /b/{bucket}/o {
-    // Allow users to read and write to the evidence folder of projects they own.
-    // This rule checks the `ownerId` on the corresponding project document in Firestore.
+    function ownsProject(projectId) {
+      return request.auth != null
+        && firestore.get(/databases/(default)/documents/projects/$(projectId)).data.ownerId == request.auth.uid;
+    }
+
     match /evidence/{projectId}/{allPaths=**} {
-      allow read, write: if request.auth != null && 
-        get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid;
+      allow read, delete: if ownsProject(projectId);
+      allow create, update: if ownsProject(projectId)
+        && request.resource.size < 50 * 1024 * 1024;
     }
   }
 }
