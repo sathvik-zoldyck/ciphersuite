@@ -73,7 +73,7 @@ export function FindingsStats({ riskScore, severityCounts, statusCounts }: Findi
         <div className="space-y-1.5 mt-2">
           {severityOrder.map(sev => (
             <div key={sev} className="flex items-center gap-2">
-              <span className="text-[9px] font-sans text-slate-500 w-12">{sev.slice(0,4)}</span>
+              <span className="text-[11px] font-sans text-slate-500 w-14">{sev === "Informational" ? "Info" : sev}</span>
               <div className="flex-1 bg-slate-800/50 rounded-full h-1">
                   <motion.div 
                     className={cn("h-1 rounded-full", SEVERITY_CONFIG[sev].dot)}
@@ -132,7 +132,7 @@ function StatCard({ icon, title, value, footer, suffix, index, children }: { ico
         <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center bg-slate-800/50 rounded-lg">
           {icon}
         </div>
-        <h3 className="text-[10px] font-sans text-slate-500 uppercase tracking-widest">{title}</h3>
+        <h3 className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">{title}</h3>
       </div>
       <div className="flex items-baseline gap-1.5 mt-3">
         <p className="text-3xl font-bold font-sans text-slate-100">{value.toFixed(0)}</p>

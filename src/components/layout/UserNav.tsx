@@ -56,7 +56,7 @@ export function UserNav() {
         )}
       >
         <div className="px-2.5 py-2 mb-0.5">
-          <p className="text-[9px] font-sans font-semibold text-slate-700 uppercase tracking-[0.18em] mb-1">
+          <p className="text-[10px] font-sans font-semibold text-slate-700 uppercase tracking-[0.08em] mb-1">
             Account
           </p>
           <div className="flex items-center gap-2">
@@ -97,7 +97,7 @@ export function UserNav() {
 
         <div className="flex items-center justify-center gap-1.5 pt-2 pb-1 mt-0.5">
           <Shield className="w-[9px] h-[9px] text-slate-800" strokeWidth={1.5} />
-          <span className="text-[9px] font-sans text-slate-800 tracking-wide">Alcyone Secure</span>
+          <span className="text-[10px] font-sans text-slate-800 tracking-wide">Alcyone Secure</span>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

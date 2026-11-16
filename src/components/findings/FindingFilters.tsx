@@ -43,7 +43,7 @@ export function FindingFilters({
 
       {/* Severity Filter */}
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-sans text-slate-500 uppercase tracking-widest">Severity:</span>
+        <span className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">Severity:</span>
         <div className="flex items-center bg-[#0A0B0C] border border-slate-700/60 rounded-md p-0.5">
           {severityOptions.map((sev) => (
             <button
@@ -69,7 +69,7 @@ export function FindingFilters({
 
       {/* Status Filter */}
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-sans text-slate-500 uppercase tracking-widest">Status:</span>
+        <span className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">Status:</span>
         <div className="flex items-center bg-[#0A0B0C] border border-slate-700/60 rounded-md p-0.5">
           {(['all', ...STATUSES_ORDERED] as (FindingStatus | 'all')[]).map((stat) => (
             <button

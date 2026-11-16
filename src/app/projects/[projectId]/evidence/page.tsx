@@ -127,7 +127,7 @@ function EmptyState({ isDragging, onClick }: { isDragging: boolean; onClick: () 
       {/* Type chips */}
       <div className="mt-6 flex items-center gap-2 flex-wrap justify-center">
         {["PNG", "JPG", "LOG", "JSON", "XML", "PDF", "TXT"].map((t) => (
-          <span key={t} className="text-[9px] font-sans text-slate-700 border border-slate-800 rounded px-1.5 py-0.5 uppercase tracking-wider">
+          <span key={t} className="text-[10px] font-sans text-slate-700 border border-slate-800 rounded px-1.5 py-0.5 uppercase tracking-wider">
             {t}
           </span>
         ))}
@@ -529,7 +529,7 @@ export default function EvidencePage() {
                     <span className={typeFilter === t ? "text-slate-300" : cfg.color}>{cfg.icon}</span>
                     {cfg.label}
                     <span className={cn(
-                      "text-[9px] font-bold",
+                      "text-[10px] font-bold",
                       typeFilter === t ? "text-slate-400" : "text-slate-700"
                     )}>
                       {count}
@@ -629,9 +629,9 @@ export default function EvidencePage() {
               {/* List header */}
               <div className="flex items-center gap-4 px-4 py-2.5 border-b border-slate-800 bg-[#0A0B0D]">
                 <div className="w-9 flex-shrink-0" />
-                <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest flex-1">File Name</span>
-                <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest w-16 hidden sm:block">Type</span>
-                <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest w-24 text-right hidden sm:block">Uploaded</span>
+                <span className="text-[10px] font-sans font-bold text-slate-600 uppercase tracking-wider flex-1">File Name</span>
+                <span className="text-[10px] font-sans font-bold text-slate-600 uppercase tracking-wider w-16 hidden sm:block">Type</span>
+                <span className="text-[10px] font-sans font-bold text-slate-600 uppercase tracking-wider w-24 text-right hidden sm:block">Uploaded</span>
                 <div className="w-14 flex-shrink-0" />
               </div>
 

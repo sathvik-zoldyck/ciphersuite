@@ -164,7 +164,7 @@ function DetailSection({
   if (!content) return null;
   return (
     <div>
-      <p className="text-[10px] font-sans font-semibold tracking-widest text-slate-600 uppercase mb-2">
+      <p className="text-[10px] font-sans font-semibold tracking-wider text-slate-600 uppercase mb-2">
         {label}
       </p>
       <div

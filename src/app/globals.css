@@ -193,7 +193,7 @@
   }
 
   .section-label {
-    @apply text-[10px] font-sans font-bold uppercase tracking-[0.15em] text-slate-600;
+    @apply text-[10px] font-sans font-bold uppercase tracking-[0.08em] text-slate-500;
   }
 
   .mono-body {
@@ -329,7 +329,7 @@
   /* ── Field label ─────────────────────────────────────────────────────────── */
 
   .field-label {
-    @apply text-[10px] font-sans font-bold text-slate-500 uppercase tracking-[0.12em];
+    @apply text-[10px] font-sans font-bold text-slate-500 uppercase tracking-[0.08em];
   }
 
   /* ── Code / terminal block ───────────────────────────────────────────────── */

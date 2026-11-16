@@ -82,7 +82,7 @@ function SeverityGroup({
     <div>
       <div className="flex items-center gap-3 mb-3">
         <div className={cn("w-2 h-2 rounded-full flex-shrink-0", cfg.dot)} />
-        <span className={cn("text-[10px] font-sans font-bold uppercase tracking-[0.15em]", cfg.color)}>
+        <span className={cn("text-[10px] font-sans font-bold uppercase tracking-[0.08em]", cfg.color)}>
           {cfg.label}
         </span>
         <span className="text-[10px] font-sans text-slate-600">
@@ -91,7 +91,7 @@ function SeverityGroup({
         <div className="flex-1 h-px bg-slate-800/60" />
         {/* Critical findings get a pulsing indicator */}
         {severity === "Critical" && count > 0 && (
-          <span className="flex items-center gap-1 text-[9px] font-sans text-red-400/70 uppercase tracking-wider">
+          <span className="flex items-center gap-1 text-[10px] font-sans text-red-400/70 uppercase tracking-wider">
             <span className="w-1 h-1 rounded-full bg-red-400 animate-pulse" />
             Urgent
           </span>
@@ -298,7 +298,7 @@ export default function FindingsPage() {
               exit={{   opacity: 0, height: 0 }}
               className="flex items-center gap-5 py-2 px-1 border-b border-slate-800/60 flex-shrink-0"
             >
-              <span className="text-[9px] font-sans text-slate-700 uppercase tracking-[0.15em]">
+              <span className="text-[10px] font-sans text-slate-700 uppercase tracking-[0.08em]">
                 Sort
               </span>
               {(["severity", "title", "status", "createdAt"] as SortField[]).map((key) => (

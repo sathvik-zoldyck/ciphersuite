@@ -117,7 +117,7 @@ function EvidenceFindingsPopover({ evidence }: { evidence: Evidence }) {
           sideOffset={8}
         >
           <div className="space-y-4">
-            <h4 className="text-[10px] font-sans font-bold text-slate-500 uppercase tracking-widest pl-1">
+            <h4 className="text-[10px] font-sans font-bold text-slate-500 uppercase tracking-wider pl-1">
               Linked Findings
             </h4>
             
@@ -347,11 +347,11 @@ export function EvidenceCard({
             {evidence.name}
           </p>
           <div className="flex items-center justify-between">
-            <span className={cn("text-[9px] font-sans font-bold uppercase", cfg.color)}>
+            <span className={cn("text-[10px] font-sans font-bold uppercase", cfg.color)}>
               {cfg.label}
             </span>
             {evidence.fileSize && (
-              <span className="text-[9px] font-sans text-slate-700">
+              <span className="text-[10px] font-sans text-slate-700">
                 {formatBytes(evidence.fileSize)}
               </span>
             )}

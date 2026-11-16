@@ -112,7 +112,7 @@ function NavItem({
 
           {/* Badge */}
           {!collapsed && item.badge && (
-            <span className="text-[9px] font-sans font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-600 border border-slate-700/60">
+            <span className="text-[10px] font-sans font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-slate-600 border border-slate-700/60">
               {item.badge}
             </span>
           )}
@@ -172,7 +172,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
               <p className="text-sm font-bold font-display text-slate-100 leading-none truncate">
                 CipherSuite
               </p>
-              <p className="text-[9px] font-sans text-slate-700 mt-0.5 tracking-wide">
+              <p className="text-[10px] font-sans text-slate-700 mt-0.5 tracking-wide">
                 by Alcyone Secure
               </p>
             </div>
@@ -188,7 +188,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
                 <p className="text-[11px] font-sans font-semibold text-slate-300 truncate leading-tight">
                   {project.name}
                 </p>
-                <p className="text-[9px] font-sans text-slate-700 truncate mt-0.5">
+                <p className="text-[10px] font-sans text-slate-700 truncate mt-0.5">
                   {project.type}
                 </p>
               </div>
@@ -203,7 +203,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
         {/* Core */}
         <SidebarGroup>
           {!collapsed && (
-            <SidebarGroupLabel className="text-[9px] font-sans font-bold uppercase tracking-[0.16em] text-slate-700 px-3 mb-1">
+            <SidebarGroupLabel className="text-[10px] font-sans font-bold uppercase tracking-[0.08em] text-slate-700 px-3 mb-1">
               Workspace
             </SidebarGroupLabel>
           )}
@@ -219,7 +219,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
         {/* Reporting */}
         <SidebarGroup>
           {!collapsed && (
-            <SidebarGroupLabel className="text-[9px] font-sans font-bold uppercase tracking-[0.16em] text-slate-700 px-3 mb-1">
+            <SidebarGroupLabel className="text-[10px] font-sans font-bold uppercase tracking-[0.08em] text-slate-700 px-3 mb-1">
               Reporting
             </SidebarGroupLabel>
           )}
@@ -235,7 +235,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
           <div className="mx-1 mt-3 px-3 py-2.5 rounded-xl border border-violet-500/15 bg-violet-500/[0.04]">
             <div className="flex items-center gap-2 mb-1">
               <Zap className="w-3 h-3 text-violet-500/60" />
-              <span className="text-[9px] font-sans font-bold text-violet-600 uppercase tracking-wider">AI Assist</span>
+              <span className="text-[10px] font-sans font-bold text-violet-600 uppercase tracking-wider">AI Assist</span>
             </div>
             <p className="text-[10px] font-sans text-slate-700 leading-relaxed">
               Draft findings and remediation with one click from any finding.
@@ -277,7 +277,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
         {!collapsed && (
           <div className="flex items-center justify-center gap-1.5 pt-3 pb-1">
             <Shield className="w-2.5 h-2.5 text-slate-800" />
-            <span className="text-[9px] font-sans text-slate-800 tracking-wide">
+            <span className="text-[10px] font-sans text-slate-800 tracking-wide">
               Alcyone Secure
             </span>
           </div>

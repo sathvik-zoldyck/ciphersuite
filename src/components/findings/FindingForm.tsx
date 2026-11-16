@@ -256,7 +256,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                 {/* Severity left bar */}
                 <div className={cn('w-1 h-9 rounded-full flex-shrink-0', stripeColor)} />
                 <div className="min-w-0">
-                  <p className="text-[9px] font-sans font-bold tracking-[0.18em] text-slate-600 uppercase mb-0.5">
+                  <p className="text-[10px] font-sans font-bold tracking-[0.08em] text-slate-600 uppercase mb-0.5">
                     {isEdit ? 'Edit Finding' : 'New Finding'}
                   </p>
                   <h2 className="text-sm font-bold font-display text-slate-100 truncate leading-tight">
@@ -293,7 +293,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                           className="absolute right-0 top-full mt-2 w-64 bg-[#0D0F12] border border-slate-700/60 rounded-xl shadow-2xl z-20 overflow-hidden"
                         >
                           <div className="px-3 py-2 border-b border-slate-800">
-                            <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest">
+                            <span className="text-[10px] font-sans font-bold text-slate-600 uppercase tracking-wider">
                               Quick Templates
                             </span>
                           </div>
@@ -539,7 +539,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                     )}
                   </div>
 
-                  <div className="flex justify-between text-[9px] font-sans text-slate-700 px-0.5">
+                  <div className="flex justify-between text-[10px] font-sans text-slate-700 px-0.5">
                     <span>0.0 Low</span>
                     <span>4.0 Med</span>
                     <span>7.0 High</span>
@@ -725,7 +725,7 @@ function AITextarea({
       {value.length > charLimit * 0.1 && (
         <div className="absolute bottom-2 right-3 pointer-events-none">
           <span className={cn(
-            'text-[9px] font-sans',
+            'text-[10px] font-sans',
             value.length > charLimit * 0.9 ? 'text-amber-500' : 'text-slate-800'
           )}>
             {value.length}/{charLimit}

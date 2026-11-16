@@ -9,7 +9,6 @@ import { useMemo } from "react";
 import {
   LayoutDashboard, Bug, Paperclip, BookText,
   FileText, FileBarChart2, Settings, ArrowLeft,
-  ChevronRight, Zap, Shield,
 } from "@/components/icons";
 import {
   Sidebar, SidebarHeader, SidebarContent,
@@ -18,6 +17,7 @@ import {
   SidebarGroupLabel, useSidebar, SidebarRail,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+import type { AppIcon } from "@/components/icons";
 import { useProject }    from "@/hooks/use-project";
 import { useCollection } from "@/hooks/use-collection";
 import { useAuth }       from "@/context/AuthContext";
@@ -27,7 +27,7 @@ import type { Finding } from "@/lib/types";
 
 interface NavItem {
   href:       string;
-  icon:       React.ElementType;
+  icon:       AppIcon;
   label:      string;
   showBadge?: boolean;
 }
@@ -100,9 +100,10 @@ function NavRow({
           </AnimatePresence>
 
           <Icon
+            weight={isActive ? "fill" : "regular"}
             className={cn(
-              "flex-shrink-0 w-4 h-4 transition-colors duration-150",
-              isActive ? "text-violet-400" : "text-slate-600"
+              "flex-shrink-0 w-[18px] h-[18px] transition-colors duration-150",
+              isActive ? "text-violet-400" : "text-slate-500"
             )}
           />
 
@@ -112,7 +113,7 @@ function NavRow({
           {!collapsed && showCount && (
             <span className={cn(
               "ml-auto flex items-center justify-center min-w-[18px] h-[16px] px-1",
-              "rounded-[4px] text-[9px] font-sans font-bold",
+              "rounded-[4px] text-[10px] font-sans font-bold",
               isActive
                 ? "bg-violet-500/20 text-violet-300 border border-violet-500/25"
                 : "bg-red-500/10 text-red-400 border border-red-500/20",
@@ -125,9 +126,6 @@ function NavRow({
             <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-red-400" />
           )}
 
-          {!collapsed && isActive && !showCount && (
-            <ChevronRight className="w-3 h-3 text-violet-500/50 flex-shrink-0" />
-          )}
         </Link>
       </SidebarMenuButton>
     </SidebarMenuItem>
@@ -138,7 +136,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const { project }  = useProject(projectId);
-  const { isGuest }  = useAuth();
+  const { isGuest, getLocalFindings, localData } = useAuth();
 
   // No ownerId filter — Finding type no longer has ownerId field.
   // Firestore rules (ownsProject) already scope results to the project owner.
@@ -150,7 +148,16 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
     );
   }, [projectId, isGuest]);
 
-  const { count: openCount } = useCollection<Finding>(findingsRef);
+  const { count: remoteOpenCount } = useCollection<Finding>(findingsRef);
+
+  // Guests keep findings in local storage, so count them there.
+  const guestOpenCount = useMemo(
+    () => (isGuest ? getLocalFindings(projectId).filter((f) => f.status === "Open").length : 0),
+    // localData changes whenever a guest adds, edits or deletes a finding
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isGuest, projectId, getLocalFindings, localData],
+  );
+  const openCount = isGuest ? guestOpenCount : remoteOpenCount;
 
   return (
     <Sidebar collapsible="icon" className="border-r border-slate-800/60 bg-[#0A0B0D]">
@@ -162,12 +169,11 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
             <div className="w-7 h-7 rounded-lg overflow-hidden">
               <Image src="/logo.png" alt="CipherSuite" width={28} height={28} className="object-cover" />
             </div>
-            <div className="absolute inset-0 rounded-lg -z-10 blur-md opacity-60" style={{ background: "rgba(139, 92, 246,0.4)" }} />
           </div>
           {!collapsed && (
             <div className="min-w-0">
               <p className="text-sm font-bold font-display text-slate-100 leading-none truncate">CipherSuite</p>
-              <p className="text-[9px] font-sans text-slate-700 mt-0.5 tracking-wide">by Alcyone Secure</p>
+              <p className="text-[11px] font-sans text-slate-500 mt-1">by Alcyone Secure</p>
             </div>
           )}
         </Link>
@@ -181,8 +187,8 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
                 project.status === "On Hold" ? "bg-amber-400" : "bg-slate-500"
               )} />
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-sans font-semibold text-slate-300 truncate leading-tight">{project.name}</p>
-                <p className="text-[9px] font-sans text-slate-700 truncate mt-0.5">{project.type}</p>
+                <p className="text-[13px] font-sans font-semibold text-slate-200 truncate leading-tight">{project.name}</p>
+                <p className="text-[11px] font-sans text-slate-500 truncate mt-0.5">{project.type}</p>
               </div>
             </div>
           </div>
@@ -197,7 +203,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
       <SidebarContent className="px-2 py-3 overflow-y-auto scrollbar-thin">
         <SidebarGroup>
           {!collapsed && (
-            <SidebarGroupLabel className="text-[9px] font-sans font-bold uppercase tracking-[0.16em] text-slate-700 px-3 mb-1">
+            <SidebarGroupLabel className="text-[11px] font-sans font-semibold uppercase tracking-[0.08em] text-slate-500 px-3 mb-1">
               Workspace
             </SidebarGroupLabel>
           )}
@@ -212,7 +218,7 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
 
         <SidebarGroup>
           {!collapsed && (
-            <SidebarGroupLabel className="text-[9px] font-sans font-bold uppercase tracking-[0.16em] text-slate-700 px-3 mb-1">
+            <SidebarGroupLabel className="text-[11px] font-sans font-semibold uppercase tracking-[0.08em] text-slate-500 px-3 mb-1">
               Reporting
             </SidebarGroupLabel>
           )}
@@ -223,17 +229,6 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
           </SidebarMenu>
         </SidebarGroup>
 
-        {!collapsed && (
-          <div className="mx-1 mt-3 px-3 py-2.5 rounded-xl border border-violet-500/15 bg-violet-500/[0.04]">
-            <div className="flex items-center gap-2 mb-1">
-              <Zap className="w-3 h-3 text-violet-500/60" />
-              <span className="text-[9px] font-sans font-bold text-violet-600 uppercase tracking-wider">AI Assist</span>
-            </div>
-            <p className="text-[10px] font-sans text-slate-700 leading-relaxed">
-              Draft findings and remediation with one click from any finding.
-            </p>
-          </div>
-        )}
       </SidebarContent>
 
       <SidebarFooter className="px-2 py-3 border-t border-slate-800/60 space-y-0.5">
@@ -258,12 +253,6 @@ export default function AppSidebar({ projectId }: { projectId: string }) {
           </SidebarMenuButton>
         </SidebarMenuItem>
 
-        {!collapsed && (
-          <div className="flex items-center justify-center gap-1.5 pt-3 pb-1">
-            <Shield className="w-2.5 h-2.5 text-slate-800" />
-            <span className="text-[9px] font-sans text-slate-800 tracking-wide">Alcyone Secure</span>
-          </div>
-        )}
       </SidebarFooter>
     </Sidebar>
   );
