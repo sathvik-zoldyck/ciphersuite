@@ -20,7 +20,7 @@ const alertVariants = cva(
           "bg-slate-800/40 border-slate-700/60 text-slate-300 [&>svg]:text-slate-400",
 
         info:
-          "bg-cyan-500/[0.07] border-cyan-500/20 text-cyan-300 [&>svg]:text-cyan-400",
+          "bg-violet-500/[0.07] border-violet-500/20 text-violet-300 [&>svg]:text-violet-400",
 
         success:
           "bg-emerald-500/[0.07] border-emerald-500/20 text-emerald-300 [&>svg]:text-emerald-400",

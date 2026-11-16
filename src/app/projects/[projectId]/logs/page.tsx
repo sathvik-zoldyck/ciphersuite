@@ -47,7 +47,7 @@ const LINE_TYPE_CONFIG: Record<LineType, { bar: string; rowBg: string; label?: s
   error:   { bar: "bg-red-500",    rowBg: "bg-red-500/[0.04] hover:bg-red-500/[0.07]",    label: "ERR"  },
   warning: { bar: "bg-yellow-400", rowBg: "bg-yellow-400/[0.04] hover:bg-yellow-400/[0.07]", label: "WRN" },
   success: { bar: "bg-emerald-400",rowBg: "bg-emerald-400/[0.04] hover:bg-emerald-400/[0.07]", label: "OK" },
-  request: { bar: "bg-cyan-400",   rowBg: "hover:bg-slate-800/40" },
+  request: { bar: "bg-violet-400",   rowBg: "hover:bg-slate-800/40" },
   info:    { bar: "bg-blue-400",   rowBg: "hover:bg-slate-800/40" },
   normal:  { bar: "bg-slate-700",  rowBg: "hover:bg-slate-800/40" },
 };
@@ -59,7 +59,7 @@ function HighlightedLine({ line, search }: { line: string; search: string }) {
   let html = line
     // IP addresses
     .replace(/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?::\d+)?)/g,
-      `<span class="text-cyan-300">$1</span>`)
+      `<span class="text-violet-300">$1</span>`)
     // HTTP methods
     .replace(/\b(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS|CONNECT|TRACE)\b/g,
       `<span class="text-violet-400 font-semibold">$1</span>`)
@@ -313,8 +313,8 @@ export default function LogsPage() {
       {/* ── Page header ──────────────────────────────────────────────── */}
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-            <Terminal className="w-4 h-4 text-cyan-400" />
+          <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <Terminal className="w-4 h-4 text-violet-400" />
           </div>
           <div>
             <h1 className="text-lg font-bold font-display text-slate-100 leading-none">Logs</h1>
@@ -337,7 +337,7 @@ export default function LogsPage() {
               className={cn(
                 "h-9 w-52 pl-9 pr-8 bg-[#0D0F12] border border-slate-700/60 rounded-lg",
                 "text-xs font-mono text-slate-200 placeholder-slate-700",
-                "focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20",
+                "focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20",
                 "transition-colors"
               )}
             />
@@ -358,7 +358,7 @@ export default function LogsPage() {
             className={cn(
               "h-9 px-3 rounded-lg border text-xs font-mono transition-colors",
               showLineNumbers
-                ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400"
+                ? "bg-violet-500/10 border-violet-500/30 text-violet-400"
                 : "bg-[#0D0F12] border-slate-700/60 text-slate-600 hover:text-slate-400"
             )}
           >
@@ -409,7 +409,7 @@ export default function LogsPage() {
             disabled={isSaving || isEmpty}
             className={cn(
               "h-9 px-4 flex items-center gap-2 rounded-lg text-xs font-mono font-semibold transition-all",
-              "bg-cyan-500 hover:bg-cyan-400 text-black",
+              "bg-violet-500 hover:bg-violet-400 text-white",
               "disabled:opacity-40 disabled:cursor-not-allowed",
               isSaving && "animate-pulse"
             )}
@@ -461,15 +461,15 @@ export default function LogsPage() {
         className={cn(
           "relative flex-1 min-h-0 rounded-xl border overflow-hidden transition-all",
           isDragging
-            ? "border-cyan-400/60 bg-cyan-500/[0.04] shadow-lg shadow-cyan-500/10"
+            ? "border-violet-400/60 bg-violet-500/[0.04] "
             : "border-slate-800 bg-[#0A0B0D]"
         )}
       >
         {/* Drag overlay */}
         {isDragging && (
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none">
-            <Upload className="w-10 h-10 text-cyan-400 mb-3" />
-            <p className="text-sm font-mono font-semibold text-cyan-400">Drop to load log file</p>
+            <Upload className="w-10 h-10 text-violet-400 mb-3" />
+            <p className="text-sm font-mono font-semibold text-violet-400">Drop to load log file</p>
           </div>
         )}
 
@@ -500,11 +500,11 @@ export default function LogsPage() {
             onClick={() => fileInputRef.current?.click()}
           >
             <div className="relative mb-6">
-              <div className="w-16 h-16 rounded-xl border border-slate-700/60 bg-slate-800/40 flex items-center justify-center group-hover:border-cyan-500/40 group-hover:bg-cyan-500/[0.04] transition-all">
-                <Terminal className="w-8 h-8 text-slate-600 group-hover:text-cyan-400 transition-colors" />
+              <div className="w-16 h-16 rounded-xl border border-slate-700/60 bg-slate-800/40 flex items-center justify-center group-hover:border-violet-500/40 group-hover:bg-violet-500/[0.04] transition-all">
+                <Terminal className="w-8 h-8 text-slate-600 group-hover:text-violet-400 transition-colors" />
               </div>
               {/* Decorative scan lines */}
-              <div className="absolute -inset-4 rounded-2xl border border-dashed border-slate-800/60 group-hover:border-cyan-500/20 transition-colors" />
+              <div className="absolute -inset-4 rounded-2xl border border-dashed border-slate-800/60 group-hover:border-violet-500/20 transition-colors" />
             </div>
             <p className="text-sm font-semibold font-display text-slate-400 group-hover:text-slate-200 transition-colors">
               No log data loaded
@@ -641,7 +641,7 @@ export default function LogsPage() {
               {visibleLines.length.toLocaleString()} lines shown
             </span>
             {hasFilters && (
-              <span className="text-cyan-600">
+              <span className="text-violet-600">
                 {filterType !== "all" && `filter: ${filterType}`}
                 {filterType !== "all" && debouncedSearch && " · "}
                 {debouncedSearch && `search: "${debouncedSearch}"`}

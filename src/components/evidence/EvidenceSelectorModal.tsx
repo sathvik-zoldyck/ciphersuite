@@ -131,9 +131,9 @@ export function EvidenceSelectorModal({ projectId, finding, open, onClose }: Evi
                           </div>
                           <div className="flex-shrink-0 flex items-center justify-center w-5 h-5">
                             {isProcessing ? (
-                              <Loader2 className="w-3.5 h-3.5 animate-spin text-cyan-400" />
+                              <Loader2 className="w-3.5 h-3.5 animate-spin text-violet-400" />
                             ) : isLinked ? (
-                              <Check className="w-4 h-4 text-cyan-400" />
+                              <Check className="w-4 h-4 text-violet-400" />
                             ) : null}
                           </div>
                         </button>

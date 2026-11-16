@@ -22,19 +22,19 @@
     --card-foreground:      220  9% 88%;
     --popover:              225 14%  7%;
     --popover-foreground:   220  9% 88%;
-    --primary:              190 81% 56%;   /* cyan-400  — interactive/active  */
-    --primary-foreground:   220 100%  5%;  /* near-black text on cyan buttons */
+    --primary:              258 90% 66%;   /* violet-500 — actions, links, focus */
+    --primary-foreground:   0 0% 100%;   /* white text on violet buttons */
     --secondary:            220 12% 16%;
     --secondary-foreground: 220  9% 88%;
     --muted:                220 12% 16%;
     --muted-foreground:     220  7% 46%;   /* slate-500 equivalent            */
-    --accent:               190 81% 56%;
-    --accent-foreground:    220 100%  5%;
+    --accent:               258 90% 66%;
+    --accent-foreground:    0 0% 100%;
     --destructive:            0 72% 51%;   /* red-500                         */
     --destructive-foreground: 0  0% 98%;
     --border:               220 10% 20%;   /* slate-700/60                    */
     --input:                222 13% 10%;   /* slightly lighter than card      */
-    --ring:                 190 81% 56%;
+    --ring:                 258 90% 66%;
     --radius:               0.5rem;
 
     /* ── Foreground / text ────────────────────────────────────────────────── */
@@ -62,11 +62,8 @@
     --sidebar-accent:           224 15%  9%;
     --sidebar-accent-foreground:220  9% 94%;
     --sidebar-border:           222 13% 10%;
-    --sidebar-ring:             190 81% 56%;
+    --sidebar-ring:             258 90% 66%;
 
-    /* ── Brand glow ───────────────────────────────────────────────────────── */
-    --glow-cyan:    rgba(6, 182, 212, 0.25);
-    --glow-cyan-sm: rgba(6, 182, 212, 0.12);
   }
 
   /* Dark class — identical to :root (dark-only product, no light mode) */
@@ -80,19 +77,19 @@
     --card-foreground:       220  9% 88%;
     --popover:               225 14%  7%;
     --popover-foreground:    220  9% 88%;
-    --primary:               190 81% 56%;
-    --primary-foreground:    220 100%  5%;
+    --primary:               258 90% 66%;
+    --primary-foreground:    0 0% 100%;
     --secondary:             220 12% 16%;
     --secondary-foreground:  220  9% 88%;
     --muted:                 220 12% 16%;
     --muted-foreground:      220  7% 46%;
-    --accent:                190 81% 56%;
-    --accent-foreground:     220 100%  5%;
+    --accent:                258 90% 66%;
+    --accent-foreground:     0 0% 100%;
     --destructive:             0 72% 51%;
     --destructive-foreground:  0  0% 98%;
     --border:                220 10% 20%;
     --input:                 222 13% 10%;
-    --ring:                  190 81% 56%;
+    --ring:                  258 90% 66%;
     --foreground:            220  9% 88%;
     --foreground-muted:      220  7% 60%;
     --foreground-subtle:     220  6% 40%;
@@ -102,7 +99,7 @@
     --sidebar-accent:        224 15%  9%;
     --sidebar-accent-foreground: 220 9% 94%;
     --sidebar-border:        222 13% 10%;
-    --sidebar-ring:          190 81% 56%;
+    --sidebar-ring:          258 90% 66%;
   }
 }
 
@@ -128,7 +125,7 @@
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   }
 
-  /* Selection colour — brand cyan tint */
+  /* Selection colour — accent tint */
   ::selection {
     background-color: hsl(var(--primary) / 0.18);
     color: inherit;
@@ -227,7 +224,7 @@
     @apply w-full px-3 py-2.5 rounded-lg text-sm font-sans text-slate-200;
     @apply bg-[#0D0F12] border border-slate-700/60;
     @apply placeholder-slate-700;
-    @apply focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20;
+    @apply focus:outline-none focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/25;
     @apply transition-colors duration-150;
     caret-color: hsl(var(--primary));
   }
@@ -255,9 +252,8 @@
   }
 
   .btn-primary {
-    @apply btn bg-cyan-500 hover:bg-cyan-400 text-black;
-    @apply shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30;
-    @apply hover:scale-[1.01] active:scale-[0.98];
+    @apply btn bg-violet-500 hover:bg-violet-400 text-white;
+    @apply active:bg-violet-600;
   }
 
   .btn-secondary {
@@ -365,32 +361,13 @@
     font-family: var(--font-mono), ui-monospace, monospace;
   }
 
-  /* ── Severity glow utilities (box-shadow on severity-coloured elements) ──── */
-  .glow-critical { box-shadow: 0 0 12px rgba(248, 113, 113, 0.30); }
-  .glow-high     { box-shadow: 0 0 12px rgba(251, 146,  60, 0.30); }
-  .glow-medium   { box-shadow: 0 0 12px rgba(250, 204,  21, 0.25); }
-  .glow-low      { box-shadow: 0 0 12px rgba(  6, 182, 212, 0.25); }
-  .glow-cyan     { box-shadow: 0 0 20px rgba(  6, 182, 212, 0.20); }
+  /* Glow utilities are intentionally flat: colour carries meaning, not light. */
+  .glow-critical, .glow-high, .glow-medium, .glow-low, .glow-cyan { box-shadow: none; }
 
-  /* ── Ambient card glow (top radial bloom inside card) ────────────────────── */
-  .card-glow-cyan {
-    background-image:
-      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(6, 182, 212, 0.05) 0%, transparent 65%);
-  }
 
-  /* ── Text gradient ───────────────────────────────────────────────────────── */
-  .text-gradient-cyan {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(135deg, #22d3ee 0%, #06b6d4 50%, #0e7490 100%);
-  }
+  .text-gradient-cyan { @apply text-violet-300; }
 
-  /* ── Noise texture overlay (use as ::after or a child div) ──────────────── */
-  .noise-overlay {
-    background-image: url('/noise.png');
-    background-repeat: repeat;
-    opacity: 0.025;
-    pointer-events: none;
-  }
+  .noise-overlay { display: none; }
 
   /* ── Scrollbar thin (explicit, for elements that don't inherit body style) ─ */
   .scrollbar-thin          { scrollbar-width: thin; }
@@ -436,23 +413,4 @@
   to   { opacity: 1; transform: translateX(0);    }
 }
 
-/* Scanline animation — subtle horizontal sweep (opt-in with class) */
-@keyframes scanline {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
 
-.animate-scanline::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  height: 2px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(6, 182, 212, 0.04),
-    transparent
-  );
-  animation: scanline 6s linear infinite;
-  pointer-events: none;
-}

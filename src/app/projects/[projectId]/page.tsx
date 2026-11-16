@@ -171,7 +171,7 @@ function ArcGauge({ score }: { score: number }) {
         score >= 80 ? "bg-red-500/10 border-red-500/25 text-red-400"
         : score >= 60 ? "bg-orange-500/10 border-orange-500/25 text-orange-400"
         : score >= 40 ? "bg-yellow-500/10 border-yellow-500/25 text-yellow-400"
-        : score >= 20 ? "bg-cyan-500/10 border-cyan-500/25 text-cyan-400"
+        : score >= 20 ? "bg-violet-500/10 border-violet-500/25 text-violet-400"
         : "bg-slate-800/60 border-slate-700/40 text-slate-600"
       )}>
         {rl.label}
@@ -222,7 +222,7 @@ function MetricCard({ label, value, sub, icon, accentColor, borderColor, bgColor
       {/* Ambient hover glow */}
       <div
         className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{ background: `radial-gradient(ellipse 70% 60% at 0% 50%, ${bgColor.includes("red") ? "rgba(239,68,68,0.05)" : bgColor.includes("orange") ? "rgba(249,115,22,0.05)" : bgColor.includes("cyan") ? "rgba(6,182,212,0.05)" : "rgba(148,163,184,0.03)"}, transparent)` }}
+        style={{ background: `radial-gradient(ellipse 70% 60% at 0% 50%, ${bgColor.includes("red") ? "rgba(239,68,68,0.05)" : bgColor.includes("orange") ? "rgba(249,115,22,0.05)" : bgColor.includes("cyan") ? "rgba(139, 92, 246,0.05)" : "rgba(148,163,184,0.03)"}, transparent)` }}
       />
 
       <div className="pl-6 pr-5 py-5">
@@ -359,7 +359,7 @@ function StatusBreakdown({ findings, isLoading }: { findings: Finding[]; isLoadi
         <span className="text-[10px] font-sans text-slate-600 uppercase tracking-wider">Remediation Rate</span>
         <span className={cn(
           "text-xs font-sans font-bold px-2 py-0.5 rounded-full",
-          pct >= 80 ? "text-emerald-400 bg-emerald-500/10" : pct >= 50 ? "text-cyan-400 bg-cyan-500/10" : "text-slate-500 bg-slate-800/60"
+          pct >= 80 ? "text-emerald-400 bg-emerald-500/10" : pct >= 50 ? "text-violet-400 bg-violet-500/10" : "text-slate-500 bg-slate-800/60"
         )}>
           {pct}%
         </span>
@@ -435,7 +435,7 @@ function ActivityFeed({ projectId }: { projectId: string }) {
 
   const getIcon = (action: string) => {
     if (action.startsWith("finding")) return <Bug className="w-3.5 h-3.5 text-red-500" />;
-    if (action.startsWith("evidence")) return <FileImage className="w-3.5 h-3.5 text-cyan-500" />;
+    if (action.startsWith("evidence")) return <FileImage className="w-3.5 h-3.5 text-violet-500" />;
     if (action.startsWith("report")) return <FileBarChart2 className="w-3.5 h-3.5 text-violet-500" />;
     return <Activity className="w-3.5 h-3.5 text-slate-500" />;
   };
@@ -603,7 +603,7 @@ export default function DashboardPage() {
           )}
           <button
             onClick={() => router.push(`/projects/${projectId}/findings`)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-sans font-bold transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:scale-[1.01] active:scale-[0.99]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-500 hover:bg-violet-400 text-white text-xs font-sans font-bold transition-all  hover:scale-[1.01] active:scale-[0.99]"
           >
             <Plus className="w-3.5 h-3.5" />
             Add Finding
@@ -657,9 +657,9 @@ export default function DashboardPage() {
           value={evidence.length}
           sub="Collected artifacts"
           icon={<FileImage className="w-3.5 h-3.5" />}
-          accentColor="text-cyan-400"
-          borderColor="border-cyan-500/25"
-          bgColor="bg-cyan-500/10"
+          accentColor="text-violet-400"
+          borderColor="border-violet-500/25"
+          bgColor="bg-violet-500/10"
           delay={180}
           onClick={() => router.push(`/projects/${projectId}/evidence`)}
         />
@@ -680,7 +680,7 @@ export default function DashboardPage() {
                 !isLoading && findings.length > 0 ? (
                   <button
                     onClick={() => router.push(`/projects/${projectId}/findings`)}
-                    className="flex items-center gap-1 text-[10px] font-sans text-cyan-400/70 hover:text-cyan-400 transition-colors"
+                    className="flex items-center gap-1 text-[10px] font-sans text-violet-400/70 hover:text-violet-400 transition-colors"
                   >
                     View all <ArrowRight className="w-2.5 h-2.5" />
                   </button>
@@ -791,7 +791,7 @@ export default function DashboardPage() {
             <div className="space-y-1">
               {[
                 { label: "Findings",    path: "findings", icon: <Bug      className="w-3.5 h-3.5" />, color: "text-red-400",    count: findings.length },
-                { label: "Evidence",    path: "evidence", icon: <FileImage className="w-3.5 h-3.5"/>, color: "text-cyan-400",   count: evidence.length },
+                { label: "Evidence",    path: "evidence", icon: <FileImage className="w-3.5 h-3.5"/>, color: "text-violet-400",   count: evidence.length },
                 { label: "Notes",       path: "notes",    icon: <Lock     className="w-3.5 h-3.5" />, color: "text-violet-400", count: null },
                 { label: "Logs",        path: "logs",     icon: <Activity className="w-3.5 h-3.5" />, color: "text-amber-400",  count: null },
               ].map((item) => (

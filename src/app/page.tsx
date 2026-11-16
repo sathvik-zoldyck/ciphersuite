@@ -130,8 +130,8 @@ function NewProjectDrawer({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-800 flex-shrink-0">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-            <Plus className="w-4 h-4 text-cyan-400" />
+          <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
+            <Plus className="w-4 h-4 text-violet-400" />
           </div>
           <div className="flex-1">
             <p className="text-sm font-sans font-bold text-slate-100">New Project</p>
@@ -167,11 +167,11 @@ function NewProjectDrawer({
                   className={cn(
                     "flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left transition-all",
                     type === t
-                      ? "bg-cyan-500/[0.08] border-cyan-500/30 text-cyan-300"
+                      ? "bg-violet-500/[0.08] border-violet-500/30 text-violet-300"
                       : "bg-[#0D0F12] border-slate-800/60 text-slate-600 hover:border-slate-700 hover:text-slate-400"
                   )}
                 >
-                  <span className={cn(type === t ? "text-cyan-400" : "text-slate-700")}>
+                  <span className={cn(type === t ? "text-violet-400" : "text-slate-700")}>
                     {TYPE_ICONS[t] ?? <Shield className="w-3.5 h-3.5" />}
                   </span>
                   <span className="text-[11px] font-sans font-medium truncate">{t}</span>
@@ -366,7 +366,7 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
         className="w-full max-w-2xl"
       >
         <div className="text-center mb-10">
-          <p className="text-[10px] font-sans text-cyan-500/60 uppercase tracking-[0.2em] mb-3">
+          <p className="text-[10px] font-sans text-violet-500/60 uppercase tracking-[0.2em] mb-3">
             What would you like to do?
           </p>
           <h2 className="text-2xl font-bold font-display text-slate-100">
@@ -385,14 +385,14 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
             className={cn(
               "group relative flex flex-col items-start text-left",
               "p-6 rounded-2xl border border-slate-800/60 bg-[#0D0F12]",
-              "hover:border-cyan-500/30 hover:bg-cyan-500/[0.03]",
+              "hover:border-violet-500/30 hover:bg-violet-500/[0.03]",
               "transition-all duration-200 overflow-hidden",
             )}
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-              style={{ background: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(6,182,212,0.06), transparent)" }} />
-            <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-4">
-              <Shield className="w-5 h-5 text-cyan-400" />
+              style={{ background: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(139, 92, 246,0.06), transparent)" }} />
+            <div className="w-11 h-11 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-4">
+              <Shield className="w-5 h-5 text-violet-400" />
             </div>
             <h3 className="text-base font-bold font-display text-slate-100 mb-1">Security Project</h3>
             <p className="text-[11px] font-sans text-slate-600 mb-4 leading-relaxed">
@@ -405,7 +405,7 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
                 </span>
               ))}
             </div>
-            <div className="flex items-center gap-2 text-[11px] font-sans font-bold text-cyan-400 group-hover:gap-3 transition-all">
+            <div className="flex items-center gap-2 text-[11px] font-sans font-bold text-violet-400 group-hover:gap-3 transition-all">
               <Plus className="w-3.5 h-3.5" />
               New Project
               <ChevronRight className="w-3.5 h-3.5" />
@@ -615,7 +615,7 @@ export default function ProjectsDashboard() {
                 <p className="text-sm font-sans text-slate-600">No projects match your filters.</p>
                 <button
                   onClick={() => { setSearch(""); setStatusFilter("all"); }}
-                  className="mt-2 text-xs font-sans text-cyan-400 hover:text-cyan-300"
+                  className="mt-2 text-xs font-sans text-violet-400 hover:text-violet-300"
                 >
                   Clear filters →
                 </button>

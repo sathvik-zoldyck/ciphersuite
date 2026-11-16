@@ -17,10 +17,10 @@ const Checkbox = React.forwardRef<
       "border border-slate-700 bg-transparent",
       "transition-all duration-150",
       "hover:border-slate-500",
-      "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50",
+      "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500/50",
       "disabled:cursor-not-allowed disabled:opacity-40",
       // Checked state
-      "data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500",
+      "data-[state=checked]:bg-violet-500 data-[state=checked]:border-violet-500",
       "data-[state=checked]:text-black",
       className
     )}

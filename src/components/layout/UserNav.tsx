@@ -35,7 +35,7 @@ export function UserNav() {
             "text-[10px] font-sans font-bold",
             isGuest
               ? "bg-slate-800 text-slate-500 border border-slate-700/60"
-              : "bg-cyan-500/15 text-cyan-400 border border-cyan-500/20",
+              : "bg-violet-500/15 text-violet-400 border border-violet-500/20",
           )}>
             {avatarLabel}
           </span>
@@ -65,7 +65,7 @@ export function UserNav() {
               "text-[11px] font-sans font-bold",
               isGuest
                 ? "bg-slate-800 text-slate-500 border border-slate-700/60"
-                : "bg-cyan-500/15 text-cyan-400 border border-cyan-500/20",
+                : "bg-violet-500/15 text-violet-400 border border-violet-500/20",
             )}>
               {avatarLabel}
             </span>

@@ -18,7 +18,7 @@ const badgeVariants = cva(
       variant: {
         // Brand / primary action
         default:
-          "bg-cyan-500/15 border-cyan-500/25 text-cyan-400 hover:bg-cyan-500/20",
+          "bg-violet-500/15 border-violet-500/25 text-violet-400 hover:bg-violet-500/20",
 
         // Secondary / neutral
         secondary:

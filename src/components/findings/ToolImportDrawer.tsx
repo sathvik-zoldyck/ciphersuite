@@ -150,17 +150,17 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
         onClick={e => e.stopPropagation()}
       >
         {/* Top accent line */}
-        <div className="h-[2px] flex-shrink-0 bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent" />
+        <div className="h-[2px] flex-shrink-0 bg-gradient-to-r from-transparent via-violet-500/60 to-transparent" />
 
         {/* Header */}
         <div className="flex items-center gap-3 px-6 py-4 border-b border-slate-800 flex-shrink-0 bg-[#0D0F12]">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-            <Zap className="w-4 h-4 text-cyan-400" />
+          <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+            <Zap className="w-4 h-4 text-violet-400" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <h2 className="text-sm font-bold font-display text-slate-100">Import Tool Output</h2>
-              <span className="text-[9px] font-sans font-bold text-cyan-500/70 bg-cyan-500/10 border border-cyan-500/15 px-1.5 py-0.5 rounded uppercase tracking-wider">
+              <span className="text-[9px] font-sans font-bold text-violet-500/70 bg-violet-500/10 border border-violet-500/15 px-1.5 py-0.5 rounded uppercase tracking-wider">
                 AI
               </span>
             </div>
@@ -185,9 +185,9 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
               className={cn(
                 "flex-1 py-1.5 text-center text-[9px] font-sans font-bold uppercase tracking-[0.12em] transition-colors border-b-2",
                 step.active && i < 2 && !findings
-                  ? "text-cyan-400 border-cyan-500/50"
+                  ? "text-violet-400 border-violet-500/50"
                   : findings && i === 2
-                  ? "text-cyan-400 border-cyan-500/50"
+                  ? "text-violet-400 border-violet-500/50"
                   : "text-slate-700 border-transparent"
               )}
             >
@@ -245,21 +245,21 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                     className={cn(
                       "relative flex flex-col items-center justify-center rounded-xl border-2 cursor-pointer transition-all duration-200 py-10",
                       isDragging
-                        ? "border-cyan-500/60 bg-cyan-500/[0.06] scale-[1.01]"
+                        ? "border-violet-500/60 bg-violet-500/[0.06] scale-[1.01]"
                         : file
-                        ? "border-cyan-500/30 bg-cyan-500/[0.04]"
+                        ? "border-violet-500/30 bg-violet-500/[0.04]"
                         : "border-dashed border-slate-800 hover:border-slate-700 hover:bg-white/[0.02]"
                     )}
                   >
                     {file ? (
                       <>
-                        <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/25 flex items-center justify-center mb-3">
-                          <CheckCircle2 className="w-5 h-5 text-cyan-400" />
+                        <div className="w-10 h-10 rounded-xl bg-violet-500/15 border border-violet-500/25 flex items-center justify-center mb-3">
+                          <CheckCircle2 className="w-5 h-5 text-violet-400" />
                         </div>
-                        <p className="text-sm font-sans font-bold text-cyan-300 max-w-[260px] truncate px-4 text-center">
+                        <p className="text-sm font-sans font-bold text-violet-300 max-w-[260px] truncate px-4 text-center">
                           {file.name}
                         </p>
-                        <p className="text-[10px] font-sans text-cyan-500/50 mt-1 uppercase tracking-wider">
+                        <p className="text-[10px] font-sans text-violet-500/50 mt-1 uppercase tracking-wider">
                           {(file.size / 1024).toFixed(1)} KB · Click to change
                         </p>
                       </>
@@ -316,7 +316,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                 {/* Summary bar */}
                 <div className="flex items-center justify-between sticky top-0 bg-[#0A0B0D] py-2 z-10">
                   <div className="flex items-center gap-2">
-                    <ShieldAlert className="w-3.5 h-3.5 text-cyan-400" />
+                    <ShieldAlert className="w-3.5 h-3.5 text-violet-400" />
                     <span className="text-[11px] font-sans font-bold text-slate-300">
                       {findings.length} issue{findings.length !== 1 ? "s" : ""} found
                     </span>
@@ -326,7 +326,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                   </div>
                   <button
                     onClick={toggleAll}
-                    className="text-[9px] font-sans font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 bg-cyan-500/[0.05] hover:bg-cyan-500/10 px-2.5 py-1 rounded transition-colors uppercase tracking-wider"
+                    className="text-[9px] font-sans font-bold text-violet-400 hover:text-violet-300 border border-violet-500/20 bg-violet-500/[0.05] hover:bg-violet-500/10 px-2.5 py-1 rounded transition-colors uppercase tracking-wider"
                   >
                     {selectedIndices.size === findings.length ? "None" : "All"}
                   </button>
@@ -355,19 +355,19 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                         className={cn(
                           "relative flex gap-3 p-3.5 rounded-xl border cursor-pointer transition-all duration-150 overflow-hidden",
                           selected
-                            ? "bg-cyan-500/[0.05] border-cyan-500/25"
+                            ? "bg-violet-500/[0.05] border-violet-500/25"
                             : "bg-[#0D0F12] border-slate-800/60 hover:border-slate-700/60"
                         )}
                       >
                         {/* Left accent stripe */}
                         {selected && (
-                          <div className="absolute left-0 top-0 bottom-0 w-[2.5px] bg-cyan-500 rounded-l-xl" />
+                          <div className="absolute left-0 top-0 bottom-0 w-[2.5px] bg-violet-500 rounded-l-xl" />
                         )}
 
                         {/* Checkbox */}
                         <div className="mt-0.5 flex-shrink-0">
                           {selected
-                            ? <CheckSquare className="w-4 h-4 text-cyan-400" />
+                            ? <CheckSquare className="w-4 h-4 text-violet-400" />
                             : <Square className="w-4 h-4 text-slate-600" />
                           }
                         </div>
@@ -435,7 +435,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                 className={cn(
                   "flex-1 h-9 rounded-lg font-sans font-bold text-[11px] flex items-center justify-center gap-2 transition-all",
                   file && !isProcessing
-                    ? "bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg shadow-cyan-500/20"
+                    ? "bg-violet-500 hover:bg-violet-400 text-white "
                     : "bg-slate-800/60 text-slate-600 cursor-not-allowed"
                 )}
               >
@@ -489,11 +489,11 @@ function ToolButton({
         compact ? "px-3 py-2 justify-center text-[10px]" : "px-3 py-2.5 text-[11px]",
         "font-sans",
         selected
-          ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.08)]"
+          ? "bg-violet-500/10 border-violet-500/30 text-violet-300 shadow-[0_0_12px_rgba(139, 92, 246,0.08)]"
           : "bg-[#0D0F12] border-slate-800/60 text-slate-500 hover:border-slate-700 hover:text-slate-300"
       )}
     >
-      <FileTerminal className={cn("flex-shrink-0", compact ? "w-3 h-3" : "w-3.5 h-3.5", selected ? "text-cyan-400" : "text-slate-600")} />
+      <FileTerminal className={cn("flex-shrink-0", compact ? "w-3 h-3" : "w-3.5 h-3.5", selected ? "text-violet-400" : "text-slate-600")} />
       {tool}
     </button>
   );

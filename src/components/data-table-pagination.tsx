@@ -37,7 +37,7 @@ function NavButton({
         "hover:border-slate-700 hover:text-slate-200 hover:bg-slate-800",
         "disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-[#0D0F12]",
         "disabled:hover:border-slate-800 disabled:hover:text-slate-600",
-        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50",
+        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500/50",
       )}
     >
       <span className="sr-only">{label}</span>
@@ -71,9 +71,9 @@ export function DataTablePagination<TData>({
       {/* ── Left: selection count ──────────────────────────────────── */}
       <div className="flex items-center gap-2 min-w-[140px]">
         {selectedRows > 0 ? (
-          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/20">
-            <div className="w-1 h-1 rounded-full bg-cyan-400" />
-            <span className="text-[10px] font-sans font-semibold text-cyan-400">
+          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-violet-500/10 border border-violet-500/20">
+            <div className="w-1 h-1 rounded-full bg-violet-400" />
+            <span className="text-[10px] font-sans font-semibold text-violet-400">
               {selectedRows} selected
             </span>
           </div>

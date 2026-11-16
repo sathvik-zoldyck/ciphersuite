@@ -129,7 +129,7 @@ export function FindingCard({ finding, index, onEdit, onDelete }: FindingCardPro
         <div className="flex items-center gap-1 flex-shrink-0">
           <button
             onClick={(e) => { e.stopPropagation(); onEdit(finding); }}
-            className="p-1.5 rounded text-slate-600 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors opacity-0 group-hover:opacity-100"
+            className="p-1.5 rounded text-slate-600 hover:text-violet-400 hover:bg-violet-500/10 transition-colors opacity-0 group-hover:opacity-100"
             title="Edit finding"
           >
             <Pencil className="w-3.5 h-3.5" />

@@ -60,7 +60,7 @@ const DialogContent = React.forwardRef<
             "w-7 h-7 rounded-lg flex items-center justify-center",
             "text-slate-600 hover:text-slate-200",
             "hover:bg-white/[0.06] transition-all duration-100",
-            "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50",
+            "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-500/50",
             "disabled:pointer-events-none",
           )}
         >

@@ -219,15 +219,15 @@ function MarkdownPreview({ content }: { content: string }) {
       "prose-h2:text-lg prose-h2:text-slate-200",
       "prose-h3:text-base prose-h3:text-slate-300",
       "prose-p:text-slate-300 prose-p:leading-relaxed prose-p:my-3 prose-p:font-sans prose-p:text-sm",
-      "prose-code:text-cyan-300 prose-code:bg-black/50 prose-code:border prose-code:border-slate-800",
+      "prose-code:text-violet-300 prose-code:bg-black/50 prose-code:border prose-code:border-slate-800",
       "prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[11px] prose-code:font-sans",
       "prose-code:before:content-none prose-code:after:content-none",
       "prose-pre:bg-[#0A0B0D] prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-xl prose-pre:text-xs prose-pre:p-4",
       "prose-li:text-slate-300 prose-li:my-0.5 prose-li:font-sans prose-li:text-sm",
       "prose-ul:my-3 prose-ol:my-3",
-      "prose-blockquote:border-l-2 prose-blockquote:border-cyan-500/40 prose-blockquote:text-slate-500 prose-blockquote:not-italic",
-      "prose-blockquote:bg-cyan-500/[0.03] prose-blockquote:px-4 prose-blockquote:rounded-r-lg",
-      "prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline",
+      "prose-blockquote:border-l-2 prose-blockquote:border-violet-500/40 prose-blockquote:text-slate-500 prose-blockquote:not-italic",
+      "prose-blockquote:bg-violet-500/[0.03] prose-blockquote:px-4 prose-blockquote:rounded-r-lg",
+      "prose-a:text-violet-400 prose-a:no-underline hover:prose-a:underline",
       "prose-hr:border-slate-800/60 prose-hr:my-6",
       "prose-strong:text-slate-100 prose-strong:font-bold",
       "prose-em:text-slate-300 prose-em:italic",
@@ -351,8 +351,8 @@ function TemplatePicker({ onInsert }: { onInsert: (content: string) => void }) {
         style={{
           display: "flex", alignItems: "center", gap: 6,
           padding: "5px 10px", borderRadius: 8, cursor: "pointer",
-          background: open ? "rgba(6,182,212,0.15)" : "rgba(6,182,212,0.08)",
-          border: "1px solid rgba(6,182,212,0.2)", color: "#22d3ee",
+          background: open ? "rgba(139, 92, 246,0.15)" : "rgba(139, 92, 246,0.08)",
+          border: "1px solid rgba(139, 92, 246,0.2)", color: "#a78bfa",
           fontFamily: "monospace", fontSize: 10, fontWeight: 700,
           textTransform: "uppercase", letterSpacing: "0.1em",
           transition: "background 0.12s",
@@ -390,7 +390,7 @@ function TemplatePicker({ onInsert }: { onInsert: (content: string) => void }) {
                 }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.05)";
-                  (e.currentTarget as HTMLButtonElement).style.color = "#22d3ee";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#a78bfa";
                 }}
                 onMouseLeave={e => {
                   (e.currentTarget as HTMLButtonElement).style.background = "transparent";
@@ -636,7 +636,7 @@ export default function NotesPage() {
           ))}
         </div>
         <div className="flex-1 bg-[#020304] flex items-center justify-center">
-          <div className="w-5 h-5 rounded-full border-2 border-cyan-500/20 border-t-cyan-500 animate-spin" />
+          <div className="w-5 h-5 rounded-full border-2 border-violet-500/20 border-t-violet-500 animate-spin" />
         </div>
       </div>
     );
@@ -719,7 +719,7 @@ export default function NotesPage() {
                 style={{
                   width: 28, height: 28, borderRadius: 8, border: "none", cursor: "pointer",
                   background: fullscreen ? "rgba(255,255,255,0.08)" : "transparent",
-                  color: fullscreen ? "#22d3ee" : "#475569",
+                  color: fullscreen ? "#a78bfa" : "#475569",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   transition: "all 0.12s",
                 }}
@@ -786,7 +786,7 @@ export default function NotesPage() {
                     style={{
                       width: "100%", background: "transparent", border: "none", outline: "none",
                       fontSize: 20, fontWeight: 700, fontFamily: "'Syne', sans-serif",
-                      color: "#f1f5f9", caretColor: "#22d3ee",
+                      color: "#f1f5f9", caretColor: "#a78bfa",
                     }}
                   />
                   <div style={{ height: 1, background: "rgba(255,255,255,0.05)", marginTop: 10 }} />
@@ -804,7 +804,7 @@ export default function NotesPage() {
                     background: "transparent", border: "none", outline: "none",
                     padding: "8px 32px 24px",
                     fontFamily: "'JetBrains Mono', monospace", fontSize: 13,
-                    color: "#94a3b8", lineHeight: 1.8, caretColor: "#22d3ee",
+                    color: "#94a3b8", lineHeight: 1.8, caretColor: "#a78bfa",
                   }}
                 />
               </div>
@@ -831,8 +831,8 @@ export default function NotesPage() {
             </div>
             <div style={{ fontSize: 9, fontFamily: "monospace", fontWeight: 700 }}>
               {saveState === "saving" && (
-                <span style={{ color: "#22d3ee", display: "flex", alignItems: "center", gap: 5 }}>
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#22d3ee", display: "inline-block", animation: "pulse 1s infinite" }} />
+                <span style={{ color: "#a78bfa", display: "flex", alignItems: "center", gap: 5 }}>
+                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#a78bfa", display: "inline-block", animation: "pulse 1s infinite" }} />
                   Saving…
                 </span>
               )}
@@ -876,13 +876,13 @@ export default function NotesPage() {
           onClick={createNote}
           title="New note"
           style={{
-            width: 26, height: 26, borderRadius: 8, border: "1px solid rgba(6,182,212,0.2)",
-            background: "rgba(6,182,212,0.08)", color: "#22d3ee", cursor: "pointer",
+            width: 26, height: 26, borderRadius: 8, border: "1px solid rgba(139, 92, 246,0.2)",
+            background: "rgba(139, 92, 246,0.08)", color: "#a78bfa", cursor: "pointer",
             display: "flex", alignItems: "center", justifyContent: "center",
             transition: "background 0.12s",
           }}
-          onMouseEnter={e => (e.currentTarget.style.background = "rgba(6,182,212,0.16)")}
-          onMouseLeave={e => (e.currentTarget.style.background = "rgba(6,182,212,0.08)")}
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(139, 92, 246,0.16)")}
+          onMouseLeave={e => (e.currentTarget.style.background = "rgba(139, 92, 246,0.08)")}
         >
           <Plus style={{ width: 13, height: 13 }} />
         </button>
@@ -924,10 +924,10 @@ export default function NotesPage() {
                     padding: "11px 12px", borderRadius: 10, marginBottom: 6,
                     borderWidth: "1px",
                     borderStyle: "solid",
-                    borderColor: isActive ? "rgba(6,182,212,0.25)" : "rgba(255,255,255,0.06)",
+                    borderColor: isActive ? "rgba(139, 92, 246,0.25)" : "rgba(255,255,255,0.06)",
                     borderLeftWidth: "3px",
-                    borderLeftColor: isActive ? "#22d3ee" : color.hex,
-                    background: isActive ? "rgba(6,182,212,0.05)" : "rgba(15,18,24,0.8)",
+                    borderLeftColor: isActive ? "#a78bfa" : color.hex,
+                    background: isActive ? "rgba(139, 92, 246,0.05)" : "rgba(15,18,24,0.8)",
                     transition: "all 0.15s",
                     overflow: "hidden",
                   }}
