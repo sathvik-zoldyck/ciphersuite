@@ -96,6 +96,8 @@ export interface Finding extends FirestoreDoc {
   cweId?:           string;
   /** e.g. "A03:2021" */
   owaspId?:         string;
+  /** CVSS v3.1 vector string, e.g. "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H". */
+  cvssVector?:      string;
   evidenceIds?:     string[];
   projectMembers?:  MemberMap;
 }

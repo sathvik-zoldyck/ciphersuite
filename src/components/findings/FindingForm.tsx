@@ -9,6 +9,8 @@ import {
 } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { SeverityBadge } from './SeverityBadge';
+import { CvssCalculator } from './CvssCalculator';
+import { severityFromCvss } from '@/lib/finding-library';
 import {
   SEVERITY_CONFIG,
   STATUS_CONFIG,
@@ -30,7 +32,7 @@ const EMPTY: FindingFormData = {
   title: '', severity: 'Medium', status: 'Open',
   target: '', description: '', stepsToReproduce: '',
   impact: '', remediation: '', cvss: undefined,
-  cweId: '', owaspId: '',
+  cweId: '', owaspId: '', cvssVector: '',
 };
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -91,6 +93,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
       cvss:             initial.cvss,
       cweId:            initial.cweId ?? '',
       owaspId:          initial.owaspId ?? '',
+      cvssVector:       initial.cvssVector ?? '',
     } : EMPTY);
     setFieldErrors({});
     setGlobalError('');
@@ -539,6 +542,20 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                   </Field>
                 </div>
 
+                <CvssCalculator
+                  vector={form.cvssVector}
+                  onChange={(vector, score) => {
+                    setForm((prev) => ({
+                      ...prev,
+                      cvssVector: vector,
+                      cvss: score,
+                      // Keep severity in step with the score unless it's 0 (no impact chosen yet).
+                      severity: score > 0 ? severityFromCvss(score) : prev.severity,
+                    }));
+                    setDirty(true);
+                  }}
+                />
+
                 {/* CVSS visual band */}
                 <div className="rounded-xl border border-slate-800 bg-black/30 p-4 space-y-3">
                   <div className="flex items-center justify-between">
@@ -549,7 +566,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                         form.cvss >= 9   ? 'text-red-400 bg-red-500/10'     :
                         form.cvss >= 7   ? 'text-orange-400 bg-orange-500/10' :
                         form.cvss >= 4   ? 'text-yellow-400 bg-yellow-500/10' :
-                        'text-violet-400 bg-violet-500/10'
+                        'text-cyan-400 bg-cyan-500/10'
                       )}>
                         {form.cvss.toFixed(1)} — {
                           form.cvss >= 9 ? 'Critical' : form.cvss >= 7 ? 'High' : form.cvss >= 4 ? 'Medium' : 'Low'
@@ -560,11 +577,11 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
 
                   {/* Gradient band */}
                   <div className="relative h-3 rounded-full overflow-hidden"
-                    style={{ background: 'linear-gradient(to right, #8b5cf6 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
+                    style={{ background: 'linear-gradient(to right, #22d3ee 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
                   >
                     <div
                       className="absolute inset-0 opacity-30"
-                      style={{ background: 'linear-gradient(to right, #8b5cf6 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
+                      style={{ background: 'linear-gradient(to right, #22d3ee 0%, #eab308 40%, #f97316 70%, #ef4444 100%)' }}
                     />
                     {form.cvss !== undefined && (
                       <motion.div
