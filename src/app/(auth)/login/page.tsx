@@ -9,7 +9,7 @@ import {
   updateProfile,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { auth, isFirebaseConfigured } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -236,6 +236,30 @@ export default function LoginPage() {
             <p className="font-display text-lg font-semibold text-slate-100">CipherSuite</p>
           </div>
 
+          {!isFirebaseConfigured ? (
+            <>
+              <h2 className="font-display text-[28px] font-semibold tracking-tight text-slate-50">Try CipherSuite</h2>
+              <p className="mt-1.5 text-sm text-slate-400">
+                Projects, findings, notes and reports work right away and are kept in this browser.
+              </p>
+              <button
+                type="button"
+                onClick={handleGuestLogin}
+                className="mt-8 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-violet-500 text-sm font-semibold text-white transition-colors hover:bg-violet-400 active:bg-violet-600"
+              >
+                Start in guest mode <ArrowRight className="h-4 w-4" />
+              </button>
+              <div className="mt-6 rounded-lg border border-slate-800 bg-[#0D0F12] p-4 text-[13px] leading-relaxed text-slate-400">
+                <p className="font-medium text-slate-200">Accounts are off on this copy</p>
+                <p className="mt-1">
+                  To sign in and sync across devices, add your Firebase web config to{" "}
+                  <code className="rounded bg-slate-800 px-1 py-0.5 text-[12px] text-slate-300">.env.local</code>{" "}
+                  and restart. The README explains each step.
+                </p>
+              </div>
+            </>
+          ) : (
+          <>
           <h2 className="font-display text-[28px] font-semibold tracking-tight text-slate-50">
             {mode === "login" ? "Sign in" : "Create your account"}
           </h2>
@@ -302,6 +326,8 @@ export default function LoginPage() {
           <p className="mt-3 text-center text-xs leading-relaxed text-slate-500">
             Guest mode keeps your projects in this browser only.
           </p>
+          </>
+          )}
         </div>
       </section>
     </main>
