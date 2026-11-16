@@ -363,7 +363,7 @@ function ReportViewer({ report, onClose }: { report: Report; onClose: () => void
           </div>
         </div>
         <div className="flex-1 overflow-y-auto scrollbar-thin px-6 py-6">
-          <pre className="whitespace-pre-wrap font-sans text-[12px] text-slate-300 leading-relaxed">
+          <pre className="whitespace-pre-wrap font-mono text-[12px] text-slate-300 leading-relaxed">
             {report.content}
           </pre>
         </div>
