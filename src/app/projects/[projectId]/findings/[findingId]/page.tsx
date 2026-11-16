@@ -181,7 +181,7 @@ export default function FindingDetailPage() {
       <div className="flex-shrink-0">
         
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-4">
+        <div className="flex items-center gap-2 text-[10px] font-sans text-slate-500 uppercase tracking-wider mb-4">
           <Link href="/" className="hover:text-slate-300 transition-colors">Projects</Link>
           <ChevronRight className="w-3 h-3" />
           <Link href={`/projects/${projectId}`} className="hover:text-slate-300 transition-colors truncate max-w-[120px]">
@@ -346,7 +346,7 @@ export default function FindingDetailPage() {
                        <p className="text-[11px] font-sans text-slate-300">
                           Changed to <span className="font-bold text-slate-200">{log.newValue}</span>
                        </p>
-                       <p className="text-[9px] font-sans text-slate-500 mt-0.5">{timeAgo(log.timestamp)} by {log.userDisplay}</p>
+                       <p className="text-[10px] font-sans text-slate-500 mt-0.5">{timeAgo(log.timestamp)} by {log.userDisplay}</p>
                     </div>
                   </div>
                 ))}
@@ -379,7 +379,7 @@ export default function FindingDetailPage() {
                    </div>
                    <div className="flex-1 min-w-0">
                      <p className="text-xs font-sans font-semibold text-slate-300 truncate group-hover:text-violet-400 transition-colors">{item.name}</p>
-                     <p className="text-[9px] font-sans text-slate-600 mt-1">{format(new Date(item.uploadedAt as any), "MMM d, yyyy")}</p>
+                     <p className="text-[10px] font-sans text-slate-600 mt-1">{format(new Date(item.uploadedAt as any), "MMM d, yyyy")}</p>
                    </div>
                  </a>
                ))}

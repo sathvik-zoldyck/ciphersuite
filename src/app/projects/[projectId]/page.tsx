@@ -167,7 +167,7 @@ function ArcGauge({ score }: { score: number }) {
       </div>
 
       <div className={cn(
-        "mt-1 px-3 py-1 rounded-full border text-[9px] font-sans font-bold tracking-[0.15em] uppercase",
+        "mt-1 px-3 py-1 rounded-full border text-[10px] font-sans font-bold tracking-[0.08em] uppercase",
         score >= 80 ? "bg-red-500/10 border-red-500/25 text-red-400"
         : score >= 60 ? "bg-orange-500/10 border-orange-500/25 text-orange-400"
         : score >= 40 ? "bg-yellow-500/10 border-yellow-500/25 text-yellow-400"
@@ -228,7 +228,7 @@ function MetricCard({ label, value, sub, icon, accentColor, borderColor, bgColor
       <div className="pl-6 pr-5 py-5">
         {/* Top row */}
         <div className="flex items-center justify-between mb-4">
-          <span className={cn("text-[10px] font-sans font-semibold uppercase tracking-[0.15em]", accentColor)}>{label}</span>
+          <span className={cn("text-[10px] font-sans font-semibold uppercase tracking-[0.08em]", accentColor)}>{label}</span>
           <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center", bgColor, borderColor.replace("border-", "border "))}>
             <span className={cn("", accentColor)}>{icon}</span>
           </div>
@@ -288,7 +288,7 @@ function SeverityBars({ findings, isLoading }: { findings: Finding[]; isLoading:
             {/* Label */}
             <div className="w-24 flex items-center gap-2 flex-shrink-0">
               <div className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", cfg.dot)} />
-              <span className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">{sev.slice(0, 4)}</span>
+              <span className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">{sev === "Informational" ? "Info" : sev}</span>
             </div>
 
             {/* Bar track */}
@@ -504,7 +504,7 @@ function SectionLabel({ icon, label, action }: { icon: React.ReactNode; label: s
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-2">
         <span className="text-slate-600">{icon}</span>
-        <span className="text-[10px] font-sans font-semibold text-slate-500 uppercase tracking-[0.15em]">{label}</span>
+        <span className="text-[10px] font-sans font-semibold text-slate-500 uppercase tracking-[0.08em]">{label}</span>
       </div>
       {action}
     </div>
@@ -578,7 +578,7 @@ export default function DashboardPage() {
             <h1 className="text-xl font-bold font-display text-slate-100 tracking-tight">Dashboard</h1>
             {!isLoading && (
               <div className={cn(
-                "flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-sans font-bold uppercase tracking-wider",
+                "flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-sans font-bold uppercase tracking-wider",
                 isActive
                   ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                   : "bg-slate-800 border-slate-700 text-slate-600"
@@ -759,12 +759,12 @@ export default function DashboardPage() {
               label="Engagement"
               action={
                 isActive ? (
-                  <div className="flex items-center gap-1.5 text-[9px] font-sans font-bold uppercase text-emerald-400">
+                  <div className="flex items-center gap-1.5 text-[10px] font-sans font-bold uppercase text-emerald-400">
                     <div className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
                     Active
                   </div>
                 ) : (
-                  <span className="text-[9px] font-sans text-slate-600 uppercase">Closed</span>
+                  <span className="text-[10px] font-sans text-slate-600 uppercase">Closed</span>
                 )
               }
             />

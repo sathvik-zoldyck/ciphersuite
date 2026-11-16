@@ -144,7 +144,7 @@ function NewProjectDrawer({
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="field-label">Project Name <span className="text-red-500">*</span></label>
-              {errors.name && <span className="text-[9px] font-sans text-red-400">{errors.name}</span>}
+              {errors.name && <span className="text-[10px] font-sans text-red-400">{errors.name}</span>}
             </div>
             <input
               value={name}
@@ -183,7 +183,7 @@ function NewProjectDrawer({
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="field-label">Target <span className="text-red-500">*</span></label>
-              {errors.target && <span className="text-[9px] font-sans text-red-400">{errors.target}</span>}
+              {errors.target && <span className="text-[10px] font-sans text-red-400">{errors.target}</span>}
             </div>
             <input
               value={target}
@@ -220,7 +220,7 @@ function NewProjectDrawer({
         </div>
 
         <div className="px-6 py-4 border-t border-slate-800 flex items-center justify-between flex-shrink-0">
-          <span className="text-[9px] font-sans text-slate-700">* Required fields</span>
+          <span className="text-[10px] font-sans text-slate-700">* Required fields</span>
           <div className="flex items-center gap-3">
             <button onClick={onClose} className="btn-secondary h-9 px-4">Cancel</button>
             <button onClick={handleCreate} disabled={saving} className="btn-primary h-9 px-5 gap-2 disabled:opacity-50">
@@ -315,7 +315,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         <div className="flex items-center justify-between">
           <div className={cn(
-            "flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[9px] font-sans font-bold uppercase tracking-wider",
+            "flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[10px] font-sans font-bold uppercase tracking-wider",
             status.bg, status.border, status.text
           )}>
             <span className={cn("w-1 h-1 rounded-full", status.dot,
@@ -326,7 +326,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
           <div className="flex items-center gap-1.5">
             <div className="text-right">
-              <p className="text-[9px] font-sans text-slate-700 uppercase tracking-wider">Risk</p>
+              <p className="text-[10px] font-sans text-slate-700 uppercase tracking-wider">Risk</p>
               <p className={cn("text-sm font-sans font-bold leading-none", {
                 "text-red-400":     (project.riskScore ?? 0) > 70,
                 "text-amber-400":   (project.riskScore ?? 0) > 40,
@@ -340,7 +340,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
 
       <div className="px-5 py-2.5 border-t border-slate-800/60 flex items-center justify-between">
-        <div className="flex items-center gap-3 text-[9px] font-sans text-slate-700">
+        <div className="flex items-center gap-3 text-[10px] font-sans text-slate-700">
           {project.startDate && (
             <span className="flex items-center gap-1">
               <Calendar className="w-2.5 h-2.5" />
@@ -348,7 +348,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </span>
           )}
         </div>
-        <span className="text-[9px] font-sans text-slate-700 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <span className="text-[10px] font-sans text-slate-700 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           Open <ChevronRight className="w-3 h-3" />
         </span>
       </div>
@@ -366,7 +366,7 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
         className="w-full max-w-2xl"
       >
         <div className="text-center mb-10">
-          <p className="text-[10px] font-sans text-violet-500/60 uppercase tracking-[0.2em] mb-3">
+          <p className="text-[10px] font-sans text-violet-500/60 uppercase tracking-[0.08em] mb-3">
             What would you like to do?
           </p>
           <h2 className="text-2xl font-bold font-display text-slate-100">
@@ -400,7 +400,7 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
             </p>
             <div className="flex flex-wrap gap-1.5 mb-5">
               {["Findings", "Evidence", "Reports", "AI Assist"].map((f) => (
-                <span key={f} className="text-[9px] font-sans text-slate-600 bg-slate-800/60 border border-slate-700/40 rounded-full px-2 py-0.5">
+                <span key={f} className="text-[10px] font-sans text-slate-600 bg-slate-800/60 border border-slate-700/40 rounded-full px-2 py-0.5">
                   {f}
                 </span>
               ))}
@@ -436,7 +436,7 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
                 {["bg-red-500","bg-orange-500","bg-yellow-400","bg-emerald-500","bg-blue-500","bg-purple-500","bg-pink-500"].map((c) => (
                   <div key={c} className={cn("w-3.5 h-3.5 rounded-full", c)} />
                 ))}
-                <span className="text-[9px] font-sans text-slate-700 ml-1">9 colors</span>
+                <span className="text-[10px] font-sans text-slate-700 ml-1">9 colors</span>
               </div>
               <div className="flex items-center gap-2 text-[11px] font-sans font-bold text-violet-400 group-hover:gap-3 transition-all">
                 <StickyNote className="w-3.5 h-3.5" />

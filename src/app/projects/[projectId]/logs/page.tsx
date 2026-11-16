@@ -513,7 +513,7 @@ export default function LogsPage() {
               Paste logs below, drag & drop a file, or click to upload
             </p>
             <div className="flex items-center gap-4 mt-5">
-              <span className="text-[10px] font-mono text-slate-700 uppercase tracking-widest">
+              <span className="text-[10px] font-mono text-slate-700 uppercase tracking-wider">
                 Supports .log · .txt · .json · .xml · .csv
               </span>
             </div>
@@ -627,7 +627,7 @@ export default function LogsPage() {
 
         {/* Corner watermark when data is loaded */}
         {!isEmpty && (
-          <div className="absolute bottom-3 right-4 text-[9px] font-mono text-slate-800 select-none pointer-events-none">
+          <div className="absolute bottom-3 right-4 text-[10px] font-mono text-slate-800 select-none pointer-events-none">
             CIPHERSUITE · LOG VIEWER
           </div>
         )}

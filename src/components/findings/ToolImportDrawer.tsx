@@ -160,7 +160,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <h2 className="text-sm font-bold font-display text-slate-100">Import Tool Output</h2>
-              <span className="text-[9px] font-sans font-bold text-violet-500/70 bg-violet-500/10 border border-violet-500/15 px-1.5 py-0.5 rounded uppercase tracking-wider">
+              <span className="text-[10px] font-sans font-bold text-violet-500/70 bg-violet-500/10 border border-violet-500/15 px-1.5 py-0.5 rounded uppercase tracking-wider">
                 AI
               </span>
             </div>
@@ -183,7 +183,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
             <div
               key={i}
               className={cn(
-                "flex-1 py-1.5 text-center text-[9px] font-sans font-bold uppercase tracking-[0.12em] transition-colors border-b-2",
+                "flex-1 py-1.5 text-center text-[10px] font-sans font-bold uppercase tracking-[0.12em] transition-colors border-b-2",
                 step.active && i < 2 && !findings
                   ? "text-violet-400 border-violet-500/50"
                   : findings && i === 2
@@ -273,7 +273,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                         </p>
                         <div className="flex items-center gap-2">
                           {["XML", "JSON", "CSV", "TXT", ".nessus"].map(ext => (
-                            <span key={ext} className="text-[9px] font-sans text-slate-600 bg-slate-800/60 border border-slate-700/40 px-1.5 py-0.5 rounded">
+                            <span key={ext} className="text-[10px] font-sans text-slate-600 bg-slate-800/60 border border-slate-700/40 px-1.5 py-0.5 rounded">
                               {ext}
                             </span>
                           ))}
@@ -326,7 +326,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                   </div>
                   <button
                     onClick={toggleAll}
-                    className="text-[9px] font-sans font-bold text-violet-400 hover:text-violet-300 border border-violet-500/20 bg-violet-500/[0.05] hover:bg-violet-500/10 px-2.5 py-1 rounded transition-colors uppercase tracking-wider"
+                    className="text-[10px] font-sans font-bold text-violet-400 hover:text-violet-300 border border-violet-500/20 bg-violet-500/[0.05] hover:bg-violet-500/10 px-2.5 py-1 rounded transition-colors uppercase tracking-wider"
                   >
                     {selectedIndices.size === findings.length ? "None" : "All"}
                   </button>

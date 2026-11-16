@@ -23,12 +23,12 @@ export function DashboardHeader({ projects, isGuest, onNewProject }: DashboardHe
           <div className="flex items-center gap-2">
             <span className="text-sm font-bold font-display text-slate-100">CipherSuite</span>
             {isGuest && (
-              <span className="text-[9px] font-sans text-amber-500/70 bg-amber-500/10 border border-amber-500/20 rounded-full px-2 py-0.5 uppercase tracking-wider">
+              <span className="text-[10px] font-sans text-amber-500/70 bg-amber-500/10 border border-amber-500/20 rounded-full px-2 py-0.5 uppercase tracking-wider">
                 Guest
               </span>
             )}
           </div>
-          <span className="text-[9px] font-sans text-slate-700">by Alcyone Secure</span>
+          <span className="text-[10px] font-sans text-slate-700">by Alcyone Secure</span>
         </div>
       </div>
 
