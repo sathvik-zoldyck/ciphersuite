@@ -1,12 +1,19 @@
 {
-  "name": "nextn",
-  "version": "0.1.0",
+  "name": "ciphersuite",
+  "version": "1.0.0",
+  "description": "Open-source pentest workspace: findings, evidence, notes, logs and AI-assisted reports in one place.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sathvik-zoldyck/ciphersuite.git"
+  },
+  "homepage": "https://ciphersuite.vercel.app",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
     "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
-    "build": "NODE_ENV=production next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

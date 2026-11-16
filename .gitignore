@@ -14,3 +14,14 @@ out/
 # Firebase
 .firebase/
 firebase-debug.log
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts.bak
+
+# Editors / local tooling
+.vscode/
+.idea/
+.idx/
+.DS_Store
+*.log
