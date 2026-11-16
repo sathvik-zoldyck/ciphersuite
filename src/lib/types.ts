@@ -353,85 +353,8 @@ export const OWASP_CATEGORIES: OwaspCategory[] = [
 // Finding templates
 // ─────────────────────────────────────────────────────────────────────────────
 
-export interface FindingTemplate {
-  title:            string;
-  severity:         FindingSeverity;
-  description:      string;
-  stepsToReproduce: string;
-  impact:           string;
-  remediation:      string;
-  cvss?:            number;
-  cweId?:           string;
-  owaspId?:         string;
-}
-
-export const FINDING_TEMPLATES: Record<string, FindingTemplate> = {
-  "sql-injection": {
-    title: "SQL Injection", severity: "High", cvss: 9.8,
-    cweId: "CWE-89", owaspId: "A03:2021",
-    description: "A SQL injection vulnerability allows an attacker to interfere with the queries an application makes to its database. User-supplied input is interpreted as SQL syntax rather than data, allowing arbitrary query manipulation.",
-    stepsToReproduce: "1. Navigate to the vulnerable endpoint.\n2. Insert a single quote (') into the target parameter — observe a database error or anomalous response.\n3. Submit the payload: ' OR '1'='1\n4. Confirm with a UNION-based or time-based blind payload to enumerate data.",
-    impact: "An attacker can gain unauthorised read access to sensitive database records, modify or delete data, execute administration operations (DROP TABLE, xp_cmdshell), and in some configurations execute OS-level commands on the database host.",
-    remediation: "1. Use parameterised queries (prepared statements) for all database interactions.\n2. Apply strict server-side input validation and allowlist expected formats.\n3. Grant the database account minimum required privileges — no DBA rights.\n4. Deploy a Web Application Firewall (WAF) as a secondary control.\n5. Audit all dynamic query constructions in the codebase.",
-  },
-  "xss-stored": {
-    title: "Stored Cross-Site Scripting (XSS)", severity: "High", cvss: 8.8,
-    cweId: "CWE-79", owaspId: "A03:2021",
-    description: "Stored XSS occurs when an application persists unsanitised user input and later renders it in HTML responses without encoding. The malicious script executes in every victim's browser that views the affected page.",
-    stepsToReproduce: "1. Identify an input field whose value is stored and later rendered in a response.\n2. Submit the payload: <script>alert(document.domain)</script>\n3. Navigate to the page that renders the stored value.\n4. Confirm script execution. Replace alert() with document.cookie exfiltration to demonstrate impact.",
-    impact: "Attackers can execute arbitrary JavaScript in victims' browsers, steal session cookies, capture keystrokes, perform CSRF actions on behalf of victims, and deface the application. Because the payload is stored, every user who views the page is affected without further attacker interaction.",
-    remediation: "1. Apply context-aware output encoding (HTML entity, JavaScript, URL) to all dynamic content.\n2. Validate and sanitize all user-supplied input server-side before storage.\n3. Implement a strict Content Security Policy (CSP) that blocks inline script execution.\n4. Set the HttpOnly and Secure flags on session cookies.",
-  },
-  "xss-reflected": {
-    title: "Reflected Cross-Site Scripting (XSS)", severity: "Medium", cvss: 6.1,
-    cweId: "CWE-79", owaspId: "A03:2021",
-    description: "Reflected XSS occurs when user-supplied input is immediately returned in an HTTP response without proper encoding. Exploitation requires a victim to click a crafted URL containing the malicious payload.",
-    stepsToReproduce: "1. Identify a URL parameter whose value is reflected in the HTML response.\n2. Craft a URL with the payload: ?param=<script>alert(document.domain)</script>\n3. Open the crafted URL in a browser and confirm script execution.\n4. Verify the payload is not encoded in the response source.",
-    impact: "An attacker can hijack the session of any user who clicks the malicious link, perform actions on their behalf, steal credentials, and redirect victims to phishing pages.",
-    remediation: "1. HTML-encode all user-controlled values reflected in responses.\n2. Set the X-XSS-Protection: 1; mode=block header for older browsers.\n3. Implement a Content Security Policy to prevent inline script execution.\n4. Validate that redirect destinations are within the expected domain.",
-  },
-  "broken-access-control": {
-    title: "Insecure Direct Object Reference (IDOR)", severity: "Critical", cvss: 9.1,
-    cweId: "CWE-639", owaspId: "A01:2021",
-    description: "Insecure Direct Object References occur when an application uses a user-controllable value (numeric ID, UUID, filename) to access a resource without verifying the requesting user is authorised to access that specific object.",
-    stepsToReproduce: "1. Authenticate as User A and capture a request containing a resource ID.\n2. Authenticate as User B in a separate session.\n3. Replay User A's request using User B's session token, replacing the ID as needed.\n4. Confirm User B can read, modify, or delete User A's resource.",
-    impact: "Attackers can access, modify, or delete any other user's data by iterating or guessing object references. In severe cases this allows horizontal privilege escalation across all accounts or vertical escalation to admin-owned resources.",
-    remediation: "1. Enforce server-side ownership checks on every resource access.\n2. Use indirect reference maps that map user-specific tokens to internal IDs.\n3. Implement attribute-based access control (ABAC) or RBAC consistently.\n4. Log and alert on access control failures.",
-  },
-  "sensitive-data-exposure": {
-    title: "Sensitive Data Exposure", severity: "High", cvss: 7.5,
-    cweId: "CWE-200", owaspId: "A02:2021",
-    description: "The application exposes sensitive information — credentials, PII, internal configuration, or cryptographic material — to unauthorised parties through insecure transmission, weak encryption, verbose error messages, or excessive API responses.",
-    stepsToReproduce: "1. Intercept API responses and examine all fields returned, including those not rendered in the UI.\n2. Review error responses for stack traces, internal paths, or configuration details.\n3. Check browser DevTools (localStorage, sessionStorage, cookies) for sensitive values.\n4. Confirm sensitive data is transmitted over HTTP or with weak TLS configuration.",
-    impact: "Exposed credentials enable immediate account takeover. PII exposure creates regulatory liability (GDPR, HIPAA). Internal configuration disclosure aids further attacks.",
-    remediation: "1. Encrypt all sensitive data at rest and in transit using TLS 1.2+ with strong cipher suites.\n2. Disable verbose error messages in production; log errors server-side only.\n3. Apply response filtering — return only fields the client is authorised to see.\n4. Audit data flows to ensure sensitive values are not unnecessarily logged or cached.",
-  },
-  "security-misconfiguration": {
-    title: "Security Misconfiguration", severity: "Medium", cvss: 5.3,
-    cweId: "CWE-16", owaspId: "A05:2021",
-    description: "The application stack contains a security misconfiguration — default credentials, enabled debug features, overly permissive CORS policy, unnecessary services, or missing security headers — that increases the attack surface.",
-    stepsToReproduce: "1. Probe the target with default credentials (admin/admin, root/root, etc.).\n2. Inspect response headers for missing security headers (HSTS, CSP, X-Frame-Options).\n3. Check for enabled debug endpoints (/debug, /actuator, /api-docs, /_/info).\n4. Test CORS by sending a request with Origin: https://evil.com and observing the response.",
-    impact: "Depending on the specific misconfiguration, an attacker may gain unauthorised system access, extract sensitive data, perform cross-origin attacks, or use the weakness as a pivot point.",
-    remediation: "1. Implement a repeatable hardening process across all environments.\n2. Disable all unnecessary features, accounts, services, and debug endpoints.\n3. Apply security headers: HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy.\n4. Restrict CORS to known, trusted origins.\n5. Automate configuration scanning in CI/CD pipelines.",
-  },
-  "ssrf": {
-    title: "Server-Side Request Forgery (SSRF)", severity: "High", cvss: 8.6,
-    cweId: "CWE-918", owaspId: "A10:2021",
-    description: "An SSRF vulnerability allows attackers to induce the server-side application to make HTTP requests to an arbitrary domain or IP of their choosing, including internal infrastructure not accessible from the internet.",
-    stepsToReproduce: "1. Identify a parameter that accepts a URL (webhook, image fetch, file import, etc.).\n2. Submit: http://169.254.169.254/latest/meta-data/ (AWS IMDSv1)\n3. Observe whether the server returns internal data in the response.\n4. Attempt internal service discovery: http://localhost:8080, http://10.0.0.1",
-    impact: "Attackers can probe internal services, read cloud metadata endpoints to extract IAM credentials (critical on AWS/GCP/Azure), access internal APIs, and potentially pivot to internal hosts.",
-    remediation: "1. Validate all user-supplied URLs against a strict allowlist of permitted domains.\n2. Block requests to private IP ranges (RFC 1918), loopback, and cloud metadata endpoints.\n3. Disable HTTP redirections or validate the final destination URL after each redirect.\n4. Require IMDSv2 (token-based) on AWS EC2 to mitigate metadata theft.",
-  },
-  "open-redirect": {
-    title: "Open Redirect", severity: "Low", cvss: 4.7,
-    cweId: "CWE-601", owaspId: "A01:2021",
-    description: "The application accepts a user-controlled parameter to specify a redirect destination and does not validate that the destination is within the intended domain, allowing redirection to arbitrary external URLs.",
-    stepsToReproduce: "1. Identify a URL containing a redirect parameter (e.g. ?next=, ?returnUrl=, ?redirect=).\n2. Replace the value with an external URL: ?next=https://evil.com\n3. Follow the link and confirm the browser redirects to the attacker-controlled domain.\n4. Confirm the trusted domain appears in the initial URL (phishing chain intact).",
-    impact: "Attackers can use the trusted domain as a springboard for phishing and credential harvesting. Victims see the legitimate domain before being redirected, lending the attack credibility.",
-    remediation: "1. Avoid using user-controlled parameters for redirect destinations entirely.\n2. If redirects are necessary, validate against a server-side allowlist of permitted destinations.\n3. Reject parameters that contain absolute URLs or protocol-relative URLs (//evil.com).\n4. Show a warning interstitial page when leaving the application domain.",
-  },
-};
-
-export const TEMPLATE_KEYS = Object.keys(FINDING_TEMPLATES);
+// The findings library lives in ./finding-library.ts.
+export { FINDING_TEMPLATES, TEMPLATE_KEYS, severityFromCvss } from "./finding-library";
+export type { FindingTemplate } from "./finding-library";
 
     

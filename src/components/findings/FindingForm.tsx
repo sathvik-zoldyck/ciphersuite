@@ -1,10 +1,10 @@
 
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  X, ChevronDown, Sparkles, LayoutTemplate,
+  X, ChevronDown, Sparkles, LayoutTemplate, Search,
   AlertTriangle, CheckCircle2, ChevronRight, Loader2,
 } from '@/components/icons';
 import { cn } from '@/lib/utils';
@@ -16,6 +16,7 @@ import {
   STATUSES_ORDERED,
   OWASP_CATEGORIES, FINDING_TEMPLATES,
 } from '@/lib/types';
+import { groupedTemplates, TEMPLATE_KEYS } from '@/lib/finding-library';
 import type {
   Finding, FindingFormData,
   FindingSeverity, FindingStatus,
@@ -69,6 +70,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [globalError, setGlobalError] = useState('');
   const [showTemplates, setShowTemplates] = useState(false);
+  const [libraryQuery, setLibraryQuery] = useState('');
   const [activeTab, setActiveTab]     = useState<Tab>('overview');
   const [dirty, setDirty]             = useState(false);
   const [aiLoading, setAiLoading]     = useState<Partial<Record<'draft' | 'impact' | 'remediation', boolean>>>({});
@@ -113,18 +115,33 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
     if (!t) return;
     setForm((prev) => ({
       ...prev,
-      title:       t.title       ?? prev.title,
-      severity:    t.severity    ?? prev.severity,
-      description: t.description ?? prev.description,
-      impact:      t.impact      ?? prev.impact,
-      remediation: t.remediation ?? prev.remediation,
-      cweId:       t.cweId       ?? prev.cweId,
-      owaspId:     t.owaspId     ?? prev.owaspId,
-      cvss:        t.cvss        ?? prev.cvss,
+      title:            t.title            ?? prev.title,
+      severity:         t.severity         ?? prev.severity,
+      description:      t.description      ?? prev.description,
+      stepsToReproduce: t.stepsToReproduce ?? prev.stepsToReproduce,
+      impact:           t.impact           ?? prev.impact,
+      remediation:      t.remediation      ?? prev.remediation,
+      cweId:            t.cweId            ?? prev.cweId,
+      owaspId:          t.owaspId          ?? prev.owaspId,
+      cvss:             t.cvss             ?? prev.cvss,
     }));
     setDirty(true);
     setShowTemplates(false);
+    setLibraryQuery('');
   };
+
+  const libraryGroups = useMemo(() => {
+    const q = libraryQuery.trim().toLowerCase();
+    return groupedTemplates()
+      .map(({ category, items }) => ({
+        category,
+        items: q
+          ? items.filter(([, t]) =>
+              [t.title, t.cweId, t.owaspId, category].some((v) => v?.toLowerCase().includes(q)))
+          : items,
+      }))
+      .filter((g) => g.items.length > 0);
+  }, [libraryQuery]);
 
   // ── Validation ─────────────────────────────────────────────────────────────
   const validate = (): boolean => {
@@ -279,7 +296,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                       )}
                     >
                       <LayoutTemplate className="w-3.5 h-3.5" />
-                      Templates
+                      Findings library
                       <ChevronDown className={cn('w-3 h-3 transition-transform', showTemplates && 'rotate-180')} />
                     </button>
 
@@ -290,26 +307,46 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -6, scale: 0.97 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute right-0 top-full mt-2 w-64 bg-[#0D0F12] border border-slate-700/60 rounded-xl shadow-2xl z-20 overflow-hidden"
+                          className="absolute right-0 top-full mt-2 w-[22rem] bg-[#0D0F12] border border-slate-700/60 rounded-xl shadow-2xl z-20 overflow-hidden"
                         >
-                          <div className="px-3 py-2 border-b border-slate-800">
-                            <span className="text-[10px] font-sans font-bold text-slate-600 uppercase tracking-wider">
-                              Quick Templates
-                            </span>
+                          <div className="p-2 border-b border-slate-800">
+                            <div className="relative">
+                              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
+                              <input
+                                autoFocus
+                                value={libraryQuery}
+                                onChange={(e) => setLibraryQuery(e.target.value)}
+                                placeholder={`Search ${TEMPLATE_KEYS.length} writeups, CWE or OWASP…`}
+                                aria-label="Search the findings library"
+                                className="w-full h-8 pl-8 pr-2 rounded-md bg-slate-900 border border-slate-800 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-violet-500/50"
+                              />
+                            </div>
                           </div>
-                          {Object.entries(FINDING_TEMPLATES).map(([key, t]) => (
-                            <button
-                              key={key}
-                              onClick={() => applyTemplate(key)}
-                              className="w-full flex items-center justify-between gap-3 px-3 py-3 hover:bg-slate-800/60 transition-colors group"
-                            >
-                              <div className="flex items-center gap-2 min-w-0">
-                                <ChevronRight className="w-3 h-3 text-slate-700 group-hover:text-violet-400 flex-shrink-0 transition-colors" />
-                                <span className="text-xs font-sans text-slate-300 truncate">{t.title}</span>
+                          <div className="max-h-80 overflow-y-auto py-1">
+                            {libraryGroups.length === 0 && (
+                              <p className="px-3 py-6 text-center text-xs text-slate-500">No writeups match “{libraryQuery}”.</p>
+                            )}
+                            {libraryGroups.map(({ category, items }) => (
+                              <div key={category}>
+                                <p className="px-3 pt-2.5 pb-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-500">
+                                  {category}
+                                </p>
+                                {items.map(([key, t]) => (
+                                  <button
+                                    key={key}
+                                    onClick={() => applyTemplate(key)}
+                                    className="w-full flex items-center justify-between gap-3 px-3 py-2 text-left hover:bg-slate-800/60 transition-colors"
+                                  >
+                                    <span className="min-w-0">
+                                      <span className="block text-xs text-slate-200 truncate">{t.title}</span>
+                                      <span className="block text-[10px] text-slate-500">{t.cweId} · CVSS {t.cvss?.toFixed(1)}</span>
+                                    </span>
+                                    <SeverityBadge severity={t.severity} size="sm" />
+                                  </button>
+                                ))}
                               </div>
-                              {t.severity && <SeverityBadge severity={t.severity} size="sm" />}
-                            </button>
-                          ))}
+                            ))}
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
