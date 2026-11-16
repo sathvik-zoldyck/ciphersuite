@@ -705,7 +705,7 @@ export default function ReportsPage() {
   const params    = useParams();
   const projectId = params.projectId as string;
 
-  const { user, isGuest, loading: authLoading, getLocalReports, setLocalReports } = useAuth();
+  const { user, isGuest, loading: authLoading, getLocalReports, setLocalReports, getLocalFindings } = useAuth();
   const { project } = useProject(projectId);
 
   // Firestore real-time subscription for authenticated users
@@ -729,19 +729,18 @@ export default function ReportsPage() {
   // Subscribe to findings for stats and report generation
   useEffect(() => {
     if (!projectId || authLoading) return;
-    const q = isGuest ? getLocalReports(projectId) : collection(db, "projects", projectId, "findings");
-    if(isGuest) {
-      // For guest, we can't get findings, so we'll just have an empty array
-      setFindings([]);
+    if (isGuest) {
+      // Guest findings live in localStorage, not Firestore.
+      setFindings(getLocalFindings(projectId));
       return;
     }
 
     const unsub = onSnapshot(
-      q as any, // Cast needed because guest path is different
-      (snap: any) => setFindings(snap.docs.map((d: any) => ({ id: d.id, ...d.data() } as Finding)))
+      collection(db, "projects", projectId, "findings"),
+      (snap) => setFindings(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Finding)))
     );
     return unsub;
-  }, [projectId, isGuest, authLoading, getLocalReports]);
+  }, [projectId, isGuest, authLoading, getLocalFindings]);
 
   const handleDelete = async (id: string) => {
     const reportToDelete = reports.find((r) => r.id === id);
