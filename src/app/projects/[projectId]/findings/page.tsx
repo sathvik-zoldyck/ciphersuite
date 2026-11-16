@@ -6,10 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Plus, Shield, AlertTriangle, Loader2,
   SortAsc, SortDesc, Bug, Upload,
-  Filter, LayoutGrid, List,
+  Filter, LayoutGrid, List, Download, ChevronDown,
 } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { useFindings } from "@/hooks/use-findings";
+import { useProject } from "@/hooks/use-project";
+import { downloadText, exportFileStem, findingsToCsv, findingsToJson } from "@/lib/export-findings";
 import { FindingCard }    from "@/components/findings/FindingCard";
 import { FindingForm }    from "@/components/findings/FindingForm";
 import { FindingFilters } from "@/components/findings/FindingFilters";
@@ -147,6 +149,16 @@ export default function FindingsPage() {
 
   const [formOpen,    setFormOpen]    = useState(false);
   const [importOpen,  setImportOpen]  = useState(false);
+  const [exportOpen,  setExportOpen]  = useState(false);
+  const { project } = useProject(projectId);
+
+  const exportAs = (format: "csv" | "json") => {
+    const name = project?.name ?? "project";
+    const stem = exportFileStem(name);
+    if (format === "csv") downloadText(`${stem}.csv`, findingsToCsv(findings), "text/csv;charset=utf-8");
+    else downloadText(`${stem}.json`, findingsToJson(name, findings), "application/json");
+    setExportOpen(false);
+  };
   const [editTarget,  setEditTarget]  = useState<Finding | null>(null);
   const [viewMode,    setViewMode]    = useState<"grouped" | "list">("grouped");
 
@@ -246,6 +258,33 @@ export default function FindingsPage() {
               <Upload className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Import</span>
             </button>
+
+            {/* Export */}
+            <div className="relative">
+              <button
+                onClick={() => setExportOpen((o) => !o)}
+                disabled={findings.length === 0}
+                aria-haspopup="menu"
+                aria-expanded={exportOpen}
+                className="btn-secondary h-9 px-4 gap-2"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Export</span>
+                <ChevronDown className="w-3 h-3" />
+              </button>
+              {exportOpen && (
+                <div role="menu" className="absolute right-0 top-full z-20 mt-2 w-56 overflow-hidden rounded-xl border border-slate-700/60 bg-[#0D0F12] py-1 shadow-2xl">
+                  <button role="menuitem" onClick={() => exportAs("csv")} className="w-full px-3 py-2 text-left hover:bg-slate-800/60">
+                    <span className="block text-xs text-slate-200">CSV spreadsheet</span>
+                    <span className="block text-[11px] text-slate-500">Excel, Sheets, Jira or Linear import</span>
+                  </button>
+                  <button role="menuitem" onClick={() => exportAs("json")} className="w-full px-3 py-2 text-left hover:bg-slate-800/60">
+                    <span className="block text-xs text-slate-200">JSON</span>
+                    <span className="block text-[11px] text-slate-500">Backup or other tools</span>
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* Add finding */}
             <button onClick={openCreate} className="btn-primary h-9 px-4 gap-2">
