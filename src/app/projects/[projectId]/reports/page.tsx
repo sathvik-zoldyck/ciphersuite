@@ -131,11 +131,11 @@ function StatCard({ icon, title, value, color, index }: {
     >
       <div className={cn("flex items-center gap-2 mb-1.5", color)}>
         {icon}
-        <span className="text-[9px] font-mono font-bold uppercase tracking-[0.12em] text-slate-600">
+        <span className="text-[9px] font-sans font-bold uppercase tracking-[0.12em] text-slate-600">
           {title}
         </span>
       </div>
-      <p className="text-2xl font-mono font-bold text-slate-100">{value}</p>
+      <p className="text-2xl font-sans font-bold text-slate-100">{value}</p>
     </motion.div>
   );
 }
@@ -237,20 +237,20 @@ function ReportCard({ report, onView, onDelete }: {
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <p className="text-sm font-mono font-semibold text-slate-200 truncate">{report.title}</p>
+            <p className="text-sm font-sans font-semibold text-slate-200 truncate">{report.title}</p>
             {report.status === "ready" && (
-              <span className="flex items-center gap-1 text-[9px] font-mono font-bold text-emerald-500 uppercase tracking-wider">
+              <span className="flex items-center gap-1 text-[9px] font-sans font-bold text-emerald-500 uppercase tracking-wider">
                 <CheckCircle2 className="w-2.5 h-2.5" /> Ready
               </span>
             )}
             {report.status === "generating" && (
-              <span className="text-[9px] font-mono text-slate-600 uppercase tracking-wider">Generating…</span>
+              <span className="text-[9px] font-sans text-slate-600 uppercase tracking-wider">Generating…</span>
             )}
             {report.status === "failed" && (
-              <span className="text-[9px] font-mono text-red-500 uppercase tracking-wider">Failed</span>
+              <span className="text-[9px] font-sans text-red-500 uppercase tracking-wider">Failed</span>
             )}
           </div>
-          <div className="flex items-center gap-3 text-[10px] font-mono text-slate-600 flex-wrap">
+          <div className="flex items-center gap-3 text-[10px] font-sans text-slate-600 flex-wrap">
             <span>{tmpl?.label}</span>
             <span>·</span>
             <span>{report.findingCount} finding{report.findingCount !== 1 ? "s" : ""}</span>
@@ -303,7 +303,7 @@ function ReportCard({ report, onView, onDelete }: {
       {/* Error message */}
       {report.status === "failed" && report.error && (
         <div className="px-5 pb-4">
-          <p className="text-[10px] font-mono text-red-400/70 bg-red-500/5 rounded-lg px-3 py-2 border border-red-500/15">
+          <p className="text-[10px] font-sans text-red-400/70 bg-red-500/5 rounded-lg px-3 py-2 border border-red-500/15">
             {report.error}
           </p>
         </div>
@@ -344,8 +344,8 @@ function ReportViewer({ report, onClose }: { report: Report; onClose: () => void
       >
         <div className="flex items-center gap-4 px-6 py-4 border-b border-slate-800 flex-shrink-0">
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-mono font-semibold text-slate-200 truncate">{report.title}</p>
-            <p className="text-[10px] font-mono text-slate-600 mt-0.5">
+            <p className="text-sm font-sans font-semibold text-slate-200 truncate">{report.title}</p>
+            <p className="text-[10px] font-sans text-slate-600 mt-0.5">
               {TEMPLATES.find((t) => t.id === report.template)?.label} · Markdown
             </p>
           </div>
@@ -363,7 +363,7 @@ function ReportViewer({ report, onClose }: { report: Report; onClose: () => void
           </div>
         </div>
         <div className="flex-1 overflow-y-auto scrollbar-thin px-6 py-6">
-          <pre className="whitespace-pre-wrap font-mono text-[12px] text-slate-300 leading-relaxed">
+          <pre className="whitespace-pre-wrap font-sans text-[12px] text-slate-300 leading-relaxed">
             {report.content}
           </pre>
         </div>
@@ -512,8 +512,8 @@ function NewReportDrawer({
             <FileBarChart2 className="w-4 h-4 text-cyan-400" />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-mono font-bold text-slate-100">New Report</p>
-            <p className="text-[10px] font-mono text-slate-600">
+            <p className="text-sm font-sans font-bold text-slate-100">New Report</p>
+            <p className="text-[10px] font-sans text-slate-600">
               Step {step} of 2 — {step === 1 ? "Template" : "Details & Sections"}
             </p>
           </div>
@@ -554,8 +554,8 @@ function NewReportDrawer({
                           template === t.id ? `bg-slate-900 border-slate-700 ${t.color}` : "bg-slate-900 border-slate-800 text-slate-700"
                         )}>{t.icon}</div>
                         <div className="flex-1 min-w-0">
-                          <p className={cn("text-xs font-mono font-semibold", template === t.id ? "text-slate-100" : "text-slate-400")}>{t.label}</p>
-                          <p className="text-[10px] font-mono text-slate-600 mt-0.5">{t.desc}</p>
+                          <p className={cn("text-xs font-sans font-semibold", template === t.id ? "text-slate-100" : "text-slate-400")}>{t.label}</p>
+                          <p className="text-[10px] font-sans text-slate-600 mt-0.5">{t.desc}</p>
                         </div>
                         <div className={cn("w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0", template === t.id ? "bg-cyan-500 border-cyan-500" : "border-slate-700")}>
                           {template === t.id && <Check className="w-2.5 h-2.5 text-black" />}
@@ -580,7 +580,7 @@ function NewReportDrawer({
                           )}
                         >
                           <FileText className={cn("w-4 h-4", format === f ? "text-cyan-400" : "text-slate-700")} />
-                          <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase">{f}</span>
+                          <span className="text-[10px] font-sans font-semibold text-slate-400 uppercase">{f}</span>
                         </button>
                       );
                     })}
@@ -621,7 +621,7 @@ function NewReportDrawer({
                           )}
                         >
                           <Hash className="w-2.5 h-2.5 flex-shrink-0" />
-                          <span className="text-[9px] font-mono font-bold uppercase tracking-wider truncate">{c.value}</span>
+                          <span className="text-[9px] font-sans font-bold uppercase tracking-wider truncate">{c.value}</span>
                         </button>
                       ))}
                     </div>
@@ -632,7 +632,7 @@ function NewReportDrawer({
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <p className="section-label">Sections</p>
-                    <span className="text-[10px] font-mono text-slate-600">{enabledSections.length} selected</span>
+                    <span className="text-[10px] font-sans text-slate-600">{enabledSections.length} selected</span>
                   </div>
                   <div className="space-y-1">
                     {sections.map((s) => (
@@ -648,8 +648,8 @@ function NewReportDrawer({
                           {s.enabled && <Check className="w-2.5 h-2.5 text-cyan-400" />}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className={cn("text-xs font-mono", s.enabled ? "text-slate-200" : "text-slate-600")}>{s.label}</p>
-                          <p className="text-[10px] font-mono text-slate-700">{s.desc}</p>
+                          <p className={cn("text-xs font-sans", s.enabled ? "text-slate-200" : "text-slate-600")}>{s.label}</p>
+                          <p className="text-[10px] font-sans text-slate-700">{s.desc}</p>
                         </div>
                       </button>
                     ))}
@@ -659,7 +659,7 @@ function NewReportDrawer({
                 {/* Findings count pill */}
                 <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/60 border border-slate-800/60">
                   <BarChart3 className="w-4 h-4 text-slate-600 flex-shrink-0" />
-                  <p className="text-[11px] font-mono text-slate-500">
+                  <p className="text-[11px] font-sans text-slate-500">
                     <span className="text-slate-300 font-semibold">{findings.length}</span>{" "}
                     finding{findings.length !== 1 ? "s" : ""} will be included
                   </p>
@@ -790,7 +790,7 @@ export default function ReportsPage() {
       <div className="flex items-start justify-between gap-4 flex-shrink-0">
         <div>
           <h1 className="page-title">Reports</h1>
-          <p className="text-[11px] font-mono text-slate-600 mt-0.5">
+          <p className="text-[11px] font-sans text-slate-600 mt-0.5">
             AI-generated professional reports from your findings
           </p>
         </div>
@@ -811,7 +811,7 @@ export default function ReportsPage() {
       {/* ── Severity breakdown ───────────────────────────────────────── */}
       {findings.length > 0 && (
         <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-800/40 bg-[#0D0F12]/60 flex-shrink-0 flex-wrap">
-          <span className="text-[9px] font-mono text-slate-700 uppercase tracking-widest">Finding Breakdown</span>
+          <span className="text-[9px] font-sans text-slate-700 uppercase tracking-widest">Finding Breakdown</span>
           {(["Critical","High","Medium","Low","Informational"] as FindingSeverity[])
             .filter((s) => (sevCounts[s] ?? 0) > 0)
             .map((s) => {
@@ -823,7 +823,7 @@ export default function ReportsPage() {
                 Informational: "text-slate-400 bg-slate-500/10 border-slate-500/20",
               };
               return (
-                <div key={s} className={cn("flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[10px] font-mono font-bold", colors[s])}>
+                <div key={s} className={cn("flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[10px] font-sans font-bold", colors[s])}>
                   <span>{sevCounts[s]}</span>
                   <span className="opacity-70">{s}</span>
                 </div>
@@ -844,7 +844,7 @@ export default function ReportsPage() {
               <FileBarChart2 className="w-7 h-7 text-slate-700" />
             </div>
             <h3 className="text-base font-bold font-display text-slate-300 mb-2">No Reports Yet</h3>
-            <p className="text-sm font-mono text-slate-600 max-w-xs mb-6 leading-relaxed">
+            <p className="text-sm font-sans text-slate-600 max-w-xs mb-6 leading-relaxed">
               Generate a professional report from your findings. AI will compile everything into a structured, client-ready document.
             </p>
             <button onClick={() => setDrawerOpen(true)} className="btn-primary h-9 px-5 gap-2">
@@ -852,7 +852,7 @@ export default function ReportsPage() {
               Generate First Report
             </button>
             {findings.length === 0 && (
-              <p className="text-[10px] font-mono text-amber-500/50 mt-4 flex items-center gap-1.5">
+              <p className="text-[10px] font-sans text-amber-500/50 mt-4 flex items-center gap-1.5">
                 <AlertTriangle className="w-3 h-3" />
                 Add findings first to generate a meaningful report.
               </p>
@@ -872,7 +872,7 @@ export default function ReportsPage() {
       {/* ── Footer ───────────────────────────────────────────────────── */}
       <div className="flex items-center justify-center gap-1.5 flex-shrink-0 pb-1">
         <Building2 className="w-2.5 h-2.5 text-slate-800" />
-        <span className="text-[9px] font-mono text-slate-800">
+        <span className="text-[9px] font-sans text-slate-800">
           Reports generated by CipherSuite — Alcyone Secure
         </span>
       </div>

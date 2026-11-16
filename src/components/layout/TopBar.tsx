@@ -52,7 +52,7 @@ export default function AppHeader() {
 
       <SidebarTrigger className="md:hidden -ml-1 text-slate-600 hover:text-slate-300 transition-colors" />
 
-      <nav className="hidden md:flex items-center gap-1.5 text-[12px] font-mono min-w-0 flex-1">
+      <nav className="hidden md:flex items-center gap-1.5 text-[12px] font-sans min-w-0 flex-1">
         <Link href="/" className="text-slate-600 hover:text-slate-300 transition-colors shrink-0">
           Workspaces
         </Link>
@@ -90,7 +90,7 @@ export default function AppHeader() {
             className={cn(
               "h-[30px] w-36 lg:w-52 pl-7 pr-3",
               "bg-white/[0.03] border border-slate-800/80 rounded-md",
-              "font-mono text-[12px] text-slate-300 placeholder:text-slate-700",
+              "font-sans text-[12px] text-slate-300 placeholder:text-slate-700",
               "outline-none transition-all duration-150",
               "focus:bg-white/[0.05] focus:border-slate-700 focus:w-44 lg:focus:w-60",
             )}

@@ -160,11 +160,11 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <h2 className="text-sm font-bold font-display text-slate-100">Import Tool Output</h2>
-              <span className="text-[9px] font-mono font-bold text-cyan-500/70 bg-cyan-500/10 border border-cyan-500/15 px-1.5 py-0.5 rounded uppercase tracking-wider">
+              <span className="text-[9px] font-sans font-bold text-cyan-500/70 bg-cyan-500/10 border border-cyan-500/15 px-1.5 py-0.5 rounded uppercase tracking-wider">
                 AI
               </span>
             </div>
-            <p className="text-[10px] font-mono text-slate-600 mt-0.5">
+            <p className="text-[10px] font-sans text-slate-600 mt-0.5">
               Parse Nmap · Nessus · Burp Suite scans into structured findings
             </p>
           </div>
@@ -183,7 +183,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
             <div
               key={i}
               className={cn(
-                "flex-1 py-1.5 text-center text-[9px] font-mono font-bold uppercase tracking-[0.12em] transition-colors border-b-2",
+                "flex-1 py-1.5 text-center text-[9px] font-sans font-bold uppercase tracking-[0.12em] transition-colors border-b-2",
                 step.active && i < 2 && !findings
                   ? "text-cyan-400 border-cyan-500/50"
                   : findings && i === 2
@@ -256,10 +256,10 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                         <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/25 flex items-center justify-center mb-3">
                           <CheckCircle2 className="w-5 h-5 text-cyan-400" />
                         </div>
-                        <p className="text-sm font-mono font-bold text-cyan-300 max-w-[260px] truncate px-4 text-center">
+                        <p className="text-sm font-sans font-bold text-cyan-300 max-w-[260px] truncate px-4 text-center">
                           {file.name}
                         </p>
-                        <p className="text-[10px] font-mono text-cyan-500/50 mt-1 uppercase tracking-wider">
+                        <p className="text-[10px] font-sans text-cyan-500/50 mt-1 uppercase tracking-wider">
                           {(file.size / 1024).toFixed(1)} KB · Click to change
                         </p>
                       </>
@@ -268,12 +268,12 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                         <div className="w-11 h-11 rounded-xl bg-slate-800/80 flex items-center justify-center mb-3">
                           <Upload className="w-5 h-5 text-slate-500" />
                         </div>
-                        <p className="text-sm font-mono font-semibold text-slate-400 mb-2">
+                        <p className="text-sm font-sans font-semibold text-slate-400 mb-2">
                           {isDragging ? "Drop it!" : "Drop file or click to browse"}
                         </p>
                         <div className="flex items-center gap-2">
                           {["XML", "JSON", "CSV", "TXT", ".nessus"].map(ext => (
-                            <span key={ext} className="text-[9px] font-mono text-slate-600 bg-slate-800/60 border border-slate-700/40 px-1.5 py-0.5 rounded">
+                            <span key={ext} className="text-[9px] font-sans text-slate-600 bg-slate-800/60 border border-slate-700/40 px-1.5 py-0.5 rounded">
                               {ext}
                             </span>
                           ))}
@@ -287,7 +287,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                 {tool === "Burp Suite" && (
                   <div className="flex items-start gap-2.5 px-3.5 py-3 rounded-xl bg-amber-500/[0.06] border border-amber-500/15">
                     <AlertTriangle className="w-3.5 h-3.5 text-amber-500/70 flex-shrink-0 mt-0.5" />
-                    <p className="text-[10px] font-mono text-amber-500/60 leading-relaxed">
+                    <p className="text-[10px] font-sans text-amber-500/60 leading-relaxed">
                       Export from Burp Suite: Target → Issues → Right-click → Report issues → XML format.
                     </p>
                   </div>
@@ -295,7 +295,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                 {tool === "Nessus" && (
                   <div className="flex items-start gap-2.5 px-3.5 py-3 rounded-xl bg-amber-500/[0.06] border border-amber-500/15">
                     <AlertTriangle className="w-3.5 h-3.5 text-amber-500/70 flex-shrink-0 mt-0.5" />
-                    <p className="text-[10px] font-mono text-amber-500/60 leading-relaxed">
+                    <p className="text-[10px] font-sans text-amber-500/60 leading-relaxed">
                       Export from Nessus: Scan → Export → Nessus format (.nessus XML).
                     </p>
                   </div>
@@ -317,16 +317,16 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                 <div className="flex items-center justify-between sticky top-0 bg-[#0A0B0D] py-2 z-10">
                   <div className="flex items-center gap-2">
                     <ShieldAlert className="w-3.5 h-3.5 text-cyan-400" />
-                    <span className="text-[11px] font-mono font-bold text-slate-300">
+                    <span className="text-[11px] font-sans font-bold text-slate-300">
                       {findings.length} issue{findings.length !== 1 ? "s" : ""} found
                     </span>
-                    <span className="text-[10px] font-mono text-slate-600">
+                    <span className="text-[10px] font-sans text-slate-600">
                       · {selectedIndices.size} selected
                     </span>
                   </div>
                   <button
                     onClick={toggleAll}
-                    className="text-[9px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 bg-cyan-500/[0.05] hover:bg-cyan-500/10 px-2.5 py-1 rounded transition-colors uppercase tracking-wider"
+                    className="text-[9px] font-sans font-bold text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 bg-cyan-500/[0.05] hover:bg-cyan-500/10 px-2.5 py-1 rounded transition-colors uppercase tracking-wider"
                   >
                     {selectedIndices.size === findings.length ? "None" : "All"}
                   </button>
@@ -336,8 +336,8 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                 {findings.length === 0 && (
                   <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-slate-800 rounded-xl">
                     <CheckCircle2 className="w-8 h-8 text-slate-700 mb-3" />
-                    <p className="text-sm font-mono text-slate-500">No significant issues detected.</p>
-                    <p className="text-[10px] font-mono text-slate-700 mt-1">Try a different file or tool type.</p>
+                    <p className="text-sm font-sans text-slate-500">No significant issues detected.</p>
+                    <p className="text-[10px] font-sans text-slate-700 mt-1">Try a different file or tool type.</p>
                   </div>
                 )}
 
@@ -382,7 +382,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                               {f.title}
                             </h4>
                             <span className={cn(
-                              "flex-shrink-0 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold tracking-wider uppercase border",
+                              "flex-shrink-0 px-1.5 py-0.5 rounded text-[8px] font-sans font-bold tracking-wider uppercase border",
                               SEV[f.severity] ?? SEV.Informational
                             )}>
                               {f.severity}
@@ -390,7 +390,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                           </div>
 
                           {/* Meta row */}
-                          <div className="flex items-center gap-3 mb-1.5 text-[10px] font-mono text-slate-600">
+                          <div className="flex items-center gap-3 mb-1.5 text-[10px] font-sans text-slate-600">
                             {f.target && (
                               <span className="truncate max-w-[160px]">
                                 <span className="text-slate-700">→ </span>{f.target}
@@ -409,7 +409,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                             {f.cweId && <span>{f.cweId}</span>}
                           </div>
 
-                          <p className="text-[11px] font-mono text-slate-500 leading-relaxed line-clamp-2">
+                          <p className="text-[11px] font-sans text-slate-500 leading-relaxed line-clamp-2">
                             {f.description}
                           </p>
                         </div>
@@ -433,7 +433,7 @@ export function ToolImportDrawer({ onClose, onImport }: Props) {
                 onClick={handleProcess}
                 disabled={!file || isProcessing}
                 className={cn(
-                  "flex-1 h-9 rounded-lg font-mono font-bold text-[11px] flex items-center justify-center gap-2 transition-all",
+                  "flex-1 h-9 rounded-lg font-sans font-bold text-[11px] flex items-center justify-center gap-2 transition-all",
                   file && !isProcessing
                     ? "bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg shadow-cyan-500/20"
                     : "bg-slate-800/60 text-slate-600 cursor-not-allowed"
@@ -487,7 +487,7 @@ function ToolButton({
       className={cn(
         "flex items-center gap-2 rounded-xl border text-left transition-all duration-150",
         compact ? "px-3 py-2 justify-center text-[10px]" : "px-3 py-2.5 text-[11px]",
-        "font-mono",
+        "font-sans",
         selected
           ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.08)]"
           : "bg-[#0D0F12] border-slate-800/60 text-slate-500 hover:border-slate-700 hover:text-slate-300"

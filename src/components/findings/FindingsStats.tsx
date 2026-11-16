@@ -73,7 +73,7 @@ export function FindingsStats({ riskScore, severityCounts, statusCounts }: Findi
         <div className="space-y-1.5 mt-2">
           {severityOrder.map(sev => (
             <div key={sev} className="flex items-center gap-2">
-              <span className="text-[9px] font-mono text-slate-500 w-12">{sev.slice(0,4)}</span>
+              <span className="text-[9px] font-sans text-slate-500 w-12">{sev.slice(0,4)}</span>
               <div className="flex-1 bg-slate-800/50 rounded-full h-1">
                   <motion.div 
                     className={cn("h-1 rounded-full", SEVERITY_CONFIG[sev].dot)}
@@ -82,7 +82,7 @@ export function FindingsStats({ riskScore, severityCounts, statusCounts }: Findi
                     transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
                   />
               </div>
-              <span className="text-xs font-mono text-slate-400 w-4 text-right">{severityCounts[sev] || 0}</span>
+              <span className="text-xs font-sans text-slate-400 w-4 text-right">{severityCounts[sev] || 0}</span>
             </div>
           ))}
         </div>
@@ -95,7 +95,7 @@ export function FindingsStats({ riskScore, severityCounts, statusCounts }: Findi
         footer='Total Findings'
         index={2}
       >
-        <div className="space-y-1 mt-2 text-xs font-mono">
+        <div className="space-y-1 mt-2 text-xs font-sans">
             {STATUSES_ORDERED.map(status => (
               <div key={status} className="flex justify-between items-center">
                 <span className="text-slate-500">{status}</span>
@@ -132,13 +132,13 @@ function StatCard({ icon, title, value, footer, suffix, index, children }: { ico
         <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center bg-slate-800/50 rounded-lg">
           {icon}
         </div>
-        <h3 className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">{title}</h3>
+        <h3 className="text-[10px] font-sans text-slate-500 uppercase tracking-widest">{title}</h3>
       </div>
       <div className="flex items-baseline gap-1.5 mt-3">
-        <p className="text-3xl font-bold font-mono text-slate-100">{value.toFixed(0)}</p>
-        {suffix && <span className="text-lg font-mono text-slate-600 -ml-1">{suffix}</span>}
+        <p className="text-3xl font-bold font-sans text-slate-100">{value.toFixed(0)}</p>
+        {suffix && <span className="text-lg font-sans text-slate-600 -ml-1">{suffix}</span>}
       </div>
-       {footer && <p className="text-[10px] font-mono text-slate-600 mt-1 h-4">{footer}</p>}
+       {footer && <p className="text-[10px] font-sans text-slate-600 mt-1 h-4">{footer}</p>}
       <div className="flex-grow flex flex-col justify-end">
         {children}
       </div>

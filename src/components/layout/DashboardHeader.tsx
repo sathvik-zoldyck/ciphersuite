@@ -23,12 +23,12 @@ export function DashboardHeader({ projects, isGuest, onNewProject }: DashboardHe
           <div className="flex items-center gap-2">
             <span className="text-sm font-bold font-display text-slate-100">CipherSuite</span>
             {isGuest && (
-              <span className="text-[9px] font-mono text-amber-500/70 bg-amber-500/10 border border-amber-500/20 rounded-full px-2 py-0.5 uppercase tracking-wider">
+              <span className="text-[9px] font-sans text-amber-500/70 bg-amber-500/10 border border-amber-500/20 rounded-full px-2 py-0.5 uppercase tracking-wider">
                 Guest
               </span>
             )}
           </div>
-          <span className="text-[9px] font-mono text-slate-700">by Alcyone Secure</span>
+          <span className="text-[9px] font-sans text-slate-700">by Alcyone Secure</span>
         </div>
       </div>
 
@@ -39,7 +39,7 @@ export function DashboardHeader({ projects, isGuest, onNewProject }: DashboardHe
               <button className={cn(
                 "flex items-center gap-2 h-8 px-3 rounded-lg border transition-colors",
                 "border-slate-800 bg-transparent text-slate-500 hover:text-violet-400 hover:border-violet-500/30 hover:bg-violet-500/[0.04]",
-                "text-[11px] font-mono"
+                "text-[11px] font-sans"
               )}>
                 <StickyNote className="w-3.5 h-3.5" />
                 Notes

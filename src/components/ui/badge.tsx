@@ -8,7 +8,7 @@ const badgeVariants = cva(
   [
     "inline-flex items-center gap-1 rounded-md border",
     "px-2 py-0.5",
-    "text-[10px] font-mono font-bold uppercase tracking-wider",
+    "text-[10px] font-sans font-bold uppercase tracking-wider",
     "transition-colors duration-150",
     "focus:outline-none focus:ring-1 focus:ring-ring",
     "select-none",

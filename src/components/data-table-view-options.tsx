@@ -54,7 +54,7 @@ export function DataTableViewOptions<TData>({
         aria-label="Toggle column visibility"
         className={cn(
           "flex items-center gap-2 h-8 px-3 rounded-lg",
-          "border text-[11px] font-mono font-semibold transition-all duration-150",
+          "border text-[11px] font-sans font-semibold transition-all duration-150",
           open
             ? "bg-slate-800 border-slate-600 text-slate-200"
             : "bg-[#0D0F12] border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300",
@@ -87,14 +87,14 @@ export function DataTableViewOptions<TData>({
             >
               {/* Header */}
               <div className="flex items-center justify-between px-3 py-2.5 border-b border-slate-800/80">
-                <span className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-[0.15em]">
+                <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-[0.15em]">
                   Columns
                 </span>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => table.toggleAllColumnsVisible(true)}
                     disabled={allVisible}
-                    className="text-[9px] font-mono text-slate-700 hover:text-cyan-400 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+                    className="text-[9px] font-sans text-slate-700 hover:text-cyan-400 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                   >
                     All
                   </button>
@@ -102,7 +102,7 @@ export function DataTableViewOptions<TData>({
                   <button
                     onClick={() => table.toggleAllColumnsVisible(false)}
                     disabled={noneVisible}
-                    className="text-[9px] font-mono text-slate-700 hover:text-red-400 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+                    className="text-[9px] font-sans text-slate-700 hover:text-red-400 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                   >
                     None
                   </button>
@@ -112,7 +112,7 @@ export function DataTableViewOptions<TData>({
               {/* Column rows */}
               <div className="py-1 max-h-72 overflow-y-auto scrollbar-thin">
                 {toggleable.length === 0 ? (
-                  <p className="px-3 py-4 text-[10px] font-mono text-slate-700 text-center">
+                  <p className="px-3 py-4 text-[10px] font-sans text-slate-700 text-center">
                     No toggleable columns
                   </p>
                 ) : (
@@ -125,7 +125,7 @@ export function DataTableViewOptions<TData>({
                         key={col.id}
                         onClick={() => col.toggleVisibility(!visible)}
                         className={cn(
-                          "w-full flex items-center gap-3 px-3 py-2 text-xs font-mono text-left transition-colors",
+                          "w-full flex items-center gap-3 px-3 py-2 text-xs font-sans text-left transition-colors",
                           visible
                             ? "text-slate-300 hover:bg-slate-800/60"
                             : "text-slate-600 hover:bg-slate-800/40",
@@ -153,7 +153,7 @@ export function DataTableViewOptions<TData>({
 
               {/* Footer */}
               <div className="px-3 py-2 border-t border-slate-800/80">
-                <span className="text-[9px] font-mono text-slate-700">
+                <span className="text-[9px] font-sans text-slate-700">
                   {visibleCount} of {toggleable.length} visible
                 </span>
               </div>

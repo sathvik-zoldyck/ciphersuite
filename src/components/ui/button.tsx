@@ -8,7 +8,7 @@ const buttonVariants = cva(
   // Base
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "font-mono font-semibold transition-all duration-150",
+    "font-sans font-semibold transition-all duration-150",
     "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50",
     "disabled:pointer-events-none disabled:opacity-40",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",

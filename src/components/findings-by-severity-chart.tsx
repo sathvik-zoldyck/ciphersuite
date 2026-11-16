@@ -41,9 +41,9 @@ function CustomTooltip({ active, payload, label }: TooltipProps<number, string>)
     <div className="bg-[#0A0B0D] border border-slate-800 rounded-xl px-3 py-2.5 shadow-2xl shadow-black/60">
       <div className="flex items-center gap-2">
         <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: fill }} />
-        <span className="text-[11px] font-mono font-semibold text-slate-200">{severity}</span>
+        <span className="text-[11px] font-sans font-semibold text-slate-200">{severity}</span>
       </div>
-      <p className="text-[10px] font-mono text-slate-500 mt-0.5">
+      <p className="text-[10px] font-sans text-slate-500 mt-0.5">
         <span className="text-slate-200 font-bold text-sm">{count}</span>{" "}
         finding{count !== 1 ? "s" : ""}
       </p>
@@ -68,7 +68,7 @@ export default function FindingsBySeverityChart({
   if (!hasData) {
     return (
       <div className="flex items-center justify-center h-[200px]">
-        <p className="text-[11px] font-mono text-slate-700">No findings to display</p>
+        <p className="text-[11px] font-sans text-slate-700">No findings to display</p>
       </div>
     );
   }

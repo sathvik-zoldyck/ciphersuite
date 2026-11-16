@@ -32,14 +32,14 @@ export function UserNav() {
         )}>
           <span className={cn(
             "flex items-center justify-center w-5 h-5 rounded-[5px]",
-            "text-[10px] font-mono font-bold",
+            "text-[10px] font-sans font-bold",
             isGuest
               ? "bg-slate-800 text-slate-500 border border-slate-700/60"
               : "bg-cyan-500/15 text-cyan-400 border border-cyan-500/20",
           )}>
             {avatarLabel}
           </span>
-          <span className="hidden lg:block text-[12px] font-mono max-w-[120px] truncate">
+          <span className="hidden lg:block text-[12px] font-sans max-w-[120px] truncate">
             {displayName}
           </span>
         </button>
@@ -56,25 +56,25 @@ export function UserNav() {
         )}
       >
         <div className="px-2.5 py-2 mb-0.5">
-          <p className="text-[9px] font-mono font-semibold text-slate-700 uppercase tracking-[0.18em] mb-1">
+          <p className="text-[9px] font-sans font-semibold text-slate-700 uppercase tracking-[0.18em] mb-1">
             Account
           </p>
           <div className="flex items-center gap-2">
             <span className={cn(
               "flex items-center justify-center w-6 h-6 rounded-[6px] flex-shrink-0",
-              "text-[11px] font-mono font-bold",
+              "text-[11px] font-sans font-bold",
               isGuest
                 ? "bg-slate-800 text-slate-500 border border-slate-700/60"
                 : "bg-cyan-500/15 text-cyan-400 border border-cyan-500/20",
             )}>
               {avatarLabel}
             </span>
-            <p className="text-[12px] font-mono text-slate-300 truncate">
+            <p className="text-[12px] font-sans text-slate-300 truncate">
               {isGuest ? "Guest Mode" : (user?.email ?? "User")}
             </p>
           </div>
           {isGuest && (
-            <p className="text-[10px] font-mono text-amber-500/50 mt-1.5">
+            <p className="text-[10px] font-sans text-amber-500/50 mt-1.5">
               Local data only — not synced
             </p>
           )}
@@ -86,7 +86,7 @@ export function UserNav() {
           onClick={() => void logout()}
           className={cn(
             "flex items-center gap-2 px-2.5 py-2 rounded-lg mx-0.5",
-            "text-[12px] font-mono text-slate-500 cursor-pointer transition-colors",
+            "text-[12px] font-sans text-slate-500 cursor-pointer transition-colors",
             "hover:bg-red-500/[0.07] hover:text-red-400",
             "focus:bg-red-500/[0.07] focus:text-red-400",
           )}
@@ -97,7 +97,7 @@ export function UserNav() {
 
         <div className="flex items-center justify-center gap-1.5 pt-2 pb-1 mt-0.5">
           <Shield className="w-[9px] h-[9px] text-slate-800" strokeWidth={1.5} />
-          <span className="text-[9px] font-mono text-slate-800 tracking-wide">Alcyone Secure</span>
+          <span className="text-[9px] font-sans text-slate-800 tracking-wide">Alcyone Secure</span>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

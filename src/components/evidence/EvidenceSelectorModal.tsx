@@ -96,7 +96,7 @@ export function EvidenceSelectorModal({ projectId, finding, open, onClose }: Evi
           >
             <div className="flex flex-col rounded-xl border border-slate-800 bg-[#0A0B0D] shadow-2xl shadow-black/60 overflow-hidden">
               <div className="flex items-center justify-between border-b border-slate-800/60 px-5 py-4">
-                <h2 className="text-sm font-bold font-mono text-slate-200">Select Evidence</h2>
+                <h2 className="text-sm font-bold font-sans text-slate-200">Select Evidence</h2>
                 <button onClick={onClose} className="btn-icon h-7 w-7">
                   <X className="w-4 h-4" />
                 </button>
@@ -110,7 +110,7 @@ export function EvidenceSelectorModal({ projectId, finding, open, onClose }: Evi
                 ) : (!evidenceItems || evidenceItems.length === 0) ? (
                   <div className="text-center py-8">
                     <FileImage className="w-8 h-8 text-slate-700 mx-auto justify-center mb-2" />
-                    <p className="text-xs font-mono text-slate-400">No evidence uploaded yet</p>
+                    <p className="text-xs font-sans text-slate-400">No evidence uploaded yet</p>
                   </div>
                 ) : (
                   <div className="space-y-1">
@@ -126,8 +126,8 @@ export function EvidenceSelectorModal({ projectId, finding, open, onClose }: Evi
                           className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-white/[0.04] transition-colors border border-transparent hover:border-slate-800/60 disabled:opacity-50"
                         >
                           <div className="flex flex-col min-w-0 pr-4 text-left">
-                            <span className="text-sm font-mono text-slate-300 truncate">{evidence.name}</span>
-                            <span className="text-[10px] font-mono text-slate-600 uppercase mt-0.5">{evidence.fileType || "File"}</span>
+                            <span className="text-sm font-sans text-slate-300 truncate">{evidence.name}</span>
+                            <span className="text-[10px] font-sans text-slate-600 uppercase mt-0.5">{evidence.fileType || "File"}</span>
                           </div>
                           <div className="flex-shrink-0 flex items-center justify-center w-5 h-5">
                             {isProcessing ? (

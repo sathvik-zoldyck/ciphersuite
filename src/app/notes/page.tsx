@@ -254,7 +254,7 @@ function TimerPopup({
       <div style={{
         fontSize: "8px", fontWeight: 700, letterSpacing: "0.22em",
         textTransform: "uppercase", color: T.textMuted,
-        fontFamily: "'IBM Plex Mono', monospace", marginBottom: "12px",
+        fontFamily: "var(--font-mono), monospace", marginBottom: "12px",
       }}>
         Delete after…
       </div>
@@ -271,7 +271,7 @@ function TimerPopup({
               style={{
                 padding: "9px 4px",
                 fontSize: "10px", fontWeight: 700,
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 background:   isActive ? "#ef4444" : "transparent",
                 border:       `1.5px solid ${isActive ? "#ef4444" : T.presetBorder}`,
                 color:        isActive ? "#fff" : T.presetText,
@@ -324,7 +324,7 @@ function TimerPopup({
           style={{
             width: "100%", marginTop: "12px", padding: "8px",
             fontSize: "9px", fontWeight: 700, letterSpacing: "0.14em",
-            textTransform: "uppercase", fontFamily: "'IBM Plex Mono', monospace",
+            textTransform: "uppercase", fontFamily: "var(--font-mono), monospace",
             background: "transparent", border: `1.5px solid #ef444450`,
             color: "#ef4444", cursor: "pointer", borderRadius: "1px",
             transition: "all 0.12s",
@@ -341,7 +341,7 @@ function TimerPopup({
         <div style={{
           marginTop: "10px", textAlign: "center",
           fontSize: "9px", fontWeight: 700, letterSpacing: "0.12em",
-          fontFamily: "'IBM Plex Mono', monospace", color: "#ef4444",
+          fontFamily: "var(--font-mono), monospace", color: "#ef4444",
         }}>
           ◷ Set for: {new Date(destructAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
         </div>
@@ -446,7 +446,7 @@ function NoteEditor({
     borderRight: `1px solid ${T.toolbarBorder}`,
     background:  active ? (activeColor ? `${activeColor}20` : T.navActiveBg) : "transparent",
     color:       active ? (activeColor ?? T.navActiveText) : T.textSecondary,
-    fontFamily:  "'IBM Plex Mono', monospace",
+    fontFamily:  "var(--font-mono), monospace",
     fontSize: "9px", fontWeight: 700,
     letterSpacing: "0.12em", textTransform: "uppercase",
     transition: "background 0.12s, color 0.12s",
@@ -583,7 +583,7 @@ function NoteEditor({
           className="np-title-input"
           style={{
             padding: "20px 26px 8px", fontSize: "26px", fontWeight: 900,
-            fontFamily: "'Syne', system-ui, sans-serif",
+            fontFamily: "var(--font-display), system-ui, sans-serif",
             letterSpacing: "-0.03em", lineHeight: 1.2,
             color: T.textPrimary, background: "transparent",
             border: "none", outline: "none", flexShrink: 0,
@@ -604,7 +604,7 @@ function NoteEditor({
               style={{
                 flex: 1, minHeight: 0, padding: "16px 26px",
                 resize: "none", fontSize: "12.5px", lineHeight: 2,
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 color: T.textSecondary, background: "transparent",
                 border: "none",
                 borderRight: viewMode === "split" ? `1px solid ${T.divider}` : "none",
@@ -622,7 +622,7 @@ function NoteEditor({
                 ? <div className="np-prose" style={{ color: T.textSecondary }}>
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.content}</ReactMarkdown>
                   </div>
-                : <p style={{ fontSize: "12px", fontStyle: "italic", fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted }}>
+                : <p style={{ fontSize: "12px", fontStyle: "italic", fontFamily: "var(--font-mono), monospace", color: T.textMuted }}>
                     Nothing to preview yet.
                   </p>
               }
@@ -636,14 +636,14 @@ function NoteEditor({
           display: "flex", alignItems: "center", gap: "5px",
           flexWrap: "wrap", background: T.tagBarBg, flexShrink: 0, minHeight: "38px",
         }}>
-          <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: T.textMuted, fontFamily: "'IBM Plex Mono', monospace" }}>#</span>
+          <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: T.textMuted, fontFamily: "var(--font-mono), monospace" }}>#</span>
           {s.tags.map(t => (
             <span key={t}
               onClick={() => removeTag(t)}
               style={{
                 display: "flex", alignItems: "center", gap: "4px",
                 fontSize: "9px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 padding: "3px 8px", background: T.tagBg, color: T.tagText,
                 cursor: "pointer", transition: "background 0.12s, color 0.12s",
               }}
@@ -665,7 +665,7 @@ function NoteEditor({
             className="np-search"
             style={{
               fontSize: "9px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
-              fontFamily: "'IBM Plex Mono', monospace",
+              fontFamily: "var(--font-mono), monospace",
               color: T.textSecondary, background: "transparent", border: "none", outline: "none",
               minWidth: "130px",
             }}
@@ -681,7 +681,7 @@ function NoteEditor({
           <div style={{
             display: "flex", alignItems: "center", gap: "14px",
             fontSize: "8px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase",
-            fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted,
+            fontFamily: "var(--font-mono), monospace", color: T.textMuted,
           }}>
             <span>{words} words</span>
             {s.localOnly  && <span style={{ color: "#d97706" }}>⬡ Local</span>}
@@ -699,7 +699,7 @@ function NoteEditor({
                 }}
                 style={{
                   padding: "8px 11px", fontSize: "9px", fontWeight: 700, letterSpacing: "0.13em",
-                  textTransform: "uppercase", fontFamily: "'IBM Plex Mono', monospace",
+                  textTransform: "uppercase", fontFamily: "var(--font-mono), monospace",
                   background: "transparent", border: "none", cursor: "pointer",
                   color: label === "Bin" ? "#ef444660" : T.textMuted,
                   transition: "color 0.12s",
@@ -717,7 +717,7 @@ function NoteEditor({
               style={{
                 padding: "8px 20px", marginLeft: "6px",
                 fontSize: "9px", fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase",
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 background: cfg.accent, color: "#fff",
                 border: "none", cursor: saving ? "not-allowed" : "pointer",
                 opacity: saving ? 0.55 : 1, transition: "opacity 0.12s",
@@ -801,7 +801,7 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
           <span style={{
             display: "inline-flex", alignItems: "center", gap: "5px",
             fontSize: "7px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase",
-            fontFamily: "'IBM Plex Mono', monospace",
+            fontFamily: "var(--font-mono), monospace",
             padding: "2px 7px", background: cfg.labelBg, color: cfg.labelText,
           }}>
             <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: cfg.dot, flexShrink: 0 }} />
@@ -809,10 +809,10 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
           </span>
           <div style={{ display: "flex", gap: "3px" }}>
             {note.isPinned && (
-              <span style={{ fontSize: "7px", fontWeight: 700, padding: "2px 5px", fontFamily: "'IBM Plex Mono', monospace", background: theme === "dark" ? "#fafafa" : "#18181b", color: theme === "dark" ? "#09090b" : "#fafafa" }}>◈</span>
+              <span style={{ fontSize: "7px", fontWeight: 700, padding: "2px 5px", fontFamily: "var(--font-mono), monospace", background: theme === "dark" ? "#fafafa" : "#18181b", color: theme === "dark" ? "#09090b" : "#fafafa" }}>◈</span>
             )}
             {note.localOnly && (
-              <span style={{ fontSize: "7px", fontWeight: 700, padding: "2px 5px", fontFamily: "'IBM Plex Mono', monospace", background: "#d97706", color: "#fff" }}>⬡</span>
+              <span style={{ fontSize: "7px", fontWeight: 700, padding: "2px 5px", fontFamily: "var(--font-mono), monospace", background: "#d97706", color: "#fff" }}>⬡</span>
             )}
           </div>
         </div>
@@ -821,7 +821,7 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
         {note.title && (
           <h3 style={{
             fontSize: "14px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.3,
-            fontFamily: "'Syne', system-ui, sans-serif",
+            fontFamily: "var(--font-display), system-ui, sans-serif",
             color: T.textPrimary, marginBottom: "6px",
             overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
           }}>
@@ -833,7 +833,7 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
         {body && (
           <p style={{
             fontSize: "11px", lineHeight: 1.7,
-            fontFamily: "'IBM Plex Mono', monospace",
+            fontFamily: "var(--font-mono), monospace",
             color: T.textSecondary,
             display: "-webkit-box", WebkitLineClamp: 4,
             WebkitBoxOrient: "vertical", overflow: "hidden",
@@ -849,12 +849,12 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
             {note.tags.slice(0, 4).map(t => (
               <span key={t} style={{
                 fontSize: "8px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 padding: "2px 6px", border: `1px solid ${T.divider}`, color: T.textMuted,
               }}>#{t}</span>
             ))}
             {(note.tags?.length ?? 0) > 4 && (
-              <span style={{ fontSize: "8px", fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted }}>
+              <span style={{ fontSize: "8px", fontFamily: "var(--font-mono), monospace", color: T.textMuted }}>
                 +{note.tags.length - 4}
               </span>
             )}
@@ -866,7 +866,7 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
           <div style={{
             display: "flex", alignItems: "center", gap: "4px",
             fontSize: "8px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
-            fontFamily: "'IBM Plex Mono', monospace",
+            fontFamily: "var(--font-mono), monospace",
             color: expiring ? "#ef4444" : T.textMuted,
             borderTop: `1px solid ${T.divider}`, paddingTop: "8px", marginTop: "4px",
           }}>
@@ -883,7 +883,7 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
           gap: '12px', padding: '12px'
         }}>
           <p style={{
-            fontSize: "9px", fontWeight: 700, fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: "9px", fontWeight: 700, fontFamily: "var(--font-mono), monospace",
             color: T.textMuted, letterSpacing: "0.1em", textTransform: 'uppercase'
           }}>
             In Bin
@@ -898,7 +898,7 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
                 padding: '6px 12px',
                 fontSize: '9px',
                 fontWeight: 700,
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 cursor: 'pointer',
                 transition: 'opacity 0.2s',
               }}
@@ -916,7 +916,7 @@ function NoteCard({ note, index, onEdit, theme, onRestore, onDeletePermanently }
                 padding: '6px 12px',
                 fontSize: '9px',
                 fontWeight: 700,
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 cursor: 'pointer',
                 transition: 'background 0.2s, color 0.2s',
               }}
@@ -1159,7 +1159,7 @@ export default function PersonalNotesPage() {
 
   const sectionDivider = (label: string) => (
     <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
-      <span style={{ fontSize: "8px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted, whiteSpace: "nowrap" }}>
+      <span style={{ fontSize: "8px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", fontFamily: "var(--font-mono), monospace", color: T.textMuted, whiteSpace: "nowrap" }}>
         {label}
       </span>
       <div style={{ flex: 1, height: "1px", background: T.divider }} />
@@ -1172,9 +1172,8 @@ export default function PersonalNotesPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
         .np-root*,.np-root *::before,.np-root *::after{box-sizing:border-box;margin:0;padding:0}
-        .np-root{font-family:'DM Sans',system-ui,sans-serif}
+        .np-root{font-family:var(--font-sans), system-ui, sans-serif}
         .np-title-input::placeholder{color:${T.textPlaceholder}!important}
         .np-textarea::placeholder{color:${T.textPlaceholder}!important}
         .np-search::placeholder{color:${T.textMuted}}
@@ -1184,9 +1183,9 @@ export default function PersonalNotesPage() {
         .np-noscroll::-webkit-scrollbar{display:none}
         .np-noscroll{-ms-overflow-style:none;scrollbar-width:none}
         .np-masonry-item{break-inside:avoid;margin-bottom:14px;display:inline-block;width:100%}
-        .np-prose h1,.np-prose h2,.np-prose h3{font-family:'Syne',system-ui,sans-serif!important;font-weight:900;margin:14px 0 6px}
+        .np-prose h1,.np-prose h2,.np-prose h3{font-family:var(--font-display), system-ui, sans-serif!important;font-weight:900;margin:14px 0 6px}
         .np-prose p{margin-bottom:10px;line-height:1.7;font-size:13px}
-        .np-prose code{font-family:'IBM Plex Mono',monospace!important;font-size:11px;padding:1px 5px;background:${T.tagBg};border-radius:2px}
+        .np-prose code{font-family:var(--font-mono), monospace!important;font-size:11px;padding:1px 5px;background:${T.tagBg};border-radius:2px}
         .np-prose ul,.np-prose ol{padding-left:18px;margin-bottom:10px}
         .np-prose li{margin-bottom:4px;font-size:13px;line-height:1.6}
         .np-prose a{color:#22d3ee;text-decoration:underline}
@@ -1209,8 +1208,8 @@ export default function PersonalNotesPage() {
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <Image src="/logo.png" alt="Alcyone" width={24} height={24} style={{ borderRadius: "4px", flexShrink: 0 }} />
               <div>
-                <div style={{ fontSize: "13px", fontWeight: 900, fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em", color: T.textPrimary, lineHeight: 1.1 }}>Notes</div>
-                <div style={{ fontSize: "7.5px", fontWeight: 500, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em", color: T.textMuted, marginTop: "2px" }}>by Alcyone Secure</div>
+                <div style={{ fontSize: "13px", fontWeight: 900, fontFamily: "var(--font-display), system-ui, sans-serif", letterSpacing: "-0.01em", color: T.textPrimary, lineHeight: 1.1 }}>Notes</div>
+                <div style={{ fontSize: "7.5px", fontWeight: 500, fontFamily: "var(--font-mono), monospace", letterSpacing: "0.08em", color: T.textMuted, marginTop: "2px" }}>by Alcyone Secure</div>
               </div>
             </div>
           </div>
@@ -1223,7 +1222,7 @@ export default function PersonalNotesPage() {
                 width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
                 padding: "9px 14px", background: T.navActiveBg, color: T.navActiveText,
                 border: "none", cursor: "pointer",
-                fontFamily: "'Syne', system-ui, sans-serif",
+                fontFamily: "var(--font-display), system-ui, sans-serif",
                 fontSize: "9px", fontWeight: 900, letterSpacing: "0.16em", textTransform: "uppercase",
                 transition: "opacity 0.12s",
               }}
@@ -1248,7 +1247,7 @@ export default function PersonalNotesPage() {
                     background: active ? T.navActiveBg : "transparent",
                     color:      active ? T.navActiveText : T.textSecondary,
                     border: "none", cursor: "pointer",
-                    fontFamily: "'Syne', system-ui, sans-serif",
+                    fontFamily: "var(--font-display), system-ui, sans-serif",
                     fontSize: "9px", fontWeight: 900, letterSpacing: "0.18em", textTransform: "uppercase",
                     borderBottom: `1px solid ${T.divider}`,
                     transition: "background 0.1s, color 0.1s",
@@ -1258,7 +1257,7 @@ export default function PersonalNotesPage() {
                 >
                   <span>{label}</span>
                   {counts[id] > 0 && (
-                    <span style={{ fontSize: "8px", fontWeight: 700, fontFamily: "'IBM Plex Mono', monospace", color: active ? `${T.navActiveText}70` : T.textMuted }}>
+                    <span style={{ fontSize: "8px", fontWeight: 700, fontFamily: "var(--font-mono), monospace", color: active ? `${T.navActiveText}70` : T.textMuted }}>
                       {counts[id]}
                     </span>
                   )}
@@ -1271,7 +1270,7 @@ export default function PersonalNotesPage() {
           {allTags.length > 0 && (
             <div style={{ flex: 1, overflowY: "auto" }} className="np-noscroll">
               <div style={{ padding: "12px 18px 6px" }}>
-                <span style={{ fontSize: "7px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted }}>Labels</span>
+                <span style={{ fontSize: "7px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "var(--font-mono), monospace", color: T.textMuted }}>Labels</span>
               </div>
               {allTags.map(tag => {
                 const active = activeTag === tag;
@@ -1284,7 +1283,7 @@ export default function PersonalNotesPage() {
                       background: active ? T.navActiveBg : "transparent",
                       color:      active ? T.navActiveText : T.textSecondary,
                       border: "none", cursor: "pointer",
-                      fontFamily: "'DM Sans', system-ui, sans-serif",
+                      fontFamily: "var(--font-sans), system-ui, sans-serif",
                       fontSize: "11px", fontWeight: 500,
                       borderBottom: `1px solid ${T.divider}20`,
                       transition: "background 0.1s, color 0.1s",
@@ -1305,7 +1304,7 @@ export default function PersonalNotesPage() {
           {/* Sidebar footer */}
           <div style={{ borderTop: `3px solid ${T.sidebarBorder}` }}>
             <div style={{ padding: "8px 12px", borderBottom: `1px solid ${T.divider}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <span style={{ fontSize: "8px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted }}>
+              <span style={{ fontSize: "8px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "var(--font-mono), monospace", color: T.textMuted }}>
                 {theme === "dark" ? "Dark" : "Light"}
               </span>
               <button
@@ -1328,7 +1327,7 @@ export default function PersonalNotesPage() {
               style={{
                 width: "100%", display: "flex", alignItems: "center", gap: "8px",
                 padding: "10px 18px", background: "transparent", border: "none", cursor: "pointer",
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-mono), monospace",
                 fontSize: "8px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase",
                 color: T.textMuted, transition: "color 0.12s",
               }}
@@ -1347,14 +1346,14 @@ export default function PersonalNotesPage() {
           {/* Header */}
           <header style={{ flexShrink: 0, display: "flex", alignItems: "stretch", background: T.headerBg, borderBottom: `3px solid ${T.headerBorder}`, height: "52px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "0 24px", borderRight: `1px solid ${T.divider}`, minWidth: "200px" }}>
-              <h1 style={{ fontSize: "11px", fontWeight: 900, fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "0.18em", textTransform: "uppercase", color: T.textPrimary, whiteSpace: "nowrap" }}>
+              <h1 style={{ fontSize: "11px", fontWeight: 900, fontFamily: "var(--font-display), system-ui, sans-serif", letterSpacing: "0.18em", textTransform: "uppercase", color: T.textPrimary, whiteSpace: "nowrap" }}>
                 {filter === "all" && !activeTag ? "All Notes" :
                  filter === "pinned"    ? "Pinned"  :
                  filter === "reminders" ? "Timers"  :
                  filter === "archive"   ? "Archive" :
                  filter === "bin"       ? "Bin"     : `#${activeTag}`}
               </h1>
-              <span style={{ fontSize: "9px", fontWeight: 700, fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted }}>{visible.length}</span>
+              <span style={{ fontSize: "9px", fontWeight: 700, fontFamily: "var(--font-mono), monospace", color: T.textMuted }}>{visible.length}</span>
             </div>
 
             <div style={{ flex: 1, display: "flex", alignItems: "center", padding: "0 16px 0 38px", borderRight: `1px solid ${T.divider}`, position: "relative" }}>
@@ -1362,7 +1361,7 @@ export default function PersonalNotesPage() {
               <input
                 value={search} onChange={e => setSearch(e.target.value)}
                 placeholder="Search…" className="np-search"
-                style={{ width: "100%", background: "transparent", border: "none", outline: "none", fontSize: "12px", fontWeight: 500, fontFamily: "'DM Sans', system-ui, sans-serif", color: T.textPrimary }}
+                style={{ width: "100%", background: "transparent", border: "none", outline: "none", fontSize: "12px", fontWeight: 500, fontFamily: "var(--font-sans), system-ui, sans-serif", color: T.textPrimary }}
               />
               {search && (
                 <button onClick={() => setSearch("")} style={{ background: "none", border: "none", cursor: "pointer", color: T.textMuted, fontSize: "12px", padding: "0 4px" }}>✕</button>
@@ -1390,7 +1389,7 @@ export default function PersonalNotesPage() {
               style={{
                 padding: "0 22px", background: T.navActiveBg, color: T.navActiveText,
                 border: "none", cursor: "pointer",
-                fontFamily: "'Syne', system-ui, sans-serif",
+                fontFamily: "var(--font-display), system-ui, sans-serif",
                 fontSize: "9px", fontWeight: 900, letterSpacing: "0.18em", textTransform: "uppercase",
                 whiteSpace: "nowrap", transition: "opacity 0.12s",
               }}
@@ -1401,14 +1400,14 @@ export default function PersonalNotesPage() {
 
           {/* Color legend bar */}
           <div style={{ flexShrink: 0, background: T.sidebarBg, borderBottom: `1px solid ${T.divider}`, padding: "6px 24px", display: "flex", alignItems: "center", gap: "6px", overflowX: "auto" }} className="np-noscroll">
-            <span style={{ fontSize: "7px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted, flexShrink: 0, marginRight: "4px" }}>Color</span>
+            <span style={{ fontSize: "7px", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", fontFamily: "var(--font-mono), monospace", color: T.textMuted, flexShrink: 0, marginRight: "4px" }}>Color</span>
             {COLOR_ORDER.map(id => {
               const c = NOTE_COLORS[id];
               return (
                 <span key={id} style={{
                   display: "inline-flex", alignItems: "center", gap: "5px",
                   fontSize: "7px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase",
-                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontFamily: "var(--font-mono), monospace",
                   padding: "2px 7px", background: c.labelBg, color: c.labelText, flexShrink: 0,
                 }}>
                   <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: c.dot }} />
@@ -1422,7 +1421,7 @@ export default function PersonalNotesPage() {
           <main style={{ flex: 1, overflowY: "auto", padding: "22px" }} className="np-scrollbar">
             {loading ? (
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "80px" }}>
-                <span style={{ fontSize: "20px", fontWeight: 900, fontFamily: "'Syne', system-ui, sans-serif", color: T.textMuted, animation: "np-pulse 1.5s ease-in-out infinite" }}>
+                <span style={{ fontSize: "20px", fontWeight: 900, fontFamily: "var(--font-display), system-ui, sans-serif", color: T.textMuted, animation: "np-pulse 1.5s ease-in-out infinite" }}>
                   Loading…
                 </span>
               </div>
@@ -1432,13 +1431,13 @@ export default function PersonalNotesPage() {
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", paddingTop: "80px", gap: "14px" }}
               >
                 <span style={{ fontSize: "52px", lineHeight: 1, color: T.textMuted, opacity: 0.2, userSelect: "none" }}>◇</span>
-                <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "'IBM Plex Mono', monospace", color: T.textMuted }}>
+                <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "var(--font-mono), monospace", color: T.textMuted }}>
                   {search ? "No results found" : "Nothing here yet"}
                 </span>
                 {filter === "all" && !search && (
                   <button
                     onClick={() => setEditor({ ...BLANK })}
-                    style={{ marginTop: "8px", padding: "10px 28px", background: T.navActiveBg, color: T.navActiveText, border: "none", cursor: "pointer", fontFamily: "'Syne', system-ui, sans-serif", fontSize: "9px", fontWeight: 900, letterSpacing: "0.2em", textTransform: "uppercase", transition: "opacity 0.12s" }}
+                    style={{ marginTop: "8px", padding: "10px 28px", background: T.navActiveBg, color: T.navActiveText, border: "none", cursor: "pointer", fontFamily: "var(--font-display), system-ui, sans-serif", fontSize: "9px", fontWeight: 900, letterSpacing: "0.2em", textTransform: "uppercase", transition: "opacity 0.12s" }}
                     onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")}
                     onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                   >

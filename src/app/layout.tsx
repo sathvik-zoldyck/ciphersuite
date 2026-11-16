@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Syne } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
@@ -9,28 +9,29 @@ import { FirebaseErrorListener } from "@/components/FirebaseErrorListener";
 // ─────────────────────────────────────────────────────────────────────────────
 // Fonts
 //
-// JetBrains Mono — all data, labels, inputs, code, monospace UI chrome.
-//   The "machine" voice of the app.
-// Syne — headings, navigation, display text.
-//   Geometric, authoritative, distinctly non-corporate.
+// IBM Plex Sans — interface text. IBM Plex Mono — code, logs and tool output.
+// IBM Plex Sans Condensed — page titles and headings.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const fontMono = JetBrains_Mono({
+const fontSans = IBM_Plex_Sans({
   subsets:  ["latin"],
-  variable: "--font-mono",
-  weight:   ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+  weight:   ["400", "500", "600", "700"],
   display:  "swap",
-  preload:  true,
-  adjustFontFallback: false,
 });
 
-const fontDisplay = Syne({
+const fontDisplay = IBM_Plex_Sans_Condensed({
   subsets:  ["latin"],
   variable: "--font-display",
-  weight:   ["500", "600", "700", "800"],
+  weight:   ["500", "600", "700"],
   display:  "swap",
-  preload:  true,
-  adjustFontFallback: false,
+});
+
+const fontMono = IBM_Plex_Mono({
+  subsets:  ["latin"],
+  variable: "--font-mono",
+  weight:   ["400", "500", "600"],
+  display:  "swap",
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -166,6 +167,7 @@ export default function RootLayout({
         // Always dark — this is a dark-only product
         "dark",
         // CSS variable injection for fonts
+        fontSans.variable,
         fontMono.variable,
         fontDisplay.variable,
       )}
@@ -190,7 +192,7 @@ export default function RootLayout({
           // Background — matches --background CSS var in globals.css
           "bg-[#080A0C]",
           // Typography
-          "font-mono antialiased text-slate-100",
+          "font-sans antialiased text-slate-100",
           // iOS font size inflation prevention
           "[-webkit-text-size-adjust:100%] [text-size-adjust:100%]",
           // Global text selection colour

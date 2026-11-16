@@ -53,7 +53,7 @@ export default function ProjectLayout({ children }: ProjectLayoutProps) {
       <div className="flex items-center justify-center h-screen bg-[#080A0C]">
         <div className="flex items-center gap-2 text-slate-500">
           <div className="w-4 h-4 border-2 border-slate-600 border-t-slate-400 rounded-full animate-spin" />
-          <span className="font-mono text-sm">Authenticating...</span>
+          <span className="font-sans text-sm">Authenticating...</span>
         </div>
       </div>
     );

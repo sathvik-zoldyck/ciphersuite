@@ -206,7 +206,7 @@ function MarkdownPreview({ content }: { content: string }) {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-2 bg-[#020304]">
         <Eye className="w-6 h-6 text-slate-800" strokeWidth={1.5} />
-        <p className="text-[11px] font-mono text-slate-700">Nothing to preview yet</p>
+        <p className="text-[11px] font-sans text-slate-700">Nothing to preview yet</p>
       </div>
     );
   }
@@ -218,12 +218,12 @@ function MarkdownPreview({ content }: { content: string }) {
       "prose-h1:text-2xl prose-h1:border-b prose-h1:border-slate-800 prose-h1:pb-3",
       "prose-h2:text-lg prose-h2:text-slate-200",
       "prose-h3:text-base prose-h3:text-slate-300",
-      "prose-p:text-slate-300 prose-p:leading-relaxed prose-p:my-3 prose-p:font-mono prose-p:text-sm",
+      "prose-p:text-slate-300 prose-p:leading-relaxed prose-p:my-3 prose-p:font-sans prose-p:text-sm",
       "prose-code:text-cyan-300 prose-code:bg-black/50 prose-code:border prose-code:border-slate-800",
-      "prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[11px] prose-code:font-mono",
+      "prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[11px] prose-code:font-sans",
       "prose-code:before:content-none prose-code:after:content-none",
       "prose-pre:bg-[#0A0B0D] prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-xl prose-pre:text-xs prose-pre:p-4",
-      "prose-li:text-slate-300 prose-li:my-0.5 prose-li:font-mono prose-li:text-sm",
+      "prose-li:text-slate-300 prose-li:my-0.5 prose-li:font-sans prose-li:text-sm",
       "prose-ul:my-3 prose-ol:my-3",
       "prose-blockquote:border-l-2 prose-blockquote:border-cyan-500/40 prose-blockquote:text-slate-500 prose-blockquote:not-italic",
       "prose-blockquote:bg-cyan-500/[0.03] prose-blockquote:px-4 prose-blockquote:rounded-r-lg",
