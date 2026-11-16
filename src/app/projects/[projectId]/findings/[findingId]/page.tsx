@@ -50,13 +50,18 @@ export default function FindingDetailPage() {
   const router = useRouter();
   const projectId = params.projectId as string;
   const findingId = params.findingId as string;
-  const { isGuest } = useAuth();
+  const { isGuest, getLocalEvidence } = useAuth();
   
   const { project } = useProject(projectId);
-  const { deleteFinding, updateFinding } = useFindings(projectId);
-  const { data: finding, isLoading: findingLoading } = useDoc<Finding>(
+  const { findings: projectFindings, deleteFinding, updateFinding } = useFindings(projectId);
+  const { data: remoteFinding, isLoading: remoteLoading } = useDoc<Finding>(
     projectId && findingId && !isGuest ? doc(db, "projects", projectId, "findings", findingId) : null
   );
+  // Guests keep findings in local storage, so read the finding from there.
+  const finding = isGuest
+    ? projectFindings.find((f) => f.id === findingId) ?? null
+    : remoteFinding;
+  const findingLoading = isGuest ? false : remoteLoading;
 
   const [evidenceItems, setEvidenceItems] = useState<Evidence[]>([]);
   const [evidenceLoading, setEvidenceLoading] = useState(true);
@@ -68,6 +73,8 @@ export default function FindingDetailPage() {
   useEffect(() => {
     async function fetchEvidence() {
       if (isGuest) {
+        const ids = finding?.evidenceIds ?? [];
+        setEvidenceItems(getLocalEvidence(projectId).filter((e) => ids.includes(e.id)));
         setEvidenceLoading(false);
         return;
       }
@@ -94,7 +101,7 @@ export default function FindingDetailPage() {
       }
     }
     fetchEvidence();
-  }, [projectId, finding?.evidenceIds, isGuest]);
+  }, [projectId, finding?.evidenceIds, isGuest, getLocalEvidence]);
 
   // Fetch Activity Logs
   const activityQuery = useMemo(() => {
