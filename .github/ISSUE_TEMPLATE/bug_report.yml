@@ -1,0 +1,38 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to …
+        2. Click …
+        3. See …
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options:
+        - Guest mode
+        - Signed in (Firebase)
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Browser and OS
+      placeholder: Chrome 131 on Windows 11
+  - type: markdown
+    attributes:
+      value: "**Don't paste real client data, findings or API keys.** For security vulnerabilities, use private reporting (see SECURITY.md)."
