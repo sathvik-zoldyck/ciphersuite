@@ -63,7 +63,7 @@ function parseNmapXML(doc: Document): string {
       scripts.forEach(script => {
         const scriptId = script.getAttribute("id");
         const output = script.getAttribute("output") ?? "";
-        const conciseOutput = output.split(/\\r?\\n/).slice(0, 3).join(" ").substring(0, 150);
+        const conciseOutput = output.split(/\r?\n/).slice(0, 3).join(" ").substring(0, 150);
         portStr += `\n  * Script: ${scriptId} -> ${conciseOutput}`;
       });
 
@@ -127,8 +127,8 @@ function parseNessusXML(doc: Document): string {
     const cvss = item.getElementsByTagName("cvss_base_score")[0]?.textContent ?? "";
     const cves = Array.from(item.getElementsByTagName("cve")).map(c => c.textContent).filter(Boolean).join(", ");
 
-    const condensedDesc = description.substring(0, 300).replace(/\\s+/g, " ");
-    const condensedSol = solution.substring(0, 200).replace(/\\s+/g, " ");
+    const condensedDesc = description.substring(0, 300).replace(/\s+/g, " ");
+    const condensedSol = solution.substring(0, 200).replace(/\s+/g, " ");
 
     results.push(
       `\nReportItem: ${pluginName}\n` +
@@ -173,8 +173,8 @@ function parseBurpXML(doc: Document): string {
     const remediationDetail = issue.getElementsByTagName("remediationDetail")[0]?.textContent ?? "";
 
     // Remove HTML tags and condense
-    const cleanDetail = issueDetail.replace(/<[^>]+>/g, " ").substring(0, 300).replace(/\\s+/g, " ");
-    const cleanRemediation = remediationDetail.replace(/<[^>]+>/g, " ").substring(0, 200).replace(/\\s+/g, " ");
+    const cleanDetail = issueDetail.replace(/<[^>]+>/g, " ").substring(0, 300).replace(/\s+/g, " ");
+    const cleanRemediation = remediationDetail.replace(/<[^>]+>/g, " ").substring(0, 200).replace(/\s+/g, " ");
     
     results.push(
       `\nIssue: ${name}\n` +
