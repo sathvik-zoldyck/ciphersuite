@@ -10,6 +10,11 @@
 
 @layer base {
   :root {
+    /* ── Fonts (self-hosted, see layout.tsx) ──────────────────────────────── */
+    --font-sans:    'IBM Plex Sans';
+    --font-display: 'IBM Plex Sans Condensed';
+    --font-mono:    'IBM Plex Mono';
+
     /* ── Core backgrounds ─────────────────────────────────────────────────── */
     --background:  222 22%  5%;   /* #080A0C  — page bg                      */
     --surface-1:   225 14%  7%;   /* #0A0B0D  — sidebar, topbar, popovers    */
