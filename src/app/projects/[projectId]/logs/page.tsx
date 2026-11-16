@@ -16,6 +16,7 @@ import { doc, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from "@/lib/utils";
+import { splitBySearch, tokenizeLogLine, type LogTokenType } from "@/lib/log-tokens";
 import type { LogEntry } from "@/lib/types";
 
 // ─── Debounce ─────────────────────────────────────────────────────────────────
@@ -54,56 +55,42 @@ const LINE_TYPE_CONFIG: Record<LineType, { bar: string; rowBg: string; label?: s
 
 // ─── Syntax highlighter ───────────────────────────────────────────────────────
 
+const TOKEN_CLASS: Record<LogTokenType, string> = {
+  timestamp: "text-slate-500",
+  ip:        "text-violet-300",
+  string:    "text-amber-300/80",
+  method:    "text-violet-400 font-semibold",
+  status2xx: "text-emerald-400 font-semibold",
+  status3xx: "text-blue-400 font-semibold",
+  status4xx: "text-red-400 font-semibold",
+  status5xx: "text-orange-400 font-semibold",
+  error:     "text-red-400 font-semibold",
+  warning:   "text-yellow-400",
+  path:      "text-slate-400",
+  kv:        "text-teal-300",
+  text:      "",
+};
+
+/**
+ * Renders one log line with token colours and search highlights.
+ * Everything is a React text node: log content is never parsed as HTML,
+ * because logs often contain attacker-controlled input.
+ */
 function HighlightedLine({ line, search }: { line: string; search: string }) {
-  // Apply token-level highlighting via regex replace
-  let html = line
-    // IP addresses
-    .replace(/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?::\d+)?)/g,
-      `<span class="text-violet-300">$1</span>`)
-    // HTTP methods
-    .replace(/\b(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS|CONNECT|TRACE)\b/g,
-      `<span class="text-violet-400 font-semibold">$1</span>`)
-    // 2xx success
-    .replace(/\b(2\d{2})\b/g,
-      `<span class="text-emerald-400 font-semibold">$1</span>`)
-    // 3xx redirect
-    .replace(/\b(3\d{2})\b/g,
-      `<span class="text-blue-400 font-semibold">$1</span>`)
-    // 4xx client error
-    .replace(/\b(4\d{2})\b/g,
-      `<span class="text-red-400 font-semibold">$1</span>`)
-    // 5xx server error
-    .replace(/\b(5\d{2})\b/g,
-      `<span class="text-orange-400 font-semibold">$1</span>`)
-    // Timestamps / dates
-    .replace(/(\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?)/g,
-      `<span class="text-slate-500">$1</span>`)
-    // Quoted strings
-    .replace(/"([^"]{0,120})"/g,
-      `<span class="text-amber-300/80">&quot;$1&quot;</span>`)
-    // Error keywords
-    .replace(/\b(error|fail(?:ed|ure)?|denied|critical|fatal|exception)\b/gi,
-      `<span class="text-red-400 font-semibold">$1</span>`)
-    // Warning keywords
-    .replace(/\b(warn(?:ing)?|deprecated|notice)\b/gi,
-      `<span class="text-yellow-400">$1</span>`)
-    // URLs / paths
-    .replace(/(\/[a-zA-Z0-9_.~!*'();:@&=+$,/?#[\]-]{2,})/g,
-      `<span class="text-slate-400">$1</span>`)
-    // Key=value pairs
-    .replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)=([^\s,}]+)/g,
-      `<span class="text-slate-400">$1</span>=<span class="text-teal-300">$2</span>`);
-
-  // Highlight search term
-  if (search.trim()) {
-    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    html = html.replace(
-      new RegExp(`(${escaped})`, "gi"),
-      `<mark class="bg-yellow-400/30 text-yellow-200 rounded-sm px-0.5">$1</mark>`
-    );
-  }
-
-  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  const tokens = useMemo(() => tokenizeLogLine(line), [line]);
+  return (
+    <span>
+      {tokens.map((t, i) => (
+        <span key={i} className={TOKEN_CLASS[t.type] || undefined}>
+          {splitBySearch(t.text, search).map((part, j) =>
+            part.match
+              ? <mark key={j} className="bg-yellow-400/30 text-yellow-200 rounded-sm px-0.5">{part.text}</mark>
+              : <span key={j}>{part.text}</span>,
+          )}
+        </span>
+      ))}
+    </span>
+  );
 }
 
 // ─── Stats bar ────────────────────────────────────────────────────────────────
