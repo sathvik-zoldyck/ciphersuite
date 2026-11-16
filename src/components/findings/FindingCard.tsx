@@ -169,11 +169,13 @@ function DetailSection({
       </p>
       <div
         className={cn(
-          'text-sm text-slate-300 leading-relaxed prose prose-invert prose-sm max-w-none',
-          mono && 'font-sans text-xs bg-black/40 rounded p-3 border border-slate-800 whitespace-pre-wrap'
+          'text-sm text-slate-300 leading-relaxed whitespace-pre-line break-words',
+          mono && 'font-mono text-xs bg-black/40 rounded p-3 border border-slate-800 whitespace-pre-wrap'
         )}
-        dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br />') }}
-      />
+      >
+        {/* Plain text on purpose: findings often contain payloads like <script>. */}
+        {content}
+      </div>
     </div>
   );
 }
