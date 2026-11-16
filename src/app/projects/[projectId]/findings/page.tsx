@@ -7,7 +7,7 @@ import {
   Plus, Shield, AlertTriangle, Loader2,
   SortAsc, SortDesc, Bug, Upload,
   Filter, LayoutGrid, List,
-} from "lucide-react";
+} from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { useFindings } from "@/hooks/use-findings";
 import { FindingCard }    from "@/components/findings/FindingCard";

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SlidersHorizontal, Check, Eye, EyeOff } from "lucide-react";
+import { SlidersHorizontal, Check, Eye, EyeOff } from "@/components/icons";
 import type { Table } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
 

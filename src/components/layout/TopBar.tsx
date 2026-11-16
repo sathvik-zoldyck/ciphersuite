@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Bell, Search, ChevronRight } from "lucide-react";
+import { Bell, Search, ChevronRight } from "@/components/icons";
 import { useProject } from "@/hooks/use-project";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";

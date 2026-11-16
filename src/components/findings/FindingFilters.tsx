@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, X } from 'lucide-react';
+import { Search, X } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import type { FindingSeverity, FindingStatus } from '@/lib/types';
 import { SEVERITY_CONFIG, STATUSES_ORDERED } from '@/lib/types';

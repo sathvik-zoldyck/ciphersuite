@@ -18,7 +18,7 @@ import { useFindings } from "@/hooks/use-findings";
 import {
   ChevronRight, Pencil, Trash2, Hash, FileImage, ShieldAlert,
   Loader2, Link as LinkIcon, Bug, Activity, FileBarChart2
-} from "lucide-react";
+} from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { SEVERITY_CONFIG, STATUS_CONFIG } from "@/lib/types";
 import type { Finding, Evidence, FindingStatus, FindingSeverity } from "@/lib/types";

@@ -3,7 +3,7 @@
 import {
   ChevronLeft, ChevronRight,
   ChevronsLeft, ChevronsRight,
-} from "lucide-react";
+} from "@/components/icons";
 import type { Table } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
 

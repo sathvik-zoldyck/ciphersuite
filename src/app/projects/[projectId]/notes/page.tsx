@@ -12,7 +12,7 @@ import {
   Quote, ListOrdered, Terminal, Heading2, Heading3,
   Plus, Trash2, FileText, ChevronDown, Pencil,
   Maximize2, Minimize2,
-} from "lucide-react";
+} from "@/components/icons";
 import {
   collection, doc, addDoc, updateDoc, deleteDoc,
   serverTimestamp, query, orderBy,

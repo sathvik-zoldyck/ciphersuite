@@ -19,7 +19,7 @@ import {
   FileText, Shield, Zap, Copy, Check, X,
   RefreshCw, Clock, BarChart3, Sparkles,
   Lock, Building2, Hash, FileDown,
-} from "lucide-react";
+} from "@/components/icons";
 import { generateReport as aiGenerateReport } from "@/ai/flows";
 import { logActivity } from "@/lib/activity-service";
 import { exportReportToPDF } from "@/lib/export-pdf";
