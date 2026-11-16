@@ -256,7 +256,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                 {/* Severity left bar */}
                 <div className={cn('w-1 h-9 rounded-full flex-shrink-0', stripeColor)} />
                 <div className="min-w-0">
-                  <p className="text-[9px] font-mono font-bold tracking-[0.18em] text-slate-600 uppercase mb-0.5">
+                  <p className="text-[9px] font-sans font-bold tracking-[0.18em] text-slate-600 uppercase mb-0.5">
                     {isEdit ? 'Edit Finding' : 'New Finding'}
                   </p>
                   <h2 className="text-sm font-bold font-display text-slate-100 truncate leading-tight">
@@ -272,7 +272,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                     <button
                       onClick={() => setShowTemplates(!showTemplates)}
                       className={cn(
-                        'flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono rounded-lg border transition-all',
+                        'flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-sans rounded-lg border transition-all',
                         showTemplates
                           ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400'
                           : 'bg-slate-800/60 border-slate-700/60 text-slate-500 hover:border-cyan-500/30 hover:text-cyan-400'
@@ -293,7 +293,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                           className="absolute right-0 top-full mt-2 w-64 bg-[#0D0F12] border border-slate-700/60 rounded-xl shadow-2xl z-20 overflow-hidden"
                         >
                           <div className="px-3 py-2 border-b border-slate-800">
-                            <span className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-widest">
+                            <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest">
                               Quick Templates
                             </span>
                           </div>
@@ -305,7 +305,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                             >
                               <div className="flex items-center gap-2 min-w-0">
                                 <ChevronRight className="w-3 h-3 text-slate-700 group-hover:text-cyan-400 flex-shrink-0 transition-colors" />
-                                <span className="text-xs font-mono text-slate-300 truncate">{t.title}</span>
+                                <span className="text-xs font-sans text-slate-300 truncate">{t.title}</span>
                               </div>
                               {t.severity && <SeverityBadge severity={t.severity} size="sm" />}
                             </button>
@@ -338,7 +338,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                     key={tab}
                     onClick={() => setActiveTab(tab)}
                     className={cn(
-                      'relative flex items-center gap-2 px-4 py-3 text-[11px] font-mono font-semibold',
+                      'relative flex items-center gap-2 px-4 py-3 text-[11px] font-sans font-semibold',
                       'uppercase tracking-wider border-b-2 transition-all',
                       activeTab === tab
                         ? 'border-cyan-400 text-cyan-400'
@@ -405,7 +405,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                           key={s}
                           onClick={() => set('status', s)}
                           className={cn(
-                            'flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-mono font-semibold transition-all',
+                            'flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-sans font-semibold transition-all',
                             form.status === s
                               ? `${cfg.bg} ${cfg.border} ${cfg.color}`
                               : 'bg-transparent border-slate-800 text-slate-600 hover:border-slate-600 hover:text-slate-400'
@@ -461,7 +461,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                       '1. Navigate to /api/login\n2. Intercept the POST request\n3. Modify the username parameter with a SQL payload...\n4. Observe the error response revealing DB structure'
                     }
                     rows={9}
-                    className={cn(InputCls, 'font-mono text-xs resize-none leading-relaxed')}
+                    className={cn(InputCls, 'font-sans text-xs resize-none leading-relaxed')}
                   />
                 </Field>
 
@@ -505,10 +505,10 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                 {/* CVSS visual band */}
                 <div className="rounded-xl border border-slate-800 bg-black/30 p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-semibold text-slate-600 uppercase tracking-wider">CVSS Severity Band</span>
+                    <span className="text-[10px] font-sans font-semibold text-slate-600 uppercase tracking-wider">CVSS Severity Band</span>
                     {form.cvss !== undefined && (
                       <span className={cn(
-                        'text-xs font-mono font-bold px-2 py-0.5 rounded-full',
+                        'text-xs font-sans font-bold px-2 py-0.5 rounded-full',
                         form.cvss >= 9   ? 'text-red-400 bg-red-500/10'     :
                         form.cvss >= 7   ? 'text-orange-400 bg-orange-500/10' :
                         form.cvss >= 4   ? 'text-yellow-400 bg-yellow-500/10' :
@@ -539,7 +539,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                     )}
                   </div>
 
-                  <div className="flex justify-between text-[9px] font-mono text-slate-700 px-0.5">
+                  <div className="flex justify-between text-[9px] font-sans text-slate-700 px-0.5">
                     <span>0.0 Low</span>
                     <span>4.0 Med</span>
                     <span>7.0 High</span>
@@ -573,7 +573,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                     className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-cyan-500/[0.06] border border-cyan-500/20"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
-                    <span className="text-xs font-mono text-cyan-300/80">
+                    <span className="text-xs font-sans text-cyan-300/80">
                       {OWASP_CATEGORIES.find((c) => c.id === form.owaspId)?.label ?? form.owaspId}
                     </span>
                   </motion.div>
@@ -591,7 +591,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                     initial={{ opacity: 0, x: -4 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
-                    className="flex items-center gap-2 text-red-400 text-xs font-mono"
+                    className="flex items-center gap-2 text-red-400 text-xs font-sans"
                   >
                     <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
                     {globalError}
@@ -602,7 +602,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-[10px] font-mono text-slate-700"
+                    className="text-[10px] font-sans text-slate-700"
                   >
                     {isEdit ? 'Editing existing finding' : '* Required · ⌘↩ to save'}
                   </motion.p>
@@ -612,7 +612,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
               <div className="flex items-center gap-3 flex-shrink-0">
                 <button
                   onClick={handleClose}
-                  className="px-4 py-2 text-xs font-mono text-slate-500 hover:text-slate-200 transition-colors"
+                  className="px-4 py-2 text-xs font-sans text-slate-500 hover:text-slate-200 transition-colors"
                 >
                   Cancel
                 </button>
@@ -620,7 +620,7 @@ export function FindingForm({ open, onClose, onSubmit, initial }: FindingFormPro
                   onClick={handleSubmit}
                   disabled={loading}
                   className={cn(
-                    'flex items-center gap-2 px-5 py-2 text-xs font-mono font-bold rounded-lg transition-all',
+                    'flex items-center gap-2 px-5 py-2 text-xs font-sans font-bold rounded-lg transition-all',
                     'bg-cyan-500 hover:bg-cyan-400 text-black',
                     'shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30',
                     'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
@@ -664,17 +664,17 @@ function Field({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <label className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-[0.12em]">
+        <label className="text-[10px] font-sans font-bold text-slate-500 uppercase tracking-[0.12em]">
           {label}
           {required && <span className="text-cyan-400 ml-1">*</span>}
         </label>
         {error ? (
-          <span className="text-[10px] font-mono text-red-400 flex items-center gap-1">
+          <span className="text-[10px] font-sans text-red-400 flex items-center gap-1">
             <AlertTriangle className="w-2.5 h-2.5" />
             {error}
           </span>
         ) : hint ? (
-          <span className="text-[10px] font-mono text-slate-700">{hint}</span>
+          <span className="text-[10px] font-sans text-slate-700">{hint}</span>
         ) : null}
       </div>
       {children}
@@ -725,7 +725,7 @@ function AITextarea({
       {value.length > charLimit * 0.1 && (
         <div className="absolute bottom-2 right-3 pointer-events-none">
           <span className={cn(
-            'text-[9px] font-mono',
+            'text-[9px] font-sans',
             value.length > charLimit * 0.9 ? 'text-amber-500' : 'text-slate-800'
           )}>
             {value.length}/{charLimit}
@@ -741,7 +741,7 @@ function AITextarea({
 const InputCls = [
   'w-full px-3 py-2.5',
   'bg-[#0D0F12] border border-slate-700/60 rounded-lg',
-  'text-sm text-slate-200 font-mono placeholder-slate-700',
+  'text-sm text-slate-200 font-sans placeholder-slate-700',
   'focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20',
   'transition-colors',
 ].join(' ');
@@ -751,7 +751,7 @@ const ErrorInputCls = 'border-red-500/40 focus:border-red-500/60 focus:ring-red-
 const SelectCls = [
   'w-full px-3 py-2.5',
   'bg-[#0D0F12] border border-slate-700/60 rounded-lg',
-  'text-sm text-slate-300 font-mono',
+  'text-sm text-slate-300 font-sans',
   'focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20',
   'transition-colors appearance-none cursor-pointer',
 ].join(' ');

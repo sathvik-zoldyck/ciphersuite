@@ -80,45 +80,45 @@ export function FindingCard({ finding, index, onEdit, onDelete }: FindingCardPro
             <SeverityBadge severity={finding.severity} size="sm" />
             <StatusBadge status={finding.status} size="sm" />
             {finding.cweId && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-slate-500 bg-slate-500/10 border border-slate-500/20">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-sans text-slate-500 bg-slate-500/10 border border-slate-500/20">
                 <Hash className="w-2.5 h-2.5" />
                 {finding.cweId}
               </span>
             )}
             {finding.owaspId && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-slate-500 bg-slate-500/10 border border-slate-500/20">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-sans text-slate-500 bg-slate-500/10 border border-slate-500/20">
                 {finding.owaspId}
               </span>
             )}
           </div>
 
-          <h3 className="text-sm font-semibold text-slate-100 font-mono leading-snug truncate">
+          <h3 className="text-sm font-semibold text-slate-100 font-sans leading-snug truncate">
             {finding.title}
           </h3>
 
           <div className="flex items-center gap-4 mt-2">
             <div className="flex items-center gap-1.5">
               <Target className="w-3 h-3 text-slate-600" />
-              <span className="text-xs text-slate-500 font-mono truncate max-w-[200px]">
+              <span className="text-xs text-slate-500 font-sans truncate max-w-[200px]">
                 {finding.target}
               </span>
             </div>
             <div className="flex items-center gap-1.5">
               <Calendar className="w-3 h-3 text-slate-600" />
-              <span className="text-xs text-slate-500 font-mono">
+              <span className="text-xs text-slate-500 font-sans">
                 {format(new Date(finding.createdAt as any), 'MMM d, yyyy')}
               </span>
             </div>
             {finding.evidenceIds && finding.evidenceIds.length > 0 && (
               <div className="flex items-center gap-1.5">
                 <Paperclip className="w-3 h-3 text-slate-600" />
-                <span className="text-xs text-slate-500 font-mono">
+                <span className="text-xs text-slate-500 font-sans">
                   {finding.evidenceIds.length} evidence
                 </span>
               </div>
             )}
             {finding.cvss !== undefined && (
-              <span className="text-xs font-mono text-slate-500">
+              <span className="text-xs font-sans text-slate-500">
                 CVSS: <span className={cn('font-semibold', cfg.color)}>{finding.cvss.toFixed(1)}</span>
               </span>
             )}
@@ -164,13 +164,13 @@ function DetailSection({
   if (!content) return null;
   return (
     <div>
-      <p className="text-[10px] font-mono font-semibold tracking-widest text-slate-600 uppercase mb-2">
+      <p className="text-[10px] font-sans font-semibold tracking-widest text-slate-600 uppercase mb-2">
         {label}
       </p>
       <div
         className={cn(
           'text-sm text-slate-300 leading-relaxed prose prose-invert prose-sm max-w-none',
-          mono && 'font-mono text-xs bg-black/40 rounded p-3 border border-slate-800 whitespace-pre-wrap'
+          mono && 'font-sans text-xs bg-black/40 rounded p-3 border border-slate-800 whitespace-pre-wrap'
         )}
         dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br />') }}
       />

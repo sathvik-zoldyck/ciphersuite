@@ -22,7 +22,7 @@ function Calendar({
         month:    "space-y-3",
 
         caption:       "flex justify-center pt-1 relative items-center",
-        caption_label: "text-[11px] font-mono font-bold text-slate-300 uppercase tracking-[0.12em]",
+        caption_label: "text-[11px] font-sans font-bold text-slate-300 uppercase tracking-[0.12em]",
 
         nav:              "flex items-center gap-1",
         nav_button:       cn(
@@ -36,18 +36,18 @@ function Calendar({
 
         table:    "w-full border-collapse",
         head_row: "flex",
-        head_cell:"text-slate-700 rounded-md w-8 font-mono font-semibold text-[10px] uppercase tracking-wider text-center",
+        head_cell:"text-slate-700 rounded-md w-8 font-sans font-semibold text-[10px] uppercase tracking-wider text-center",
 
         row:  "flex w-full mt-1",
         cell: cn(
-          "h-8 w-8 text-center p-0 relative text-[11px] font-mono",
+          "h-8 w-8 text-center p-0 relative text-[11px] font-sans",
           "focus-within:relative focus-within:z-20",
           "[&:has([aria-selected])]:bg-cyan-500/10 [&:has([aria-selected])]:rounded-md",
           "[&:has([aria-selected].day-outside)]:bg-cyan-500/[0.05]",
           "first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md",
         ),
         day: cn(
-          "h-8 w-8 p-0 font-mono text-[11px] text-slate-400",
+          "h-8 w-8 p-0 font-sans text-[11px] text-slate-400",
         ),
         day_button: cn(
           "h-full w-full rounded-lg flex items-center justify-center outline-none",

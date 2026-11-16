@@ -100,7 +100,7 @@ const AlertDialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm font-mono text-slate-500 leading-relaxed", className)}
+    className={cn("text-sm font-sans text-slate-500 leading-relaxed", className)}
     {...props}
   />
 ));
@@ -125,7 +125,7 @@ const AlertDialogCancel = React.forwardRef<
   <AlertDialogPrimitive.Cancel
     ref={ref}
     className={cn(
-      "h-9 px-4 rounded-lg text-sm font-mono font-medium",
+      "h-9 px-4 rounded-lg text-sm font-sans font-medium",
       "border border-slate-700/60 bg-transparent text-slate-400",
       "hover:bg-slate-800/60 hover:text-slate-200 hover:border-slate-600",
       "transition-all duration-150",

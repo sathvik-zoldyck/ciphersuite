@@ -134,8 +134,8 @@ function NewProjectDrawer({
             <Plus className="w-4 h-4 text-cyan-400" />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-mono font-bold text-slate-100">New Project</p>
-            <p className="text-[10px] font-mono text-slate-600">Create a new engagement workspace</p>
+            <p className="text-sm font-sans font-bold text-slate-100">New Project</p>
+            <p className="text-[10px] font-sans text-slate-600">Create a new engagement workspace</p>
           </div>
           <button onClick={onClose} className="btn-icon h-7 w-7"><X className="w-3.5 h-3.5" /></button>
         </div>
@@ -144,7 +144,7 @@ function NewProjectDrawer({
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="field-label">Project Name <span className="text-red-500">*</span></label>
-              {errors.name && <span className="text-[9px] font-mono text-red-400">{errors.name}</span>}
+              {errors.name && <span className="text-[9px] font-sans text-red-400">{errors.name}</span>}
             </div>
             <input
               value={name}
@@ -174,7 +174,7 @@ function NewProjectDrawer({
                   <span className={cn(type === t ? "text-cyan-400" : "text-slate-700")}>
                     {TYPE_ICONS[t] ?? <Shield className="w-3.5 h-3.5" />}
                   </span>
-                  <span className="text-[11px] font-mono font-medium truncate">{t}</span>
+                  <span className="text-[11px] font-sans font-medium truncate">{t}</span>
                 </button>
               ))}
             </div>
@@ -183,7 +183,7 @@ function NewProjectDrawer({
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="field-label">Target <span className="text-red-500">*</span></label>
-              {errors.target && <span className="text-[9px] font-mono text-red-400">{errors.target}</span>}
+              {errors.target && <span className="text-[9px] font-sans text-red-400">{errors.target}</span>}
             </div>
             <input
               value={target}
@@ -220,7 +220,7 @@ function NewProjectDrawer({
         </div>
 
         <div className="px-6 py-4 border-t border-slate-800 flex items-center justify-between flex-shrink-0">
-          <span className="text-[9px] font-mono text-slate-700">* Required fields</span>
+          <span className="text-[9px] font-sans text-slate-700">* Required fields</span>
           <div className="flex items-center gap-3">
             <button onClick={onClose} className="btn-secondary h-9 px-4">Cancel</button>
             <button onClick={handleCreate} disabled={saving} className="btn-primary h-9 px-5 gap-2 disabled:opacity-50">
@@ -288,7 +288,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <h3 className="text-sm font-bold font-display text-slate-100 truncate leading-tight">
                 {project.name}
               </h3>
-              <p className="text-[10px] font-mono text-slate-600 truncate">{project.type}</p>
+              <p className="text-[10px] font-sans text-slate-600 truncate">{project.type}</p>
             </div>
           </div>
 
@@ -310,12 +310,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         <div className="flex items-center gap-1.5 mb-3">
           <Target className="w-2.5 h-2.5 text-slate-700 flex-shrink-0" />
-          <span className="text-[10px] font-mono text-slate-600 truncate">{project.target}</span>
+          <span className="text-[10px] font-sans text-slate-600 truncate">{project.target}</span>
         </div>
 
         <div className="flex items-center justify-between">
           <div className={cn(
-            "flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[9px] font-mono font-bold uppercase tracking-wider",
+            "flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[9px] font-sans font-bold uppercase tracking-wider",
             status.bg, status.border, status.text
           )}>
             <span className={cn("w-1 h-1 rounded-full", status.dot,
@@ -326,8 +326,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
           <div className="flex items-center gap-1.5">
             <div className="text-right">
-              <p className="text-[9px] font-mono text-slate-700 uppercase tracking-wider">Risk</p>
-              <p className={cn("text-sm font-mono font-bold leading-none", {
+              <p className="text-[9px] font-sans text-slate-700 uppercase tracking-wider">Risk</p>
+              <p className={cn("text-sm font-sans font-bold leading-none", {
                 "text-red-400":     (project.riskScore ?? 0) > 70,
                 "text-amber-400":   (project.riskScore ?? 0) > 40,
                 "text-emerald-400": (project.riskScore ?? 0) <= 40,
@@ -340,7 +340,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
 
       <div className="px-5 py-2.5 border-t border-slate-800/60 flex items-center justify-between">
-        <div className="flex items-center gap-3 text-[9px] font-mono text-slate-700">
+        <div className="flex items-center gap-3 text-[9px] font-sans text-slate-700">
           {project.startDate && (
             <span className="flex items-center gap-1">
               <Calendar className="w-2.5 h-2.5" />
@@ -348,7 +348,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </span>
           )}
         </div>
-        <span className="text-[9px] font-mono text-slate-700 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <span className="text-[9px] font-sans text-slate-700 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           Open <ChevronRight className="w-3 h-3" />
         </span>
       </div>
@@ -366,13 +366,13 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
         className="w-full max-w-2xl"
       >
         <div className="text-center mb-10">
-          <p className="text-[10px] font-mono text-cyan-500/60 uppercase tracking-[0.2em] mb-3">
+          <p className="text-[10px] font-sans text-cyan-500/60 uppercase tracking-[0.2em] mb-3">
             What would you like to do?
           </p>
           <h2 className="text-2xl font-bold font-display text-slate-100">
             Choose your workspace
           </h2>
-          <p className="text-sm font-mono text-slate-600 mt-2">
+          <p className="text-sm font-sans text-slate-600 mt-2">
             Start a security engagement or just take notes — no setup required.
           </p>
         </div>
@@ -395,17 +395,17 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
               <Shield className="w-5 h-5 text-cyan-400" />
             </div>
             <h3 className="text-base font-bold font-display text-slate-100 mb-1">Security Project</h3>
-            <p className="text-[11px] font-mono text-slate-600 mb-4 leading-relaxed">
+            <p className="text-[11px] font-sans text-slate-600 mb-4 leading-relaxed">
               Pentest workspace with findings tracker, evidence vault, AI report generator, and logs.
             </p>
             <div className="flex flex-wrap gap-1.5 mb-5">
               {["Findings", "Evidence", "Reports", "AI Assist"].map((f) => (
-                <span key={f} className="text-[9px] font-mono text-slate-600 bg-slate-800/60 border border-slate-700/40 rounded-full px-2 py-0.5">
+                <span key={f} className="text-[9px] font-sans text-slate-600 bg-slate-800/60 border border-slate-700/40 rounded-full px-2 py-0.5">
                   {f}
                 </span>
               ))}
             </div>
-            <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-cyan-400 group-hover:gap-3 transition-all">
+            <div className="flex items-center gap-2 text-[11px] font-sans font-bold text-cyan-400 group-hover:gap-3 transition-all">
               <Plus className="w-3.5 h-3.5" />
               New Project
               <ChevronRight className="w-3.5 h-3.5" />
@@ -429,16 +429,16 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
                 <StickyNote className="w-5 h-5 text-violet-400" />
               </div>
               <h3 className="text-base font-bold font-display text-slate-100 mb-1">Just Notes</h3>
-              <p className="text-[11px] font-mono text-slate-600 mb-4 leading-relaxed">
+              <p className="text-[11px] font-sans text-slate-600 mb-4 leading-relaxed">
                 Color-coded personal notes with markdown, tags, pins, and self-destruct timers. No project needed.
               </p>
               <div className="flex items-center gap-2 mb-5">
                 {["bg-red-500","bg-orange-500","bg-yellow-400","bg-emerald-500","bg-blue-500","bg-purple-500","bg-pink-500"].map((c) => (
                   <div key={c} className={cn("w-3.5 h-3.5 rounded-full", c)} />
                 ))}
-                <span className="text-[9px] font-mono text-slate-700 ml-1">9 colors</span>
+                <span className="text-[9px] font-sans text-slate-700 ml-1">9 colors</span>
               </div>
-              <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-violet-400 group-hover:gap-3 transition-all">
+              <div className="flex items-center gap-2 text-[11px] font-sans font-bold text-violet-400 group-hover:gap-3 transition-all">
                 <StickyNote className="w-3.5 h-3.5" />
                 Open Notes
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -447,7 +447,7 @@ function DualEntryEmptyState({ onNewProject }: { onNewProject: () => void }) {
           </Link>
         </div>
 
-        <p className="text-center text-[10px] font-mono text-slate-800 mt-8">
+        <p className="text-center text-[10px] font-sans text-slate-800 mt-8">
           CipherSuite · Professional Cybersecurity Workspace · by Alcyone Secure
         </p>
       </motion.div>
@@ -562,7 +562,7 @@ export default function ProjectsDashboard() {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h1 className="page-title">Projects</h1>
-                <p className="text-[11px] font-mono text-slate-600 mt-0.5">
+                <p className="text-[11px] font-sans text-slate-600 mt-0.5">
                   {projects.length} engagement{projects.length !== 1 ? "s" : ""}
                 </p>
               </div>
@@ -574,7 +574,7 @@ export default function ProjectsDashboard() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search…"
-                    className="h-8 w-40 pl-7 pr-3 rounded-lg border border-slate-800 bg-[#0D0F12] text-[11px] font-mono text-slate-300 placeholder-slate-700 focus:outline-none focus:border-slate-700 transition-colors"
+                    className="h-8 w-40 pl-7 pr-3 rounded-lg border border-slate-800 bg-[#0D0F12] text-[11px] font-sans text-slate-300 placeholder-slate-700 focus:outline-none focus:border-slate-700 transition-colors"
                   />
                 </div>
 
@@ -584,7 +584,7 @@ export default function ProjectsDashboard() {
                       key={s}
                       onClick={() => setStatusFilter(s)}
                       className={cn(
-                        "px-2.5 py-1.5 rounded-md text-[10px] font-mono transition-colors",
+                        "px-2.5 py-1.5 rounded-md text-[10px] font-sans transition-colors",
                         statusFilter === s ? "bg-slate-700/80 text-slate-200" : "text-slate-600 hover:text-slate-400"
                       )}
                     >
@@ -612,10 +612,10 @@ export default function ProjectsDashboard() {
 
             {filtered.length === 0 ? (
               <div className="text-center py-16">
-                <p className="text-sm font-mono text-slate-600">No projects match your filters.</p>
+                <p className="text-sm font-sans text-slate-600">No projects match your filters.</p>
                 <button
                   onClick={() => { setSearch(""); setStatusFilter("all"); }}
-                  className="mt-2 text-xs font-mono text-cyan-400 hover:text-cyan-300"
+                  className="mt-2 text-xs font-sans text-cyan-400 hover:text-cyan-300"
                 >
                   Clear filters →
                 </button>

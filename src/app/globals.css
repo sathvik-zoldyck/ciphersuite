@@ -125,15 +125,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-    /* Subtle scanline texture — visible only at very low opacity */
-    background-image: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.012) 2px,
-      rgba(0, 0, 0, 0.012) 4px
-    );
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   }
 
   /* Selection colour — brand cyan tint */
@@ -142,9 +134,9 @@
     color: inherit;
   }
 
-  /* Headings use the display font (Syne) */
+  /* Headings use the condensed display face */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-family: var(--font-display), ui-sans-serif, sans-serif;
     @apply tracking-tight;
   }
 
@@ -181,6 +173,11 @@
     transition: background-color 5000s ease-in-out 0s;
   }
 
+  /* Code, terminal output and tool data stay monospaced */
+  pre, code, kbd, samp {
+    font-family: var(--font-mono), ui-monospace, monospace;
+  }
+
   /* Prevent layout shift from scrollbar appearing */
   html { overflow-y: scroll; }
 }
@@ -194,16 +191,16 @@
   /* ── Typography helpers ──────────────────────────────────────────────────── */
 
   .page-title {
-    font-family: 'Syne', ui-sans-serif, sans-serif;
+    font-family: var(--font-display), ui-sans-serif, sans-serif;
     @apply text-lg font-bold text-slate-100 tracking-tight;
   }
 
   .section-label {
-    @apply text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-slate-600;
+    @apply text-[10px] font-sans font-bold uppercase tracking-[0.15em] text-slate-600;
   }
 
   .mono-body {
-    @apply text-sm font-mono text-slate-300 leading-relaxed;
+    @apply text-sm font-sans text-slate-300 leading-relaxed;
   }
 
   /* ── Card ────────────────────────────────────────────────────────────────── */
@@ -227,7 +224,7 @@
   /* ── Inputs ──────────────────────────────────────────────────────────────── */
 
   .input-base {
-    @apply w-full px-3 py-2.5 rounded-lg text-sm font-mono text-slate-200;
+    @apply w-full px-3 py-2.5 rounded-lg text-sm font-sans text-slate-200;
     @apply bg-[#0D0F12] border border-slate-700/60;
     @apply placeholder-slate-700;
     @apply focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20;
@@ -251,7 +248,7 @@
 
   .btn {
     @apply inline-flex items-center justify-center gap-2;
-    @apply px-4 py-2 rounded-lg text-sm font-mono font-semibold;
+    @apply px-4 py-2 rounded-lg text-sm font-sans font-semibold;
     @apply transition-all duration-150;
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1;
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
@@ -287,7 +284,7 @@
   /* ── Severity badges ─────────────────────────────────────────────────────── */
 
   .severity-badge {
-    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider border;
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-sans font-semibold uppercase tracking-wide border;
   }
 
   .severity-critical { @apply severity-badge bg-red-500/10     text-red-400     border-red-500/25;     }
@@ -299,7 +296,7 @@
   /* ── Status badges ───────────────────────────────────────────────────────── */
 
   .status-badge {
-    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider border;
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-sans font-semibold uppercase tracking-wide border;
   }
 
   .status-open     { @apply status-badge bg-red-500/10     text-red-400     border-red-500/25;     }
@@ -336,7 +333,7 @@
   /* ── Field label ─────────────────────────────────────────────────────────── */
 
   .field-label {
-    @apply text-[10px] font-mono font-bold text-slate-500 uppercase tracking-[0.12em];
+    @apply text-[10px] font-sans font-bold text-slate-500 uppercase tracking-[0.12em];
   }
 
   /* ── Code / terminal block ───────────────────────────────────────────────── */
@@ -362,10 +359,10 @@
 
   /* ── Font families ───────────────────────────────────────────────────────── */
   .font-display {
-    font-family: 'Syne', 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-family: var(--font-display), ui-sans-serif, sans-serif;
   }
   .font-mono {
-    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    font-family: var(--font-mono), ui-monospace, monospace;
   }
 
   /* ── Severity glow utilities (box-shadow on severity-coloured elements) ──── */

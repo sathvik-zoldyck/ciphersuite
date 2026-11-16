@@ -35,7 +35,7 @@ export function FindingFilters({
           placeholder="Search by title or target..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full h-9 bg-[#0A0B0C]/50 pl-9 pr-3 text-sm font-mono placeholder:text-slate-600 focus:outline-none border border-slate-700/60 focus:border-cyan-500/50 rounded-md"
+          className="w-full h-9 bg-[#0A0B0C]/50 pl-9 pr-3 text-sm font-sans placeholder:text-slate-600 focus:outline-none border border-slate-700/60 focus:border-cyan-500/50 rounded-md"
         />
       </div>
 
@@ -43,14 +43,14 @@ export function FindingFilters({
 
       {/* Severity Filter */}
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Severity:</span>
+        <span className="text-[10px] font-sans text-slate-500 uppercase tracking-widest">Severity:</span>
         <div className="flex items-center bg-[#0A0B0C] border border-slate-700/60 rounded-md p-0.5">
           {severityOptions.map((sev) => (
             <button
               key={sev}
               onClick={() => onSeverityChange(sev)}
               className={cn(
-                'px-2.5 py-1 text-[10px] font-mono rounded transition-colors flex items-center gap-1.5',
+                'px-2.5 py-1 text-[10px] font-sans rounded transition-colors flex items-center gap-1.5',
                 severityFilter === sev
                   ? 'bg-slate-700 text-slate-200'
                   : 'text-slate-500 hover:text-slate-300'
@@ -69,14 +69,14 @@ export function FindingFilters({
 
       {/* Status Filter */}
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Status:</span>
+        <span className="text-[10px] font-sans text-slate-500 uppercase tracking-widest">Status:</span>
         <div className="flex items-center bg-[#0A0B0C] border border-slate-700/60 rounded-md p-0.5">
           {(['all', ...STATUSES_ORDERED] as (FindingStatus | 'all')[]).map((stat) => (
             <button
               key={stat}
               onClick={() => onStatusChange(stat)}
               className={cn(
-                'px-2.5 py-1 text-[10px] font-mono rounded transition-colors capitalize',
+                'px-2.5 py-1 text-[10px] font-sans rounded transition-colors capitalize',
                 statusFilter === stat
                   ? 'bg-slate-700 text-slate-200'
                   : 'text-slate-500 hover:text-slate-300'
@@ -91,14 +91,14 @@ export function FindingFilters({
       <div className="flex-grow" />
 
       {/* Results Count */}
-      <p className="text-[10px] font-mono text-slate-600">
+      <p className="text-[10px] font-sans text-slate-600">
         Showing <span className="font-bold text-slate-400">{filtered}</span> of <span className="font-bold text-slate-400">{total}</span>
       </p>
 
       {(searchQuery || severityFilter !== 'all' || statusFilter !== 'all') && (
         <button
           onClick={() => { onSearchChange(''); onSeverityChange('all'); onStatusChange('all'); }}
-          className="flex items-center gap-1.5 text-[10px] font-mono text-slate-600 hover:text-red-400 transition-colors"
+          className="flex items-center gap-1.5 text-[10px] font-sans text-slate-600 hover:text-red-400 transition-colors"
         >
           <X className="w-2.5 h-2.5" />
           Clear

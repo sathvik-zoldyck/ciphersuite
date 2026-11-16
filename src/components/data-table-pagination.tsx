@@ -73,12 +73,12 @@ export function DataTablePagination<TData>({
         {selectedRows > 0 ? (
           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/20">
             <div className="w-1 h-1 rounded-full bg-cyan-400" />
-            <span className="text-[10px] font-mono font-semibold text-cyan-400">
+            <span className="text-[10px] font-sans font-semibold text-cyan-400">
               {selectedRows} selected
             </span>
           </div>
         ) : (
-          <span className="text-[10px] font-mono text-slate-700">
+          <span className="text-[10px] font-sans text-slate-700">
             {totalRows > 0
               ? `${firstRowOnPage}–${lastRowOnPage} of ${totalRows.toLocaleString()}`
               : "No results"}
@@ -87,7 +87,7 @@ export function DataTablePagination<TData>({
       </div>
 
       {/* ── Center: page info ─────────────────────────────────────── */}
-      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-600">
+      <div className="flex items-center gap-1 text-[10px] font-sans text-slate-600">
         <span>Page</span>
         <span className="font-semibold text-slate-400">{currentPage}</span>
         <span>of</span>
@@ -99,7 +99,7 @@ export function DataTablePagination<TData>({
 
         {/* Rows per page */}
         <div className="hidden sm:flex items-center gap-2">
-          <span className="text-[10px] font-mono text-slate-700 whitespace-nowrap">
+          <span className="text-[10px] font-sans text-slate-700 whitespace-nowrap">
             Rows
           </span>
           <select
@@ -109,7 +109,7 @@ export function DataTablePagination<TData>({
             className={cn(
               "h-7 px-2 rounded-lg",
               "bg-[#0D0F12] border border-slate-800",
-              "text-[10px] font-mono text-slate-400",
+              "text-[10px] font-sans text-slate-400",
               "focus:outline-none focus:border-slate-700",
               "cursor-pointer appearance-none",
               "transition-colors hover:border-slate-700",

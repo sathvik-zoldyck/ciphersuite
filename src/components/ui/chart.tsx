@@ -49,7 +49,7 @@ const ChartContainer = React.forwardRef<
           "flex aspect-video justify-center text-xs",
           // Recharts SVG overrides — scoped to dark theme colours
           "[&_.recharts-cartesian-axis-tick_text]:fill-slate-600",
-          "[&_.recharts-cartesian-axis-tick_text]:font-mono",
+          "[&_.recharts-cartesian-axis-tick_text]:font-sans",
           "[&_.recharts-cartesian-grid_line]:stroke-slate-800/60",
           "[&_.recharts-curve.recharts-tooltip-cursor]:stroke-slate-700",
           "[&_.recharts-dot[stroke='#fff']]:stroke-transparent",
@@ -136,10 +136,10 @@ const ChartTooltipContent = React.forwardRef<
       : itemCfg?.label;
 
     if (labelFormatter) {
-      return <div className={cn("font-mono font-semibold text-slate-300 mb-1", labelClassName)}>{labelFormatter(value, payload)}</div>;
+      return <div className={cn("font-sans font-semibold text-slate-300 mb-1", labelClassName)}>{labelFormatter(value, payload)}</div>;
     }
     if (!value) return null;
-    return <div className={cn("font-mono font-semibold text-slate-300 mb-1", labelClassName)}>{value}</div>;
+    return <div className={cn("font-sans font-semibold text-slate-300 mb-1", labelClassName)}>{value}</div>;
   }, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);
 
   if (!active || !payload?.length) return null;
@@ -152,7 +152,7 @@ const ChartTooltipContent = React.forwardRef<
       className={cn(
         "min-w-[8rem] rounded-xl border border-slate-800 bg-[#0A0B0D]",
         "px-3 py-2.5 shadow-2xl shadow-black/60",
-        "text-[11px] font-mono",
+        "text-[11px] font-sans",
         className
       )}
     >
@@ -228,7 +228,7 @@ const ChartLegendContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex items-center justify-center gap-4 text-[10px] font-mono text-slate-500",
+        "flex items-center justify-center gap-4 text-[10px] font-sans text-slate-500",
         verticalAlign === "top" ? "pb-3" : "pt-3",
         className
       )}

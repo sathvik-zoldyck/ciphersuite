@@ -107,7 +107,7 @@ function EvidenceFindingsPopover({ evidence }: { evidence: Evidence }) {
     <div onClick={(e) => e.stopPropagation()}>
       <Popover>
         <PopoverTrigger asChild>
-          <button className="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-500/10 border border-slate-500/20 text-[10px] font-mono font-bold text-slate-300 hover:bg-slate-500/20 hover:text-white transition-colors">
+          <button className="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-500/10 border border-slate-500/20 text-[10px] font-sans font-bold text-slate-300 hover:bg-slate-500/20 hover:text-white transition-colors">
             <Bug className="w-3 h-3 text-cyan-400" />
             {count} {count === 1 ? "finding" : "findings"}
           </button>
@@ -117,20 +117,20 @@ function EvidenceFindingsPopover({ evidence }: { evidence: Evidence }) {
           sideOffset={8}
         >
           <div className="space-y-4">
-            <h4 className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest pl-1">
+            <h4 className="text-[10px] font-sans font-bold text-slate-500 uppercase tracking-widest pl-1">
               Linked Findings
             </h4>
             
             {isLoading ? (
                <div className="flex justify-center py-4"><Loader2 className="w-5 h-5 text-slate-600 animate-spin" /></div>
             ) : (!findings || findings.length === 0) ? (
-               <p className="text-xs font-mono text-slate-500 text-center py-2">No findings linked to this evidence yet.</p>
+               <p className="text-xs font-sans text-slate-500 text-center py-2">No findings linked to this evidence yet.</p>
             ) : (
                <div className="space-y-1.5 max-h-48 overflow-y-auto scrollbar-thin pr-1">
                  {findings.map(f => (
                    <div key={f.id} className="flex items-start gap-2.5 p-2 rounded-lg bg-white/[0.02] border border-transparent hover:border-slate-800/60 transition-colors">
                      <div className="mt-0.5"><SeverityBadge severity={f.severity as FindingSeverity} size="sm" /></div>
-                     <span className="text-xs font-mono text-slate-300 leading-snug">{f.title}</span>
+                     <span className="text-xs font-sans text-slate-300 leading-snug">{f.title}</span>
                    </div>
                  ))}
                </div>
@@ -216,10 +216,10 @@ export function EvidenceCard({
 
           {/* Name + meta */}
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-mono font-medium text-slate-200 truncate" title={evidence.name}>
+            <p className="text-sm font-sans font-medium text-slate-200 truncate" title={evidence.name}>
               {evidence.name}
             </p>
-            <div className="flex items-center gap-3 mt-0.5 text-[10px] font-mono text-slate-600">
+            <div className="flex items-center gap-3 mt-0.5 text-[10px] font-sans text-slate-600">
               <span className={cn("font-bold uppercase", cfg.color)}>{cfg.label}</span>
               {evidence.fileSize && <span>{formatBytes(evidence.fileSize)}</span>}
               {evidence.uploadedAt && (
@@ -343,15 +343,15 @@ export function EvidenceCard({
       {/* Footer */}
       <div className="px-3 pb-3 pt-2.5 flex-1 flex flex-col justify-between">
         <div>
-          <p className="text-[11px] font-mono font-medium text-slate-300 truncate mb-1.5" title={evidence.name}>
+          <p className="text-[11px] font-sans font-medium text-slate-300 truncate mb-1.5" title={evidence.name}>
             {evidence.name}
           </p>
           <div className="flex items-center justify-between">
-            <span className={cn("text-[9px] font-mono font-bold uppercase", cfg.color)}>
+            <span className={cn("text-[9px] font-sans font-bold uppercase", cfg.color)}>
               {cfg.label}
             </span>
             {evidence.fileSize && (
-              <span className="text-[9px] font-mono text-slate-700">
+              <span className="text-[9px] font-sans text-slate-700">
                 {formatBytes(evidence.fileSize)}
               </span>
             )}

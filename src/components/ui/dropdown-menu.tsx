@@ -32,7 +32,7 @@ const contentBase = cn(
 const itemBase = cn(
   "relative flex cursor-pointer select-none items-center gap-2",
   "rounded-lg px-2.5 py-2 mx-0.5",
-  "text-[12px] font-mono text-slate-400",
+  "text-[12px] font-sans text-slate-400",
   "outline-none transition-colors duration-100",
   "focus:bg-white/[0.05] focus:text-slate-200",
   "data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
@@ -158,7 +158,7 @@ const DropdownMenuLabel = React.forwardRef<
     ref={ref}
     className={cn(
       "px-2.5 py-1.5 mx-0.5",
-      "text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-slate-600",
+      "text-[9px] font-sans font-bold uppercase tracking-[0.15em] text-slate-600",
       inset && "pl-8",
       className
     )}
@@ -189,7 +189,7 @@ const DropdownMenuShortcut = ({
 }: React.HTMLAttributes<HTMLSpanElement>) => (
   <span
     className={cn(
-      "ml-auto text-[10px] font-mono tracking-widest text-slate-700",
+      "ml-auto text-[10px] font-sans tracking-widest text-slate-700",
       className
     )}
     {...props}

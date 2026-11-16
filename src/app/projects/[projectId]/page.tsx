@@ -167,7 +167,7 @@ function ArcGauge({ score }: { score: number }) {
       </div>
 
       <div className={cn(
-        "mt-1 px-3 py-1 rounded-full border text-[9px] font-mono font-bold tracking-[0.15em] uppercase",
+        "mt-1 px-3 py-1 rounded-full border text-[9px] font-sans font-bold tracking-[0.15em] uppercase",
         score >= 80 ? "bg-red-500/10 border-red-500/25 text-red-400"
         : score >= 60 ? "bg-orange-500/10 border-orange-500/25 text-orange-400"
         : score >= 40 ? "bg-yellow-500/10 border-yellow-500/25 text-yellow-400"
@@ -228,7 +228,7 @@ function MetricCard({ label, value, sub, icon, accentColor, borderColor, bgColor
       <div className="pl-6 pr-5 py-5">
         {/* Top row */}
         <div className="flex items-center justify-between mb-4">
-          <span className={cn("text-[10px] font-mono font-semibold uppercase tracking-[0.15em]", accentColor)}>{label}</span>
+          <span className={cn("text-[10px] font-sans font-semibold uppercase tracking-[0.15em]", accentColor)}>{label}</span>
           <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center", bgColor, borderColor.replace("border-", "border "))}>
             <span className={cn("", accentColor)}>{icon}</span>
           </div>
@@ -237,7 +237,7 @@ function MetricCard({ label, value, sub, icon, accentColor, borderColor, bgColor
         {/* Value */}
         <div className="flex items-end gap-2 mb-1.5">
           <span className={cn(
-            "text-4xl font-bold font-mono leading-none transition-colors",
+            "text-4xl font-bold font-sans leading-none transition-colors",
             Number(value) > 0 ? "text-slate-100" : "text-slate-700"
           )}>
             {value}
@@ -250,7 +250,7 @@ function MetricCard({ label, value, sub, icon, accentColor, borderColor, bgColor
         </div>
 
         {/* Sub */}
-        <p className="text-[11px] font-mono text-slate-600">{sub}</p>
+        <p className="text-[11px] font-sans text-slate-600">{sub}</p>
       </div>
     </div>
   );
@@ -288,7 +288,7 @@ function SeverityBars({ findings, isLoading }: { findings: Finding[]; isLoading:
             {/* Label */}
             <div className="w-24 flex items-center gap-2 flex-shrink-0">
               <div className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", cfg.dot)} />
-              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">{sev.slice(0, 4)}</span>
+              <span className="text-[10px] font-sans text-slate-500 uppercase tracking-wider">{sev.slice(0, 4)}</span>
             </div>
 
             {/* Bar track */}
@@ -311,7 +311,7 @@ function SeverityBars({ findings, isLoading }: { findings: Finding[]; isLoading:
             {/* Count */}
             <div className="w-8 text-right flex-shrink-0">
               <span className={cn(
-                "text-xs font-mono font-bold",
+                "text-xs font-sans font-bold",
                 count > 0 ? cfg.color : "text-slate-800"
               )}>
                 {count}
@@ -320,7 +320,7 @@ function SeverityBars({ findings, isLoading }: { findings: Finding[]; isLoading:
 
             {/* Pct */}
             <div className="w-10 text-right flex-shrink-0">
-              <span className="text-[10px] font-mono text-slate-700">
+              <span className="text-[10px] font-sans text-slate-700">
                 {total > 0 ? `${Math.round(pct)}%` : "—"}
               </span>
             </div>
@@ -356,9 +356,9 @@ function StatusBreakdown({ findings, isLoading }: { findings: Finding[]; isLoadi
     <div className="space-y-3">
       {/* Remediation rate */}
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[10px] font-mono text-slate-600 uppercase tracking-wider">Remediation Rate</span>
+        <span className="text-[10px] font-sans text-slate-600 uppercase tracking-wider">Remediation Rate</span>
         <span className={cn(
-          "text-xs font-mono font-bold px-2 py-0.5 rounded-full",
+          "text-xs font-sans font-bold px-2 py-0.5 rounded-full",
           pct >= 80 ? "text-emerald-400 bg-emerald-500/10" : pct >= 50 ? "text-cyan-400 bg-cyan-500/10" : "text-slate-500 bg-slate-800/60"
         )}>
           {pct}%
@@ -382,9 +382,9 @@ function StatusBreakdown({ findings, isLoading }: { findings: Finding[]; isLoadi
             <div key={s} className={cn("flex items-center justify-between px-3 py-2 rounded-lg border", cfg.bg, "border-transparent")}>
               <div className="flex items-center gap-2">
                 <div className={cn("w-1.5 h-1.5 rounded-full", cfg.dot)} />
-                <span className="text-[10px] font-mono text-slate-400">{cfg.label}</span>
+                <span className="text-[10px] font-sans text-slate-400">{cfg.label}</span>
               </div>
-              <span className={cn("text-xs font-mono font-bold", count > 0 ? cfg.color : "text-slate-700")}>
+              <span className={cn("text-xs font-sans font-bold", count > 0 ? cfg.color : "text-slate-700")}>
                 {count}
               </span>
             </div>
@@ -429,7 +429,7 @@ function ActivityFeed({ projectId }: { projectId: string }) {
       <div className="w-10 h-10 rounded-xl bg-slate-800/60 border border-slate-700/40 flex items-center justify-center mb-3">
         <Activity className="w-5 h-5 text-slate-700" />
       </div>
-      <p className="text-xs font-mono text-slate-700">No activity yet</p>
+      <p className="text-xs font-sans text-slate-700">No activity yet</p>
     </div>
   );
 
@@ -468,10 +468,10 @@ function ActivityFeed({ projectId }: { projectId: string }) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-0.5">
-              <span className="text-[11px] font-mono font-semibold text-slate-300 truncate">{getActionLabel(item)}</span>
-              <span className="text-[10px] font-mono text-slate-600 flex-shrink-0">{timeAgo(item.timestamp)}</span>
+              <span className="text-[11px] font-sans font-semibold text-slate-300 truncate">{getActionLabel(item)}</span>
+              <span className="text-[10px] font-sans text-slate-600 flex-shrink-0">{timeAgo(item.timestamp)}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-[10px] font-mono">
+            <div className="flex items-center gap-1.5 text-[10px] font-sans">
               <span className="text-slate-500 font-semibold truncate max-w-[80px]">{item.userDisplay}</span>
               <span className="text-slate-700 flex-shrink-0">·</span>
               <span className="text-slate-600 truncate">{item.targetTitle ?? (item.targetId ? item.targetId.slice(0, 8) : "")}</span>
@@ -490,9 +490,9 @@ function SummaryRow({ icon, label, value }: { icon: React.ReactNode; label: stri
     <div className="flex items-center gap-3 py-2.5 border-b border-slate-800/80 last:border-0">
       <div className="flex items-center gap-2.5 w-24 flex-shrink-0">
         <span className="text-slate-700">{icon}</span>
-        <span className="text-[10px] font-mono font-semibold text-slate-600 uppercase tracking-wider">{label}</span>
+        <span className="text-[10px] font-sans font-semibold text-slate-600 uppercase tracking-wider">{label}</span>
       </div>
-      <span className="text-xs font-mono text-slate-300 flex-1 text-right truncate">{value}</span>
+      <span className="text-xs font-sans text-slate-300 flex-1 text-right truncate">{value}</span>
     </div>
   );
 }
@@ -504,7 +504,7 @@ function SectionLabel({ icon, label, action }: { icon: React.ReactNode; label: s
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-2">
         <span className="text-slate-600">{icon}</span>
-        <span className="text-[10px] font-mono font-semibold text-slate-500 uppercase tracking-[0.15em]">{label}</span>
+        <span className="text-[10px] font-sans font-semibold text-slate-500 uppercase tracking-[0.15em]">{label}</span>
       </div>
       {action}
     </div>
@@ -555,7 +555,7 @@ export default function DashboardPage() {
         <div className="flex flex-col items-center justify-center h-full text-center">
             <AlertTriangle className="w-16 h-16 text-amber-500/50 mb-4" />
             <h2 className="text-2xl font-bold font-display text-slate-200 mb-2">Project Not Found</h2>
-            <p className="text-sm font-mono text-slate-600 leading-relaxed mb-6 max-w-xs mx-auto">
+            <p className="text-sm font-sans text-slate-600 leading-relaxed mb-6 max-w-xs mx-auto">
                 The project you are looking for does not exist or you do not have permission to view it.
             </p>
             <Button onClick={() => router.push('/')}>
@@ -578,7 +578,7 @@ export default function DashboardPage() {
             <h1 className="text-xl font-bold font-display text-slate-100 tracking-tight">Dashboard</h1>
             {!isLoading && (
               <div className={cn(
-                "flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-mono font-bold uppercase tracking-wider",
+                "flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-sans font-bold uppercase tracking-wider",
                 isActive
                   ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                   : "bg-slate-800 border-slate-700 text-slate-600"
@@ -588,7 +588,7 @@ export default function DashboardPage() {
               </div>
             )}
           </div>
-          <p className="text-xs font-mono text-slate-600">
+          <p className="text-xs font-sans text-slate-600">
             {isLoading ? "Loading…" : `Security posture overview · ${findings.length} finding${findings.length !== 1 ? "s" : ""} documented`}
           </p>
         </div>
@@ -598,12 +598,12 @@ export default function DashboardPage() {
           {remediationPct > 0 && (
             <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-emerald-500/20 bg-emerald-500/[0.06]">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-xs font-mono text-emerald-400 font-semibold">{remediationPct}% remediated</span>
+              <span className="text-xs font-sans text-emerald-400 font-semibold">{remediationPct}% remediated</span>
             </div>
           )}
           <button
             onClick={() => router.push(`/projects/${projectId}/findings`)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-mono font-bold transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:scale-[1.01] active:scale-[0.99]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-sans font-bold transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:scale-[1.01] active:scale-[0.99]"
           >
             <Plus className="w-3.5 h-3.5" />
             Add Finding
@@ -680,7 +680,7 @@ export default function DashboardPage() {
                 !isLoading && findings.length > 0 ? (
                   <button
                     onClick={() => router.push(`/projects/${projectId}/findings`)}
-                    className="flex items-center gap-1 text-[10px] font-mono text-cyan-400/70 hover:text-cyan-400 transition-colors"
+                    className="flex items-center gap-1 text-[10px] font-sans text-cyan-400/70 hover:text-cyan-400 transition-colors"
                   >
                     View all <ArrowRight className="w-2.5 h-2.5" />
                   </button>
@@ -738,11 +738,11 @@ export default function DashboardPage() {
                       return (
                         <div key={sev} className="flex items-center gap-2">
                           <div className={cn("w-1 h-1 rounded-full flex-shrink-0", cfg.dot)} />
-                          <span className="text-[10px] font-mono text-slate-600 w-16">{sev}</span>
+                          <span className="text-[10px] font-sans text-slate-600 w-16">{sev}</span>
                           <div className="flex-1 h-1 bg-slate-800 rounded-full overflow-hidden">
                             <div className={cn("h-full rounded-full", cfg.dot)} style={{ width: `${pct}%` }} />
                           </div>
-                          <span className={cn("text-[10px] font-mono font-bold w-4 text-right", cfg.color)}>{count}</span>
+                          <span className={cn("text-[10px] font-sans font-bold w-4 text-right", cfg.color)}>{count}</span>
                         </div>
                       );
                     })}
@@ -759,12 +759,12 @@ export default function DashboardPage() {
               label="Engagement"
               action={
                 isActive ? (
-                  <div className="flex items-center gap-1.5 text-[9px] font-mono font-bold uppercase text-emerald-400">
+                  <div className="flex items-center gap-1.5 text-[9px] font-sans font-bold uppercase text-emerald-400">
                     <div className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
                     Active
                   </div>
                 ) : (
-                  <span className="text-[9px] font-mono text-slate-600 uppercase">Closed</span>
+                  <span className="text-[9px] font-sans text-slate-600 uppercase">Closed</span>
                 )
               }
             />
@@ -781,7 +781,7 @@ export default function DashboardPage() {
                 <SummaryRow icon={<Clock className="w-3 h-3" />}      label="End"    value={fmt(project.endDate)} />
               </div>
             ) : (
-              <p className="text-xs font-mono text-slate-700 text-center py-4">No project data</p>
+              <p className="text-xs font-sans text-slate-700 text-center py-4">No project data</p>
             )}
           </div>
 
@@ -802,11 +802,11 @@ export default function DashboardPage() {
                 >
                   <div className="flex items-center gap-2.5">
                     <span className={cn("transition-colors", item.color)}>{item.icon}</span>
-                    <span className="text-xs font-mono text-slate-400 group-hover:text-slate-200 transition-colors">{item.label}</span>
+                    <span className="text-xs font-sans text-slate-400 group-hover:text-slate-200 transition-colors">{item.label}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     {item.count !== null && (
-                      <span className="text-[10px] font-mono text-slate-700">{item.count}</span>
+                      <span className="text-[10px] font-sans text-slate-700">{item.count}</span>
                     )}
                     <ChevronRight className="w-3 h-3 text-slate-700 group-hover:text-slate-400 group-hover:translate-x-0.5 transition-all" />
                   </div>

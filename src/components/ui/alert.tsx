@@ -7,7 +7,7 @@ const alertVariants = cva(
   // Base — shared across all variants
   [
     "relative w-full rounded-xl border px-4 py-3.5 overflow-hidden",
-    "text-sm font-mono",
+    "text-sm font-sans",
     // Icon positioning
     "[&>svg~*]:pl-7",
     "[&>svg+div]:translate-y-[-1px]",
@@ -90,7 +90,7 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-[12px] font-mono leading-relaxed opacity-80 [&_p]:leading-relaxed", className)}
+    className={cn("text-[12px] font-sans leading-relaxed opacity-80 [&_p]:leading-relaxed", className)}
     {...props}
   />
 ));

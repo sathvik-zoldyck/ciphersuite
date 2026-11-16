@@ -112,13 +112,13 @@ function EmptyState({ isDragging, onClick }: { isDragging: boolean; onClick: () 
       )}>
         {isDragging ? "Drop files here" : "Drop files or click to upload"}
       </h3>
-      <p className="text-xs font-mono text-slate-600 text-center max-w-xs leading-relaxed">
+      <p className="text-xs font-sans text-slate-600 text-center max-w-xs leading-relaxed">
         Screenshots, logs, JSON responses, Burp exports,<br />
         Nessus reports, text files — any evidence file
       </p>
 
       {!isDragging && (
-        <div className="mt-6 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-mono font-bold shadow-lg shadow-cyan-500/20">
+        <div className="mt-6 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-sans font-bold shadow-lg shadow-cyan-500/20">
           <Plus className="w-3.5 h-3.5" />
           Upload Evidence
         </div>
@@ -127,7 +127,7 @@ function EmptyState({ isDragging, onClick }: { isDragging: boolean; onClick: () 
       {/* Type chips */}
       <div className="mt-6 flex items-center gap-2 flex-wrap justify-center">
         {["PNG", "JPG", "LOG", "JSON", "XML", "PDF", "TXT"].map((t) => (
-          <span key={t} className="text-[9px] font-mono text-slate-700 border border-slate-800 rounded px-1.5 py-0.5 uppercase tracking-wider">
+          <span key={t} className="text-[9px] font-sans text-slate-700 border border-slate-800 rounded px-1.5 py-0.5 uppercase tracking-wider">
             {t}
           </span>
         ))}
@@ -402,7 +402,7 @@ export default function EvidencePage() {
                 <HardDriveUpload className="w-12 h-12 text-cyan-400" />
               </div>
               <p className="text-lg font-bold font-display text-cyan-300">Drop files to upload</p>
-              <p className="text-xs font-mono text-slate-500">Release to add evidence to this project</p>
+              <p className="text-xs font-sans text-slate-500">Release to add evidence to this project</p>
             </div>
           </motion.div>
         )}
@@ -417,7 +417,7 @@ export default function EvidencePage() {
           <div>
             <h1 className="text-lg font-bold font-display text-slate-100 leading-none">Evidence</h1>
             {!isLoading && (
-              <p className="text-[11px] font-mono text-slate-600 mt-0.5">
+              <p className="text-[11px] font-sans text-slate-600 mt-0.5">
                 {hasEvidence ? `${allEvidence.length} artifact${allEvidence.length !== 1 ? "s" : ""} collected` : "No evidence yet"}
               </p>
             )}
@@ -444,7 +444,7 @@ export default function EvidencePage() {
           {/* Upload button */}
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-mono font-bold transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:scale-[1.01] active:scale-[0.99]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-sans font-bold transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:scale-[1.01] active:scale-[0.99]"
           >
             <Upload className="w-3.5 h-3.5" />
             Upload
@@ -496,7 +496,7 @@ export default function EvidencePage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search evidence…"
-                className="w-full pl-9 pr-8 h-9 bg-[#0D0F12] border border-slate-700/60 rounded-lg text-xs font-mono text-slate-200 placeholder-slate-700 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
+                className="w-full pl-9 pr-8 h-9 bg-[#0D0F12] border border-slate-700/60 rounded-lg text-xs font-sans text-slate-200 placeholder-slate-700 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
               {search && (
                 <button
@@ -520,7 +520,7 @@ export default function EvidencePage() {
                     key={t}
                     onClick={() => setTypeFilter(t)}
                     className={cn(
-                      "flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[10px] font-mono transition-all",
+                      "flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[10px] font-sans transition-all",
                       typeFilter === t
                         ? `bg-slate-700 border-slate-500 text-slate-200`
                         : `border-slate-800 text-slate-600 hover:text-slate-400 hover:border-slate-700`
@@ -547,7 +547,7 @@ export default function EvidencePage() {
                   key={s}
                   onClick={() => setSort(s)}
                   className={cn(
-                    "px-2.5 py-1 text-[10px] font-mono font-semibold uppercase tracking-wider rounded transition-colors",
+                    "px-2.5 py-1 text-[10px] font-sans font-semibold uppercase tracking-wider rounded transition-colors",
                     sort === s ? "bg-slate-700 text-slate-200" : "text-slate-600 hover:text-slate-400"
                   )}
                 >
@@ -561,11 +561,11 @@ export default function EvidencePage() {
               <>
                 <button
                   onClick={() => { setSearch(""); setTypeFilter("all"); }}
-                  className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-mono text-slate-600 border border-slate-800 rounded-lg hover:text-slate-400 transition-colors"
+                  className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-sans text-slate-600 border border-slate-800 rounded-lg hover:text-slate-400 transition-colors"
                 >
                   <X className="w-2.5 h-2.5" /> Clear
                 </button>
-                <span className="text-[10px] font-mono text-slate-600">
+                <span className="text-[10px] font-sans text-slate-600">
                   {filtered.length} / {allEvidence.length}
                 </span>
               </>
@@ -579,7 +579,7 @@ export default function EvidencePage() {
               <p className="text-sm font-display text-slate-500 font-bold">No matching files</p>
               <button
                 onClick={() => { setSearch(""); setTypeFilter("all"); }}
-                className="mt-3 text-xs font-mono text-cyan-400 hover:underline"
+                className="mt-3 text-xs font-sans text-cyan-400 hover:underline"
               >
                 Clear filters
               </button>
@@ -616,7 +616,7 @@ export default function EvidencePage() {
                 <div className="w-10 h-10 rounded-xl border border-slate-700 bg-slate-800/60 flex items-center justify-center group-hover:border-cyan-500/40 group-hover:bg-cyan-500/10 transition-all">
                   <Plus className="w-5 h-5 text-slate-600 group-hover:text-cyan-400 transition-colors" />
                 </div>
-                <span className="text-[10px] font-mono text-slate-700 group-hover:text-cyan-400 transition-colors font-semibold uppercase tracking-wider">
+                <span className="text-[10px] font-sans text-slate-700 group-hover:text-cyan-400 transition-colors font-semibold uppercase tracking-wider">
                   Upload More
                 </span>
               </motion.button>
@@ -629,9 +629,9 @@ export default function EvidencePage() {
               {/* List header */}
               <div className="flex items-center gap-4 px-4 py-2.5 border-b border-slate-800 bg-[#0A0B0D]">
                 <div className="w-9 flex-shrink-0" />
-                <span className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-widest flex-1">File Name</span>
-                <span className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-widest w-16 hidden sm:block">Type</span>
-                <span className="text-[9px] font-mono font-bold text-slate-600 uppercase tracking-widest w-24 text-right hidden sm:block">Uploaded</span>
+                <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest flex-1">File Name</span>
+                <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest w-16 hidden sm:block">Type</span>
+                <span className="text-[9px] font-sans font-bold text-slate-600 uppercase tracking-widest w-24 text-right hidden sm:block">Uploaded</span>
                 <div className="w-14 flex-shrink-0" />
               </div>
 
